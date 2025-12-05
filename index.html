@@ -20,14 +20,17 @@ body{
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   background: var(--bg);
   color:#e9eef1;
-  display:flex;
-  justify-content:center;
-  padding:48px 20px 0 20px;
+  padding:48px 20px 0 24em; /* Lebih nempel ke kiri */
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
-.page{width:100%;max-width:var(--maxw);padding:28px 0}
-.header{display:flex;gap:28px;align-items:flex-start;justify-content:space-between}
+.page{
+  width:100%;
+  max-width:var(--maxw);
+  padding:28px 0;
+  margin-left:0; /* semua ke kiri */
+}
+.header{display:flex;gap:28px;align-items:flex-start;justify-content:flex-start;} /* align left */
 .left{flex:1 1 420px;min-width:240px}
 .right{width:360px;max-width:40%;overflow:hidden;display:flex;flex-direction:column;gap:16px;}
 h1{font-size:28px;margin:0 0 8px;font-weight:700}
@@ -46,19 +49,15 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
   overflow-x:auto;
   scroll-behavior:smooth;
   -webkit-overflow-scrolling: touch;
-
-  /* sembunyikan scrollbar */
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
 }
-.carousel-wrapper::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
-}
+.carousel-wrapper::-webkit-scrollbar { display: none; }
 .carousel {
   display:flex;
   gap:16px;
 }
 .slide {
-  flex:0 0 350px; /* lebar persegi panjang */
+  flex:0 0 350px;
   display:flex;
   flex-direction:column;
   gap:12px;
@@ -89,7 +88,10 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 .social-grid img{width:32px;height:32px; object-fit:contain; border-radius:0; transition: transform 0.2s;}
 .social-grid img:hover{transform:scale(1.1);}
 
-@media(max-width:900px){ .header{flex-direction:column} .right{width:100%;max-width:none} }
+@media(max-width:900px){ 
+  .header{flex-direction:column; align-items:flex-start} 
+  .right{width:100%;max-width:none} 
+}
 </style>
 </head>
 <body>
@@ -111,7 +113,6 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
         <h3 id="projects-title">Projects</h3>
         <div class="carousel-wrapper">
           <div class="carousel" id="carousel">
-            <!-- Slide 1 -->
             <div class="slide">
               <article class="card"><div class="thumb"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=60&auto=format&fit=crop"></div><h4>Project 1</h4><p>Description Project 1</p></article>
               <article class="card"><div class="thumb"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1200&q=60&auto=format&fit=crop"></div><h4>Project 2</h4><p>Description Project 2</p></article>
