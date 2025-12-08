@@ -50,53 +50,47 @@ p.lead{color:var(--muted);line-height:1.6;margin-top:12px}
 
 hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 
-
-/* ─────────── ACCORDION: TOOLS ─────────── */
-.tools-card{
-  margin-top:18px;
-  padding:0;
+/* TAG BAR */
+.tag-bar{
+  display:flex;
+  gap:10px;
+  margin:10px 0 14px 0;
 }
+.tag{
+  background:#1c1c1e;
+  border:1px solid #2a2a2c;
+  padding:6px 12px;
+  border-radius:8px;
+  font-size:13px;
+  color:var(--muted);
+  cursor:pointer;
+  transition:0.2s;
+}
+.tag:hover{background:#2c2c2e; color:#acacac;}
+.tag.active{background:#2C2F30; color:#acacac;}
 
+/* ACCORDION */
+.tools-card{margin-top:18px;padding:0;}
 .tools-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
   cursor:pointer;
 }
-
-.tools-header h3{
-  margin:0;
-  font-size:17px;
-}
-
+.tools-header h2{margin:0;font-weight:700;color:#E9EEF1;}
 .accordion-btn{
-  font-size:16px;
-  background:none;
-  width: 32px;
-  height: 32px;
-  border:none;
-  color:var(--muted);
-  cursor:pointer;
-  transition:transform 0.3s ease;
-  &:hover{background-color:#333335; border-radius:6px; width: 32px; height: 32px;}
+  font-size:16px;background:none;width:32px;height:32px;border:none;
+  color:var(--muted);cursor:pointer;transition:transform 0.3s ease;
 }
-
-.accordion-btn.open{
-  transform:rotate(180deg);
-}
-
+.accordion-btn:hover{background-color:#333335;border-radius:6px;}
+.accordion-btn.open{transform:rotate(180deg);}
 .tools-body{
   overflow:hidden;
   max-height:0;
   opacity:0;
-  transition:
-    max-height .45s ease,
-    opacity .35s ease;
+  transition:max-height .45s ease, opacity .35s ease;
 }
-
-.tools-body.open{
-  opacity:1;
-}
+.tools-body.open{opacity:1;}
 
 .tools-grid{
   display:grid;
@@ -104,107 +98,51 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
   gap:12px;
   padding:4px;
 }
-
 .tools-grid img{
   width:40px;height:40px;
   object-fit:contain;
-  transition:transform 0.2s;
+  transition:0.25s;
 }
+.tools-grid img:hover{transform:scale(1.1);}
+.tools-grid.dimmed img{opacity:0.15;filter:grayscale(100%);}
+.tools-grid img.highlight{opacity:1 !important;filter:none !important;}
 
-.tools-grid img:hover{
-  transform:scale(1.1);
-}
-
-
-/* ─────────── PROJECT ARROW NAVIGATION ─────────── */
+/* Projects */
 .project-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:10px;
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;
 }
-
-.project-arrows{
-  display:flex;
-  gap:10px;
-}
-
+.project-arrows{display:flex;gap:10px;}
 .project-arrow{
-  cursor:pointer;
-  background:#26262800;
-  border:none;
-  color:var(--muted);
-  padding:6px 10px;
-  border-radius:8px;
-  font-size:15px;
-  transition:background 0.25s ease;
+  cursor:pointer;background:#26262800;border:none;color:var(--muted);
+  padding:6px 10px;border-radius:8px;font-size:15px;transition:background 0.25s ease;
 }
+.project-arrow:hover{background:#333335;}
 
-.project-arrow:hover{
-  background:#333335;
+.carousel-wrapper{
+  margin-top:-5px;width:100%;overflow-x:auto;scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
 }
-
-
-/* ─────────── CAROUSEL ─────────── */
-.carousel-wrapper {
-  margin-top:-5px;
-  width:100%;
-  overflow-x:auto;
-  scroll-behavior:smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.carousel-wrapper::-webkit-scrollbar { display:none; }
-
-.carousel {
-  display:flex;
-  gap:16px;
-}
-
-.slide {
-  flex:0 0 350px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
+.carousel-wrapper::-webkit-scrollbar{display:none;}
+.carousel{display:flex;gap:16px;}
+.slide{flex:0 0 350px;display:flex;flex-direction:column;gap:12px;}
 
 .card{
   background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,0.03);
+  border-radius:12px;border:1px solid rgba(255,255,255,0.03);
 }
-
 .card .thumb{height:180px;border-radius:8px 8px 0 0;overflow:hidden;margin-bottom:10px}
 .card .thumb img{width:100%;height:100%;object-fit:cover}
+.card h4{margin:0 0 6px;font-size:15px;padding:0 14px;}
+.card p{margin:0;color:var(--muted);font-size:13px;padding:0 0 14px 14px;}
 
-.card h4{margin:0 0 6px;font-size:15px; padding: 0 14px;}
-.card p{margin:0;color:var(--muted);font-size:13px; padding: 0 0 14px 14px;}
-
-
-/* Social Media */
 .social-card{margin-top:12px;}
 .social-card h3{margin:0 0 12px;font-size:17px}
 .social-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:13px;
-  padding:10px 4px 4px 4px;
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:13px;padding:10px 4px 4px 4px;
 }
-
-.social-grid img{
-  width:38px;height:38px;
-  object-fit:contain;
-  transition: transform 0.2s;
-}
-.social-grid img:hover{
-  transform:scale(1.1);
-  filter:grayscale(100%);
-}
-
-@media(max-width:900px){ 
-  .header{flex-direction:column; align-items:flex-start} 
-  .right{width:100%;max-width:none} 
-}
+.social-grid img{width:38px;height:38px;object-fit:contain;transition:transform 0.2s;}
+.social-grid img:hover{transform:scale(1.1);filter:grayscale(100%);}
 </style>
 </head>
 
@@ -214,7 +152,7 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
   <div class="header">
     
     <div class="left">
-      <h1>Hi, I’m Takathena! <span style="font-size:20px; font-weight:600; color:var(--muted);">(he / him)</span></h1>
+      <h1>Hi, I’m Takathena! <span style="font-size:20px;font-weight:600;color:var(--muted);">(he / him)</span></h1>
       <h2>a curious learner and a creative mind obsessed with building innovative projects and exploring the world of technology.</h2>
       
       <div class="badges">
@@ -225,48 +163,29 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 
       <p class="lead">
         From exploring the latest gadgets and apps to building small projects and learning new programming languages, 
-        I dive into technology with curiosity and creativity. When I’m not coding or experimenting with ideas, 
-        you’ll find me reading tech blogs, participating in online challenges, or brainstorming my next software project. 
-        Let’s innovate and create something exciting together.
+        I dive into technology with curiosity and creativity...
       </p>
 
       <hr class="sep">
 
-
-      <!-- ─────────── TOOLS & SOFTWARE ─────────── -->
+      <!-- ACCORDION -->
       <div class="tools-card">
         <div class="tools-header" onclick="toggleTools()">
-          <h3>Tools & Software</h3>
+          <h2>Dabble in</h2>
           <button class="accordion-btn" id="acc-btn">ᐯ</button>
         </div>
 
+        <div class="tag-bar">
+          <div class="tag" data-tag="software">Software</div>
+          <div class="tag" data-tag="programming">Programming</div>
+          <div class="tag" data-tag="database">Database</div>
+          <div class="tag" data-tag="etc">Etc</div>
+        </div>
+
         <div class="tools-body" id="tools-body">
-          <div class="tools-grid">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Arch_Linux_%22Crystal%22_icon.svg/960px-Arch_Linux_%22Crystal%22_icon.svg.png">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Npm-logo.svg/960px-Npm-logo.svg.png">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg">
-            <img src="https://freesvg.org/img/winbox-mikrotik-icon.png">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sass_Logo_Color.svg/960px-Sass_Logo_Color.svg.png">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Thonny_logo.png?20181127113433">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Kubernetes_logo_without_workmark.svg/960px-Kubernetes_logo_without_workmark.svg.png">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg">
-          </div>
+          <div class="tools-grid" id="tools-grid"></div>
         </div>
       </div>
-      <!-- ─────────────────────────────────────────────── -->
-
 
       <!-- PROJECTS -->
       <section class="projects" aria-labelledby="projects-title">
@@ -306,12 +225,11 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
           </div>
         </div>
       </section>
+
     </div>
 
-
-    <!-- RIGHT ASIDE -->
     <aside class="right photo">
-      <img src="https://cdn.cosmos.so/44fe48eb-7188-4d82-b685-f7c6ecb3e533?format=jpeg" alt="Móric Stankovic — Landscape with a Lake">
+      <img src="https://cdn.cosmos.so/44fe48eb-7188-4d82-b685-f7c6ecb3e533?format=jpeg" alt="cover">
 
       <div class="social-card">
         <h3>Social Media</h3>
@@ -332,38 +250,107 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 </div>
 
 <script>
-// Accordion super smooth
-function toggleTools() {
-  const body = document.getElementById("tools-body");
-  const btn  = document.getElementById("acc-btn");
+/* DATABASE ICONS */
+const toolsDB = [
+  {cat:"etc", src:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Arch_Linux_%22Crystal%22_icon.svg/960px-Arch_Linux_%22Crystal%22_icon.svg.png"},
+  {cat:"etc", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"},
+  {cat:"software", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"},
+  {cat:"software", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"},
+  {cat:"programming", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"},
+  {cat:"software", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"},
+  {cat:"programming", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"},
+  {cat:"software", src:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Npm-logo.svg/960px-Npm-logo.svg.png"},
+  {cat:"software", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"},
+  {cat:"software", src:"https://freesvg.org/img/winbox-mikrotik-icon.png"},
+  {cat:"programming", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"},
+  {cat:"programming", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"},
+  {cat:"programming", src:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sass_Logo_Color.svg/960px-Sass_Logo_Color.svg.png"},
+  {cat:"software", src:"https://upload.wikimedia.org/wikipedia/commons/e/e2/Thonny_logo.png?20181127113433"},
+  {cat:"database", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"},
+  {cat:"database", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"},
+  {cat:"software", src:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Kubernetes_logo_without_workmark.svg/960px-Kubernetes_logo_without_workmark.svg.png"},
+  {cat:"programming", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"},
+  {cat:"software", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"},
+  {cat:"programming", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"}
+];
 
-  const isOpen = body.classList.contains("open");
+/* Render Tools */
+const grid=document.getElementById("tools-grid");
+toolsDB.forEach(t=>{
+  const img=document.createElement("img");
+  img.src=t.src;
+  img.dataset.cat=t.cat;
+  grid.appendChild(img);
+});
 
-  if (!isOpen) {
-    body.style.maxHeight = body.scrollHeight + "px";
+/* Accordion */
+function toggleTools(){
+  const body=document.getElementById("tools-body");
+  const btn=document.getElementById("acc-btn");
+  const open=body.classList.contains("open");
+
+  if(!open){
+    body.style.maxHeight=body.scrollHeight+"px";
     body.classList.add("open");
     btn.classList.add("open");
-  } else {
-    body.style.maxHeight = body.scrollHeight + "px";
+  }else{
+    body.style.maxHeight=body.scrollHeight+"px";
     void body.offsetHeight;
-    body.style.maxHeight = "0px";
+    body.style.maxHeight="0px";
     body.classList.remove("open");
     btn.classList.remove("open");
   }
 }
 
+/* --- AUTO OPEN ON PAGE LOAD --- */
+function openAccordionOnLoad(){
+  const body=document.getElementById("tools-body");
+  const btn=document.getElementById("acc-btn");
 
-// Carousel slide navigation
-const carousel = document.querySelector(".carousel-wrapper");
+  body.style.maxHeight=body.scrollHeight+"px";
+  body.classList.add("open");
+  btn.classList.add("open");
+}
+window.addEventListener("load", openAccordionOnLoad);
 
-function slideLeft(){
-  carousel.scrollBy({ left: -350, behavior: "smooth" });
+/* TAG FILTER */
+let lockedTag=null;
+const tags=document.querySelectorAll(".tag");
+
+tags.forEach(tag=>{
+  tag.addEventListener("mouseenter",()=>{ if(!lockedTag) applyFilter(tag.dataset.tag); });
+  tag.addEventListener("mouseleave",()=>{ if(!lockedTag) clearFilter(); });
+  tag.addEventListener("click",()=>{
+    if(lockedTag===tag.dataset.tag){
+      lockedTag=null;
+      tag.classList.remove("active");
+      clearFilter();
+    }else{
+      lockedTag=tag.dataset.tag;
+      tags.forEach(t=>t.classList.remove("active"));
+      tag.classList.add("active");
+      applyFilter(lockedTag);
+    }
+  });
+});
+
+function applyFilter(cat){
+  grid.classList.add("dimmed");
+  document.querySelectorAll("#tools-grid img").forEach(img=>{
+    img.classList.toggle("highlight", img.dataset.cat===cat);
+  });
 }
 
-function slideRight(){
-  carousel.scrollBy({ left: 350, behavior: "smooth" });
+function clearFilter(){
+  grid.classList.remove("dimmed");
+  document.querySelectorAll("#tools-grid img").forEach(i=>i.classList.remove("highlight"));
 }
+
+/* Carousel */
+const carousel=document.querySelector(".carousel-wrapper");
+function slideLeft(){carousel.scrollBy({left:-350,behavior:"smooth"});}
+function slideRight(){carousel.scrollBy({left:350,behavior:"smooth"});}
+
 </script>
-
 </body>
 </html>
