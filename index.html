@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Portfolio — Takathena</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
 :root{
   --bg: #111113;
@@ -14,35 +15,137 @@
   --glass: rgba(255,255,255,0.03);
   --maxw: 980px;
 }
+
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;}
 body{
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   background: var(--bg);
   color:#e9eef1;
-  padding:24px 20px 0 24em; /* Lebih nempel ke kiri */
+  padding:24px 20px 0 24em;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
+
 .page{
   width:100%;
   max-width:var(--maxw);
   padding:28px 0;
-  margin-left:0; /* semua ke kiri */
+  margin-left:0;
 }
-.header{display:flex;gap:28px;align-items:flex-start;justify-content:flex-start;} /* align left */
+
+.header{display:flex;gap:28px;align-items:flex-start;justify-content:flex-start;}
 .left{flex:1 1 420px;min-width:240px}
 .right{width:360px;max-width:40%;overflow:hidden;display:flex;flex-direction:column;gap:16px;}
+
 h1{font-size:28px;margin:0 0 8px;font-weight:700}
 h2{font-size:18px;margin:0 0 8px;font-weight:600;color:var(--muted)}
 p.lead{color:var(--muted);line-height:1.6;margin-top:12px}
+
 .photo img{display:block;width:100%;}
+
 .badges{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
 .badge{display:inline-flex;align-items:center;gap:8px;background:#262628;padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
 .badge img{width:18px;height:18px}
+
 hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 
-/* Carousel Horizontal */
+
+/* ─────────── ACCORDION: TOOLS ─────────── */
+.tools-card{
+  margin-top:18px;
+  padding:0;
+}
+
+.tools-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+}
+
+.tools-header h3{
+  margin:0;
+  font-size:17px;
+}
+
+.accordion-btn{
+  font-size:16px;
+  background:none;
+  width: 32px;
+  height: 32px;
+  border:none;
+  color:var(--muted);
+  cursor:pointer;
+  transition:transform 0.3s ease;
+  &:hover{background-color:#333335; border-radius:6px; width: 32px; height: 32px;}
+}
+
+.accordion-btn.open{
+  transform:rotate(180deg);
+}
+
+.tools-body{
+  overflow:hidden;
+  max-height:0;
+  opacity:0;
+  transition:
+    max-height .45s ease,
+    opacity .35s ease;
+}
+
+.tools-body.open{
+  opacity:1;
+}
+
+.tools-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+  padding:4px;
+}
+
+.tools-grid img{
+  width:40px;height:40px;
+  object-fit:contain;
+  transition:transform 0.2s;
+}
+
+.tools-grid img:hover{
+  transform:scale(1.1);
+}
+
+
+/* ─────────── PROJECT ARROW NAVIGATION ─────────── */
+.project-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.project-arrows{
+  display:flex;
+  gap:10px;
+}
+
+.project-arrow{
+  cursor:pointer;
+  background:#26262800;
+  border:none;
+  color:var(--muted);
+  padding:6px 10px;
+  border-radius:8px;
+  font-size:15px;
+  transition:background 0.25s ease;
+}
+
+.project-arrow:hover{
+  background:#333335;
+}
+
+
+/* ─────────── CAROUSEL ─────────── */
 .carousel-wrapper {
   margin-top:-5px;
   width:100%;
@@ -51,42 +154,52 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
-.carousel-wrapper::-webkit-scrollbar { display: none; }
+.carousel-wrapper::-webkit-scrollbar { display:none; }
+
 .carousel {
   display:flex;
   gap:16px;
 }
+
 .slide {
   flex:0 0 350px;
   display:flex;
   flex-direction:column;
   gap:12px;
 }
+
 .card{
   background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   border-radius:12px;
-  padding:14px;
   border:1px solid rgba(255,255,255,0.03);
 }
-.card .thumb{height:180px;border-radius:8px;overflow:hidden;margin-bottom:10px}
+
+.card .thumb{height:180px;border-radius:8px 8px 0 0;overflow:hidden;margin-bottom:10px}
 .card .thumb img{width:100%;height:100%;object-fit:cover}
-.card h4{margin:0 0 6px;font-size:15px}
-.card p{margin:0;color:var(--muted);font-size:13px}
 
-/* Tools */
-.tools-card{ margin-top:12px;}
-.tools-card h3{margin:0 0 12px;font-size:17px}
-.tools-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:12px; padding:10px 4px 4px 4px;}
-.tools-grid img{width:40px;height:40px;object-fit:contain;padding:0;background:none;border-radius:0;transition: transform 0.2s;}
-.tools-grid img:hover{transform:scale(1.1);}
+.card h4{margin:0 0 6px;font-size:15px; padding: 0 14px;}
+.card p{margin:0;color:var(--muted);font-size:13px; padding: 0 0 14px 14px;}
 
-/* Social Media Icons Only */
-.social-card{ margin-top:12px;}
+
+/* Social Media */
+.social-card{margin-top:12px;}
 .social-card h3{margin:0 0 12px;font-size:17px}
-.social-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:13px; padding:10px 4px 4px 4px;}
-.social-grid a{ display:flex; justify-content:start; align-items:center; }
-.social-grid img{width:38px;height:38px; object-fit:contain; border-radius:0; transition: transform 0.2s;}
-.social-grid img:hover{transform:scale(1.1); filter: grayscale(100%);}
+.social-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:13px;
+  padding:10px 4px 4px 4px;
+}
+
+.social-grid img{
+  width:38px;height:38px;
+  object-fit:contain;
+  transition: transform 0.2s;
+}
+.social-grid img:hover{
+  transform:scale(1.1);
+  filter:grayscale(100%);
+}
 
 @media(max-width:900px){ 
   .header{flex-direction:column; align-items:flex-start} 
@@ -94,92 +207,163 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 }
 </style>
 </head>
+
 <body>
+
 <div class="page" role="main">
   <div class="header">
+    
     <div class="left">
       <h1>Hi, I’m Takathena! <span style="font-size:20px; font-weight:600; color:var(--muted);">(he / him)</span></h1>
       <h2>a curious learner and a creative mind obsessed with building innovative projects and exploring the world of technology.</h2>
+      
       <div class="badges">
         <span class="badge"><img src="https://decisive-platypus-f3d.notion.site/icons/butterfly_gray.svg?mode=dark">Student</span>
         <span class="badge">Ai Enthusiast</span>
         <span class="badge">Vibe coder</span>
       </div>
-      <p class="lead">From exploring the latest gadgets and apps to building small projects and learning new programming languages, I dive into technology with curiosity and creativity. When I’m not coding or experimenting with ideas, you’ll find me reading tech blogs, participating in online challenges, or brainstorming my next software project. Let’s innovate and create something exciting together.</p>
+
+      <p class="lead">
+        From exploring the latest gadgets and apps to building small projects and learning new programming languages, 
+        I dive into technology with curiosity and creativity. When I’m not coding or experimenting with ideas, 
+        you’ll find me reading tech blogs, participating in online challenges, or brainstorming my next software project. 
+        Let’s innovate and create something exciting together.
+      </p>
+
       <hr class="sep">
 
-      <!-- PROJECT CAROUSEL -->
+
+      <!-- ─────────── TOOLS & SOFTWARE ─────────── -->
+      <div class="tools-card">
+        <div class="tools-header" onclick="toggleTools()">
+          <h3>Tools & Software</h3>
+          <button class="accordion-btn" id="acc-btn">ᐯ</button>
+        </div>
+
+        <div class="tools-body" id="tools-body">
+          <div class="tools-grid">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Arch_Linux_%22Crystal%22_icon.svg/960px-Arch_Linux_%22Crystal%22_icon.svg.png">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Npm-logo.svg/960px-Npm-logo.svg.png">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg">
+            <img src="https://freesvg.org/img/winbox-mikrotik-icon.png">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sass_Logo_Color.svg/960px-Sass_Logo_Color.svg.png">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Thonny_logo.png?20181127113433">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Kubernetes_logo_without_workmark.svg/960px-Kubernetes_logo_without_workmark.svg.png">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg">
+          </div>
+        </div>
+      </div>
+      <!-- ─────────────────────────────────────────────── -->
+
+
+      <!-- PROJECTS -->
       <section class="projects" aria-labelledby="projects-title">
-        <h3 id="projects-title">Projects</h3>
+
+        <div class="project-header">
+          <h3 id="projects-title">Projects</h3>
+
+          <div class="project-arrows">
+            <button class="project-arrow" onclick="slideLeft()">ᐸ</button>
+            <button class="project-arrow" onclick="slideRight()">ᐳ</button>
+          </div>
+        </div>
+
         <div class="carousel-wrapper">
-          <div class="carousel" id="carousel">
+          <div class="carousel">
+
             <div class="slide">
               <article class="card"><div class="thumb"><img src="https://cdn.cosmos.so/715a0d84-49ed-42f5-9883-230cbbd2965c?format=jpeg"></div><h4>Project 1</h4><p>Description Project 1</p></article>
               <article class="card"><div class="thumb"><img src="https://cdn.cosmos.so/6fd2b521-5261-43c7-82cc-5b8b906ee450?format=jpeg"></div><h4>Project 2</h4><p>Description Project 2</p></article>
             </div>
+
             <div class="slide">
               <article class="card"><div class="thumb"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&q=60&auto=format&fit=crop"></div><h4>Project 3</h4><p>Description Project 3</p></article>
               <article class="card"><div class="thumb"><img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=60&auto=format&fit=crop"></div><h4>Project 4</h4><p>Description Project 4</p></article>
             </div>
+
             <div class="slide">
               <article class="card"><div class="thumb"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=60&auto=format&fit=crop"></div><h4>Project 5</h4><p>Description Project 5</p></article>
               <article class="card"><div class="thumb"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1200&q=60&auto=format&fit=crop"></div><h4>Project 6</h4><p>Description Project 6</p></article>
             </div>
+
             <div class="slide">
               <article class="card"><div class="thumb"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&q=60&auto=format&fit=crop"></div><h4>Project 7</h4><p>Description Project 7</p></article>
               <article class="card"><div class="thumb"><img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=60&auto=format&fit=crop"></div><h4>Project 8</h4><p>Description Project 8</p></article>
             </div>
+
           </div>
         </div>
       </section>
     </div>
 
+
+    <!-- RIGHT ASIDE -->
     <aside class="right photo">
-      <img src="https://cdn.cosmos.so/44fe48eb-7188-4d82-b685-f7c6ecb3e533?format=jpeg" alt="Móric Stankovic (1867-1938)- Landscape with a Lake ca 1900, oil on canvas , 100 x 75 cm">
+      <img src="https://cdn.cosmos.so/44fe48eb-7188-4d82-b685-f7c6ecb3e533?format=jpeg" alt="Móric Stankovic — Landscape with a Lake">
 
-      <!-- Tools & Software -->
-      <div class="tools-card">
-        <h3>Tools & Software</h3>
-        <div class="tools-grid">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Arch_Linux_%22Crystal%22_icon.svg/960px-Arch_Linux_%22Crystal%22_icon.svg.png">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Npm-logo.svg/960px-Npm-logo.svg.png">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg">
-          <img src="https://freesvg.org/img/winbox-mikrotik-icon.png">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sass_Logo_Color.svg/960px-Sass_Logo_Color.svg.png?20150315202757">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Thonny_logo.png?20181127113433">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Kubernetes_logo_without_workmark.svg/960px-Kubernetes_logo_without_workmark.svg.png?20190926210707">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg">
-        </div>
-      </div>
-
-      <!-- Social Media Icons Only 10 colored -->
-      <div class="social-card"> 
+      <div class="social-card">
         <h3>Social Media</h3>
         <div class="social-grid">
-          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/960px-LinkedIn_logo_initials.png" style="color:#0A66C2; border-radius: 8px;"></a>
-          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Github-desktop-logo-symbol.svg/2048px-Github-desktop-logo-symbol.svg.png" style="color:#181717; border-radius: 8px; transform:scale(1.1)"></a>
-          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/X_icon_2.svg/1024px-X_icon_2.svg.png" style="color:#1DA1F2; border-radius: 8px;"></a>
-          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/960px-Instagram_logo_2022.svg.png?20220518162235  " style="color:#E4405F; border-radius: 8px;"></a>
-          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Tumblr.svg/960px-Tumblr.svg.png" style="color:#000000; border-radius: 8px;"></a>
-          <a href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLqNIMiklXnPjCckpTiqnNLIlKC4biPA9snQ&s" style="color:#1877F2; border-radius: 8px;"></a>
-          <a href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7tLgjKmU6bnmbMYK86RFwZaknMMPL8jvI2g&s" style="color:#FF4500; border-radius: 8px;"></a>
+          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/960px-LinkedIn_logo_initials.png"></a>
+          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Github-desktop-logo-symbol.svg/2048px-Github-desktop-logo-symbol.svg.png"></a>
+          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/X_icon_2.svg/1024px-X_icon_2.svg.png"></a>
+          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/960px-Instagram_logo_2022.svg.png"></a>
+          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Tumblr.svg/960px-Tumblr.svg.png"></a>
+          <a href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLqNIMiklXnPjCckpTiqnNLIlKC4biPA9snQ&s"></a>
+          <a href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7tLgjKmU6bnmbMYK86RFwZaknMMPL8jvI2g&s"></a>
         </div>
       </div>
 
     </aside>
+
   </div>
 </div>
+
+<script>
+// Accordion super smooth
+function toggleTools() {
+  const body = document.getElementById("tools-body");
+  const btn  = document.getElementById("acc-btn");
+
+  const isOpen = body.classList.contains("open");
+
+  if (!isOpen) {
+    body.style.maxHeight = body.scrollHeight + "px";
+    body.classList.add("open");
+    btn.classList.add("open");
+  } else {
+    body.style.maxHeight = body.scrollHeight + "px";
+    void body.offsetHeight;
+    body.style.maxHeight = "0px";
+    body.classList.remove("open");
+    btn.classList.remove("open");
+  }
+}
+
+
+// Carousel slide navigation
+const carousel = document.querySelector(".carousel-wrapper");
+
+function slideLeft(){
+  carousel.scrollBy({ left: -350, behavior: "smooth" });
+}
+
+function slideRight(){
+  carousel.scrollBy({ left: 350, behavior: "smooth" });
+}
+</script>
+
 </body>
 </html>
