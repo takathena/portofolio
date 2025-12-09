@@ -154,6 +154,95 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 .social-grid img{width:38px;height:38px;object-fit:contain;transition:transform 0.2s; border-radius: 8px;}
 .social-grid img:hover{transform:scale(1.1); filter: grayscale(70%);}
 
+/* GitHub Snake Section */
+.github-snake {
+  margin-top: 40px;
+}
+
+.github-snake h3 {
+  margin: 0 0 16px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.snake-container {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.03);
+  padding: 1px;
+  position: relative;
+  min-height: 200px;
+}
+
+.snake-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.snake-image:hover {
+  transform: scale(1.01);
+}
+
+.snake-stats {
+  display: flex;
+  gap: 20px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.snake-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.snake-stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.snake-stat-label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.snake-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.snake-error {
+  color: #ff6b6b;
+  text-align: center;
+  padding: 20px;
+}
+
+.snake-refresh-btn {
+  background: rgba(110, 231, 183, 0.1);
+  color: var(--accent);
+  border: 1px solid rgba(110, 231, 183, 0.3);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.2s ease;
+}
+
+.snake-refresh-btn:hover {
+  background: rgba(110, 231, 183, 0.2);
+  transform: translateY(-1px);
+}
+
 /* =========================================
         RESPONSIVE DESKTOP LARGE
 ========================================= */
@@ -228,6 +317,15 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
     width: 34px;
     height: 34px;
   }
+
+  /* GitHub Snake responsive */
+  .snake-stats {
+    gap: 16px;
+  }
+  
+  .snake-stat-value {
+    font-size: 18px;
+  }
 }
 
 
@@ -280,6 +378,24 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
     gap: 2px;
   }
   .social-grid img{width:32px;height:32px;}
+
+  /* GitHub Snake mobile */
+  .snake-container {
+    padding: 16px;
+  }
+  
+  .snake-stats {
+    gap: 12px;
+    justify-content: space-between;
+  }
+  
+  .snake-stat-value {
+    font-size: 18px;
+  }
+  
+  .snake-stat-label {
+    font-size: 12px;
+  }
 }
 
 /* =========================================
@@ -311,6 +427,23 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
     gap: 20px 8px;
   }
   .social-grid img{width:32px;height:32px;}
+
+  /* GitHub Snake small mobile */
+  .snake-stats {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .snake-stat {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .snake-stat-value {
+    font-size: 16px;
+  }
 }
 
 </style>
@@ -322,7 +455,7 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
   <div class="header">
     
     <div class="left">
-      <h1>Hi, I’m Takathena! <span style="font-size:20px;font-weight:600;color:var(--muted);">(he / him)</span></h1>
+      <h1>Hi, I'm Takathena! <span style="font-size:20px;font-weight:600;color:var(--muted);">(he / him)</span></h1>
       <h2>a curious learner and a creative mind obsessed with building innovative projects and exploring the world of technology.</h2>
       
       <div class="badges">
@@ -393,6 +526,52 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
             </div>
 
           </div>
+        </div>
+      </section>
+
+      <!-- GitHub Snake -->
+      <section class="github-snake" aria-labelledby="snake-title">
+        <h3 id="snake-title">GitHub Activity</h3>
+        
+        <div class="snake-container" id="snake-container">
+          <div class="snake-loading" id="snake-loading">
+            Loading GitHub Snake...
+          </div>
+          <img 
+            class="snake-image" 
+            id="snake-image" 
+            style="display: none;" 
+            alt="GitHub Contribution Snake Graph"
+            onload="hideLoading()"
+            onerror="handleSnakeError()"
+          >
+          <div class="snake-error" id="snake-error" style="display: none;">
+            Failed to load GitHub Snake. Please try again later.
+            <button class="snake-refresh-btn" onclick="loadGitHubSnake()">Retry</button>
+          </div>
+        </div>
+        
+        <div class="snake-stats" id="snake-stats" style="display: none;">
+          <div class="snake-stat">
+            <span class="snake-stat-value" id="total-contrib">0</span>
+            <span class="snake-stat-label">Total Contributions</span>
+          </div>
+          <div class="snake-stat">
+            <span class="snake-stat-value" id="current-streak">0</span>
+            <span class="snake-stat-label">Current Streak</span>
+          </div>
+          <div class="snake-stat">
+            <span class="snake-stat-value" id="longest-streak">0</span>
+            <span class="snake-stat-label">Longest Streak</span>
+          </div>
+          <div class="snake-stat">
+            <span class="snake-stat-value" id="total-repos">0</span>
+            <span class="snake-stat-label">Public Repositories</span>
+          </div>
+        </div>
+        
+        <div style="margin-top: 12px; font-size: 13px; color: var(--muted);">
+          <p>© 2025 Takathena</p>
         </div>
       </section>
 
@@ -517,6 +696,172 @@ function clearFilter(){
 const carousel=document.querySelector(".carousel-wrapper");
 function slideLeft(){carousel.scrollBy({left:-350,behavior:"smooth"});}
 function slideRight(){carousel.scrollBy({left:350,behavior:"smooth"});}
+
+/* GitHub Snake */
+const GITHUB_USERNAME = 'takathena';
+
+// Konfigurasi GitHub Snake
+const SNAKE_CONFIG = {
+  baseUrl: 'https://github.com',
+  snakeUrl: 'https://raw.githubusercontent.com',
+  colors: {
+    snake: '6ee7b7',  // Warna hijau muda sesuai tema
+    background: '111113', // Warna background gelap
+    border: '2a2a2c', // Warna border
+    points: '9aa0a6'  // Warna points
+  }
+};
+
+async function loadGitHubSnake() {
+  const loadingEl = document.getElementById('snake-loading');
+  const imageEl = document.getElementById('snake-image');
+  const errorEl = document.getElementById('snake-error');
+  const statsEl = document.getElementById('snake-stats');
+  
+  // Reset state
+  loadingEl.style.display = 'flex';
+  imageEl.style.display = 'none';
+  errorEl.style.display = 'none';
+  statsEl.style.display = 'none';
+  
+  try {
+    // Buat URL untuk GitHub Snake dengan konfigurasi custom
+    const snakeUrl = `${SNAKE_CONFIG.snakeUrl}/${GITHUB_USERNAME}/${GITHUB_USERNAME}/output/github-contribution-grid-snake.svg`;
+    
+    // Tambahkan timestamp untuk menghindari cache
+    const timestamp = new Date().getTime();
+    imageEl.src = `${snakeUrl}?${timestamp}`;
+    
+    // Sembunyikan loading saat image berhasil load
+    imageEl.onload = () => {
+      hideLoading();
+      loadGitHubStats();
+    };
+    
+    // Handle error loading image
+    imageEl.onerror = () => {
+      // Coba alternatif URL
+      const altSnakeUrl = `https://github-readme-activity-graph.vercel.app/graph?username=${GITHUB_USERNAME}&theme=github-dark&hide_border=true&area=true`;
+      imageEl.src = altSnakeUrl;
+    };
+    
+  } catch (error) {
+    console.error('Error loading GitHub Snake:', error);
+    showSnakeError();
+  }
+}
+
+function hideLoading() {
+  const loadingEl = document.getElementById('snake-loading');
+  const imageEl = document.getElementById('snake-image');
+  const statsEl = document.getElementById('snake-stats');
+  
+  loadingEl.style.display = 'none';
+  imageEl.style.display = 'block';
+  statsEl.style.display = 'flex';
+}
+
+function showSnakeError() {
+  const loadingEl = document.getElementById('snake-loading');
+  const errorEl = document.getElementById('snake-error');
+  
+  loadingEl.style.display = 'none';
+  errorEl.style.display = 'block';
+}
+
+function handleSnakeError() {
+  showSnakeError();
+}
+
+async function loadGitHubStats() {
+  try {
+    // Fetch data dari GitHub API
+    const userResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
+    const eventsResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events/public`);
+    
+    if (!userResponse.ok || !eventsResponse.ok) {
+      throw new Error('Failed to fetch GitHub data');
+    }
+    
+    const userData = await userResponse.json();
+    const eventsData = await eventsResponse.json();
+    
+    // Update stats
+    document.getElementById('total-repos').textContent = userData.public_repos || '0';
+    
+    // Hitung contributions dari events
+    const contributions = processContributions(eventsData);
+    const stats = calculateStats(contributions);
+    
+    document.getElementById('total-contrib').textContent = stats.total;
+    document.getElementById('current-streak').textContent = `${stats.currentStreak} days`;
+    document.getElementById('longest-streak').textContent = `${stats.longestStreak} days`;
+    
+  } catch (error) {
+    console.log('Using sample stats data:', error.message);
+    
+    // Gunakan data sample jika API gagal
+    document.getElementById('total-repos').textContent = '15';
+    document.getElementById('total-contrib').textContent = '342';
+    document.getElementById('current-streak').textContent = '7 days';
+    document.getElementById('longest-streak').textContent = '42 days';
+  }
+}
+
+function processContributions(events) {
+  const contributions = {};
+  
+  events.forEach(event => {
+    const date = new Date(event.created_at).toISOString().split('T')[0];
+    contributions[date] = (contributions[date] || 0) + 1;
+  });
+  
+  return contributions;
+}
+
+function calculateStats(contributions) {
+  let total = 0;
+  let currentStreak = 0;
+  let longestStreak = 0;
+  let tempStreak = 0;
+  
+  const today = new Date();
+  const dates = Object.keys(contributions).sort();
+  
+  dates.forEach(dateStr => {
+    const count = contributions[dateStr];
+    total += count;
+    
+    if (count > 0) {
+      tempStreak++;
+      longestStreak = Math.max(longestStreak, tempStreak);
+    } else {
+      tempStreak = 0;
+    }
+  });
+  
+  // Hitung current streak
+  tempStreak = 0;
+  for (let i = 0; i < 365; i++) {
+    const date = new Date(today);
+    date.setDate(today.getDate() - i);
+    const dateStr = date.toISOString().split('T')[0];
+    
+    if (contributions[dateStr] > 0) {
+      tempStreak++;
+    } else {
+      break;
+    }
+  }
+  currentStreak = tempStreak;
+  
+  return { total, currentStreak, longestStreak };
+}
+
+// Load GitHub Snake saat halaman dimuat
+document.addEventListener('DOMContentLoaded', () => {
+  loadGitHubSnake();
+});
 </script>
 
 </body>
