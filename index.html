@@ -131,6 +131,7 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 .carousel-wrapper{
   margin-top:-5px;width:100%;overflow-x:auto;scroll-behavior:smooth;
   -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  padding: 4px;
 }
 .carousel-wrapper::-webkit-scrollbar{display:none;}
 .carousel{display:flex;gap:16px;}
@@ -139,11 +140,22 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 .card{
   background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   border-radius:12px;border:1px solid rgba(255,255,255,0.03);
+  cursor:pointer;
+  padding: 2px;
+  transition:transform 0.3s ease, border-color 0.3s ease;
+}
+.card:hover{
+  border-color:#b5b5b566;
+  border-radius: 12px;
 }
 .card .thumb{height:180px;border-radius:8px 8px 0 0;overflow:hidden;margin-bottom:10px}
-.card .thumb img{width:100%;height:100%;object-fit:cover}
+.card .thumb img{width:100%;height:100%;object-fit:cover; border-radius: 11px 11px 0 0;}
 .card h4{margin:0 0 6px;font-size:15px;padding:0 14px;}
-.card p{margin:0;color:var(--muted);font-size:13px;padding:0 0 14px 14px;}
+.card p{margin:0;color:var(--muted);font-size:13px;padding:0 14px 14px 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 .social-card{margin-top:12px;}
 .social-card h3{margin:0 0 12px;font-size:17px}
@@ -194,6 +206,7 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 }
 
 .snake-stat {
+  padding: 14px 10px;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -202,7 +215,7 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 .snake-stat-value {
   font-size: 20px;
   font-weight: 700;
-  color: var(--accent);
+  color: #E9EEF1;
 }
 
 .snake-stat-label {
@@ -240,6 +253,217 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 .snake-refresh-btn:hover {
   background: rgba(110, 231, 183, 0.2);
   transform: translateY(-1px);
+}
+
+/* Project Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+}
+
+.modal {
+  background: var(--card);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow: hidden;
+  position: relative;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--muted);
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.modal-header {
+  padding: 30px 30px 20px;
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #fff;
+}
+
+.modal-subtitle {
+  font-size: 15px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.modal-content {
+  padding: 0 30px 30px;
+  overflow-y: auto;
+  max-height: calc(90vh - 200px);
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.modal-content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.modal-image {
+  width: 100%;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+
+.modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-section {
+  margin-bottom: 25px;
+}
+
+.modal-section h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 12px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-section h4 i {
+  color: var(--accent);
+}
+
+.modal-description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.tech-item {
+  background: rgba(110, 231, 183, 0.1);
+  color: var(--accent);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tech-item i {
+  font-size: 14px;
+}
+
+.modal-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.modal-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(110, 231, 183, 0.1);
+  color: var(--accent);
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.modal-link:hover {
+  background: rgba(110, 231, 183, 0.2);
+  transform: translateY(-2px);
+}
+
+.modal-link i {
+  font-size: 16px;
+}
+
+.modal-scroll {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Scrollbar styling untuk modal */
+.modal-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.modal-scroll::-webkit-scrollbar-thumb {
+  background: rgba(110, 231, 183, 0.3);
+  border-radius: 3px;
+}
+
+.modal-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(110, 231, 183, 0.5);
 }
 
 /* =========================================
@@ -325,6 +549,16 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
   .snake-stat-value {
     font-size: 18px;
   }
+  
+  /* Modal responsive */
+  .modal {
+    width: 95%;
+    max-width: 700px;
+  }
+  
+  .modal-image {
+    height: 250px;
+  }
 }
 
 
@@ -395,6 +629,42 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
   .snake-stat-label {
     font-size: 12px;
   }
+  
+  /* Modal mobile */
+  .modal {
+    width: 95%;
+    max-height: 95vh;
+    border-radius: 12px;
+  }
+  
+  .modal-header {
+    padding: 20px 20px 15px;
+  }
+  
+  .modal-content {
+    padding: 0 20px 20px;
+  }
+  
+  .modal-title {
+    font-size: 20px;
+  }
+  
+  .modal-image {
+    height: 200px;
+    margin-bottom: 20px;
+  }
+  
+  .modal-section {
+    margin-bottom: 20px;
+  }
+  
+  .modal-links {
+    flex-direction: column;
+  }
+  
+  .modal-link {
+    justify-content: center;
+  }
 }
 
 /* =========================================
@@ -442,6 +712,24 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
   
   .snake-stat-value {
     font-size: 16px;
+  }
+  
+  /* Modal small mobile */
+  .modal-image {
+    height: 180px;
+  }
+  
+  .modal-title {
+    font-size: 18px;
+  }
+  
+  .tech-stack {
+    gap: 8px;
+  }
+  
+  .tech-item {
+    padding: 5px 10px;
+    font-size: 12px;
   }
 }
 
@@ -506,23 +794,55 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
           <div class="carousel">
 
             <div class="slide">
-              <article class="card"><div class="thumb"><img src="https://cdn.cosmos.so/715a0d84-49ed-42f5-9883-230cbbd2965c?format=jpeg"></div><h4>Project 1</h4><p>Description Project 1</p></article>
-              <article class="card"><div class="thumb"><img src="https://cdn.cosmos.so/6fd2b521-5261-43c7-82cc-5b8b906ee450?format=jpeg"></div><h4>Project 2</h4><p>Description Project 2</p></article>
+              <article class="card" onclick="openModal(0)">
+                <div class="thumb"><img src="https://cdn.cosmos.so/715a0d84-49ed-42f5-9883-230cbbd2965c?format=jpeg"></div>
+                <h4>E-Commerce Platform</h4>
+                <p>Full-stack online shopping platform with real-time inventory</p>
+              </article>
+              <article class="card" onclick="openModal(1)">
+                <div class="thumb"><img src="https://cdn.cosmos.so/6fd2b521-5261-43c7-82cc-5b8b906ee450?format=jpeg"></div>
+                <h4>AI Image Generator</h4>
+                <p>AI-powered image generation using stable diffusion</p>
+              </article>
             </div>
 
             <div class="slide">
-              <article class="card"><div class="thumb"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&q=60&auto=format&fit=crop"></div><h4>Project 3</h4><p>Description Project 3</p></article>
-              <article class="card"><div class="thumb"><img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=60&auto=format&fit=crop"></div><h4>Project 4</h4><p>Description Project 4</p></article>
+              <article class="card" onclick="openModal(2)">
+                <div class="thumb"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&q=60&auto=format&fit=crop"></div>
+                <h4>Code Editor Web App</h4>
+                <p>Browser-based code editor with live preview</p>
+              </article>
+              <article class="card" onclick="openModal(3)">
+                <div class="thumb"><img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=60&auto=format&fit=crop"></div>
+                <h4>Task Management System</h4>
+                <p>Collaborative task management with real-time updates</p>
+              </article>
             </div>
 
             <div class="slide">
-              <article class="card"><div class="thumb"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=60&auto=format&fit=crop"></div><h4>Project 5</h4><p>Description Project 5</p></article>
-              <article class="card"><div class="thumb"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1200&q=60&auto=format&fit=crop"></div><h4>Project 6</h4><p>Description Project 6</p></article>
+              <article class="card" onclick="openModal(4)">
+                <div class="thumb"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=60&auto=format&fit=crop"></div>
+                <h4>Weather Dashboard</h4>
+                <p>Real-time weather data visualization dashboard</p>
+              </article>
+              <article class="card" onclick="openModal(5)">
+                <div class="thumb"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1200&q=60&auto=format&fit=crop"></div>
+                <h4>Chat Application</h4>
+                <p>Real-time messaging app with end-to-end encryption</p>
+              </article>
             </div>
 
             <div class="slide">
-              <article class="card"><div class="thumb"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&q=60&auto=format&fit=crop"></div><h4>Project 7</h4><p>Description Project 7</p></article>
-              <article class="card"><div class="thumb"><img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=60&auto=format&fit=crop"></div><h4>Project 8</h4><p>Description Project 8</p></article>
+              <article class="card" onclick="openModal(6)">
+                <div class="thumb"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&q=60&auto=format&fit=crop"></div>
+                <h4>Portfolio Website</h4>
+                <p>Responsive portfolio with dark/light mode toggle</p>
+              </article>
+              <article class="card" onclick="openModal(7)">
+                <div class="thumb"><img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=60&auto=format&fit=crop"></div>
+                <h4>Data Analytics Dashboard</h4>
+                <p>Interactive dashboard for data analysis and visualization</p>
+              </article>
             </div>
 
           </div>
@@ -595,6 +915,63 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 
     </aside>
 
+  </div>
+</div>
+
+<!-- Project Modal -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
+  <div class="modal" id="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    
+    <div class="modal-header">
+      <h2 class="modal-title" id="modal-title">Project Title</h2>
+      <p class="modal-subtitle" id="modal-subtitle">Project Type • Timeline</p>
+    </div>
+    
+    <div class="modal-content">
+      <div class="modal-image">
+        <img id="modal-image" src="" alt="Project Image">
+      </div>
+      
+      <div class="modal-scroll">
+        <div class="modal-section">
+          <h4><i>📋</i> Project Overview</h4>
+          <p class="modal-description" id="modal-description">
+            Project description will appear here...
+          </p>
+        </div>
+        
+        <div class="modal-section">
+          <h4><i>💻</i> Technology Stack</h4>
+          <div class="tech-stack" id="tech-stack">
+            <!-- Technology items will be added here dynamically -->
+          </div>
+        </div>
+        
+        <div class="modal-section">
+          <h4><i>🎯</i> Key Features</h4>
+          <p class="modal-description" id="modal-features">
+            Key features will be listed here...
+          </p>
+        </div>
+        
+        <div class="modal-section">
+          <h4><i>🚀</i> Challenges & Solutions</h4>
+          <p class="modal-description" id="modal-challenges">
+            Technical challenges and solutions...
+          </p>
+        </div>
+        
+        <div class="modal-links">
+          <a href="#" class="modal-link" id="modal-live-link" target="_blank">
+            <i>🌐</i> Live Demo
+          </a>
+          <a href="#" class="modal-link" id="modal-github-link" target="_blank">
+            <i>🔗</i> GitHub Repository
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -857,6 +1234,173 @@ function calculateStats(contributions) {
   
   return { total, currentStreak, longestStreak };
 }
+
+/* Project Modal */
+const projects = [
+  {
+    id: 0,
+    title: "E-Commerce Platform",
+    subtitle: "Full-Stack Web Application • 3 Months",
+    image: "https://cdn.cosmos.so/715a0d84-49ed-42f5-9883-230cbbd2965c?format=jpeg",
+    description: "A comprehensive e-commerce platform built with modern web technologies. Features include user authentication, product catalog, shopping cart, payment integration, and admin dashboard for inventory management.",
+    technologies: ["JavaScript", "React", "Node.js", "Express", "MongoDB", "Stripe API", "JWT", "Redux"],
+    features: "• User authentication & authorization\n• Product catalog with search & filters\n• Shopping cart with real-time updates\n• Secure payment processing with Stripe\n• Admin dashboard for inventory management\n• Order tracking & history\n• Responsive design for all devices",
+    challenges: "Implementing secure payment gateway integration while maintaining PCI compliance. Solved by using Stripe's secure payment elements and storing minimal payment data.",
+    liveLink: "https://demo-ecommerce.takathena.com",
+    githubLink: "https://github.com/takathena/ecommerce-platform"
+  },
+  {
+    id: 1,
+    title: "AI Image Generator",
+    subtitle: "AI/ML Application • 2 Months",
+    image: "https://cdn.cosmos.so/6fd2b521-5261-43c7-82cc-5b8b906ee450?format=jpeg",
+    description: "An AI-powered image generation tool using Stable Diffusion. Users can input text prompts to generate unique images, with options for style customization and image enhancement.",
+    technologies: ["Python", "TensorFlow", "Flask", "React", "Stable Diffusion", "OpenCV", "Docker", "Redis"],
+    features: "• Text-to-image generation\n• Multiple artistic style options\n• Image upscaling & enhancement\n• Batch processing capabilities\n• User gallery & history\n• API for third-party integration\n• Real-time generation progress",
+    challenges: "Managing GPU memory constraints for multiple concurrent users. Implemented queue system with Redis and optimized model loading strategies.",
+    liveLink: "https://ai-images.takathena.com",
+    githubLink: "https://github.com/takathena/ai-image-generator"
+  },
+  {
+    id: 2,
+    title: "Code Editor Web App",
+    subtitle: "Web Development Tool • 1.5 Months",
+    image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&q=60&auto=format&fit=crop",
+    description: "A browser-based code editor with live preview functionality. Supports multiple programming languages with syntax highlighting, auto-completion, and collaborative editing features.",
+    technologies: ["TypeScript", "Monaco Editor", "WebSocket", "Node.js", "Express", "PostgreSQL", "Docker", "Nginx"],
+    features: "• Real-time code editing\n• Live preview for HTML/CSS/JS\n• Multiple language support\n• Syntax highlighting & auto-complete\n• Collaborative editing sessions\n• Code sharing & export\n• Customizable themes",
+    challenges: "Implementing real-time collaboration with conflict resolution. Used Operational Transformation algorithm to handle concurrent edits.",
+    liveLink: "https://code-editor.takathena.com",
+    githubLink: "https://github.com/takathena/web-code-editor"
+  },
+  {
+    id: 3,
+    title: "Task Management System",
+    subtitle: "Productivity Application • 2 Months",
+    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=60&auto=format&fit=crop",
+    description: "A collaborative task management application with real-time updates, team collaboration features, and productivity analytics.",
+    technologies: ["Vue.js", "Firebase", "Vuex", "SCSS", "Chart.js", "Jest", "Webpack", "PWA"],
+    features: "• Real-time task updates\n• Team collaboration & assignment\n• Drag-and-drop interface\n• Priority & deadline management\n• Productivity analytics dashboard\n• Mobile app (PWA)\n• Email notifications",
+    challenges: "Ensuring real-time sync across multiple devices. Implemented using Firebase Firestore with offline persistence and conflict resolution.",
+    liveLink: "https://tasks.takathena.com",
+    githubLink: "https://github.com/takathena/task-manager"
+  },
+  {
+    id: 4,
+    title: "Weather Dashboard",
+    subtitle: "Data Visualization • 1 Month",
+    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=60&auto=format&fit=crop",
+    description: "A real-time weather data visualization dashboard with interactive maps, forecasts, and historical data analysis.",
+    technologies: ["React", "D3.js", "OpenWeather API", "Leaflet", "Chart.js", "Axios", "Service Workers", "IndexedDB"],
+    features: "• Real-time weather data\n• Interactive weather maps\n• 7-day forecast\n• Historical data analysis\n• Location-based weather\n• Severe weather alerts\n• Offline functionality",
+    challenges: "Handling API rate limits and caching data efficiently. Implemented service workers for offline access and IndexedDB for local storage.",
+    liveLink: "https://weather.takathena.com",
+    githubLink: "https://github.com/takathena/weather-dashboard"
+  },
+  {
+    id: 5,
+    title: "Chat Application",
+    subtitle: "Real-time Communication • 2.5 Months",
+    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1200&q=60&auto=format&fit=crop",
+    description: "A real-time messaging application with end-to-end encryption, file sharing, and voice/video call capabilities.",
+    technologies: ["Socket.io", "React Native", "Node.js", "MongoDB", "WebRTC", "AES-256", "JWT", "Redis"],
+    features: "• Real-time messaging\n• End-to-end encryption\n• File & media sharing\n• Voice & video calls\n• Group chats & channels\n• Message history\n• Read receipts & typing indicators",
+    challenges: "Implementing secure end-to-end encryption while maintaining performance. Used AES-256 with key exchange via Diffie-Hellman.",
+    liveLink: "https://chat.takathena.com",
+    githubLink: "https://github.com/takathena/secure-chat-app"
+  },
+  {
+    id: 6,
+    title: "Portfolio Website",
+    subtitle: "Personal Website • 1 Month",
+    image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&q=60&auto=format&fit=crop",
+    description: "A responsive portfolio website with dark/light mode toggle, project showcase, and interactive elements.",
+    technologies: ["HTML5", "CSS3", "JavaScript", "GSAP", "Intersection Observer", "CSS Grid", "Flexbox", "Webpack"],
+    features: "• Responsive design\n• Dark/light mode toggle\n• Smooth animations\n• Project showcase\n• Contact form\n• Performance optimized\n• SEO friendly",
+    challenges: "Creating smooth animations without performance issues. Used CSS transitions and GSAP for complex animations with hardware acceleration.",
+    liveLink: "https://takathena.com",
+    githubLink: "https://github.com/takathena/portfolio"
+  },
+  {
+    id: 7,
+    title: "Data Analytics Dashboard",
+    subtitle: "Business Intelligence • 3 Months",
+    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=60&auto=format&fit=crop",
+    description: "An interactive dashboard for data analysis and visualization with real-time data streaming and custom reporting.",
+    technologies: ["Python", "Django", "React", "Plotly", "Pandas", "Celery", "PostgreSQL", "Docker Compose"],
+    features: "• Real-time data visualization\n• Custom report generation\n• Data filtering & segmentation\n• Export to PDF/Excel\n• User role management\n• Automated data pipelines\n• Alert system",
+    challenges: "Handling large datasets with real-time updates. Implemented pagination, server-side processing, and WebSocket for live updates.",
+    liveLink: "https://analytics.takathena.com",
+    githubLink: "https://github.com/takathena/data-analytics-dashboard"
+  }
+];
+
+function openModal(projectId) {
+  const project = projects[projectId];
+  const overlay = document.getElementById('modal-overlay');
+  const modal = document.getElementById('modal');
+  
+  // Update modal content
+  document.getElementById('modal-title').textContent = project.title;
+  document.getElementById('modal-subtitle').textContent = project.subtitle;
+  document.getElementById('modal-image').src = project.image;
+  document.getElementById('modal-description').textContent = project.description;
+  document.getElementById('modal-features').innerHTML = project.features.replace(/\n/g, '<br>• ');
+  document.getElementById('modal-challenges').textContent = project.challenges;
+  document.getElementById('modal-live-link').href = project.liveLink;
+  document.getElementById('modal-github-link').href = project.githubLink;
+  
+  // Update technology stack
+  const techStack = document.getElementById('tech-stack');
+  techStack.innerHTML = '';
+  project.technologies.forEach(tech => {
+    const techItem = document.createElement('div');
+    techItem.className = 'tech-item';
+    
+    // Add appropriate icon based on technology
+    let icon = '💻';
+    if (tech.toLowerCase().includes('react')) icon = '⚛️';
+    if (tech.toLowerCase().includes('node')) icon = '🟢';
+    if (tech.toLowerCase().includes('python')) icon = '🐍';
+    if (tech.toLowerCase().includes('mongodb')) icon = '🍃';
+    if (tech.toLowerCase().includes('docker')) icon = '🐳';
+    if (tech.toLowerCase().includes('firebase')) icon = '🔥';
+    if (tech.toLowerCase().includes('tensorflow')) icon = '🤖';
+    if (tech.toLowerCase().includes('vue')) icon = '🟢';
+    if (tech.toLowerCase().includes('typescript')) icon = '📘';
+    
+    techItem.innerHTML = `<i>${icon}</i> ${tech}`;
+    techStack.appendChild(techItem);
+  });
+  
+  // Show modal
+  overlay.classList.add('active');
+  setTimeout(() => {
+    modal.classList.add('active');
+  }, 10);
+  
+  // Prevent body scroll
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  const overlay = document.getElementById('modal-overlay');
+  const modal = document.getElementById('modal');
+  
+  modal.classList.remove('active');
+  setTimeout(() => {
+    overlay.classList.remove('active');
+    // Restore body scroll
+    document.body.style.overflow = '';
+  }, 300);
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.getElementById('modal-overlay').classList.contains('active')) {
+    closeModal();
+  }
+});
 
 // Load GitHub Snake saat halaman dimuat
 document.addEventListener('DOMContentLoaded', () => {
