@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Portfolio — Takathena</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+<link rel="icon" type="image/png" href="https://cdn.cosmos.so/ce562cca-2d95-47b3-969e-f842ffb4c225?format=jpeg">
 <style>
 :root{
   --bg: #111113;
@@ -19,14 +19,14 @@
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;}
 body{
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-family: Inter, system-ui;
   background: var(--bg);
   color:#e9eef1;
-  padding:24px 20px 0 24em;
+  padding:24px 20px 0 4.5em; /* OPTION A — desktop agak kiri */
   -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
 }
 
+/* Page */
 .page{
   width:100%;
   max-width:var(--maxw);
@@ -34,7 +34,13 @@ body{
   margin-left:0;
 }
 
-.header{display:flex;gap:28px;align-items:flex-start;justify-content:flex-start;}
+.header{
+  display:flex;
+  gap:28px;
+  align-items:flex-start;
+  justify-content:flex-start;
+}
+
 .left{flex:1 1 420px;min-width:240px}
 .right{width:360px;max-width:40%;overflow:hidden;display:flex;flex-direction:column;gap:16px;}
 
@@ -52,10 +58,15 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 
 /* TAG BAR */
 .tag-bar{
+  overflow-x: auto;
   display:flex;
   gap:10px;
   margin:10px 0 14px 0;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
 }
+.tag-bar::-webkit-scrollbar{display:none;}
+
 .tag{
   background:#1c1c1e;
   border:1px solid #2a2a2c;
@@ -65,17 +76,15 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
   color:var(--muted);
   cursor:pointer;
   transition:0.2s;
+  white-space:nowrap;
 }
-.tag:hover{background:#2c2c2e; color:#acacac;}
-.tag.active{background:#2C2F30; color:#acacac;}
+.tag:hover{background:#2c2c2e;color:#acacac;}
+.tag.active{background:#2C2F30;color:#acacac;}
 
 /* ACCORDION */
 .tools-card{margin-top:18px;padding:0;}
 .tools-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;cursor:pointer;
 }
 .tools-header h2{margin:0;font-weight:700;color:#E9EEF1;}
 .accordion-btn{
@@ -84,6 +93,7 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 }
 .accordion-btn:hover{background-color:#333335;border-radius:6px;}
 .accordion-btn.open{transform:rotate(180deg);}
+
 .tools-body{
   overflow:hidden;
   max-height:0;
@@ -103,7 +113,7 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
   object-fit:contain;
   transition:0.25s;
 }
-.tools-grid img:hover{transform:scale(1.1);}
+.tools-grid img:hover{transform:scale(1.1); filter: grayscale(70%);}
 .tools-grid.dimmed img{opacity:0.15;filter:grayscale(100%);}
 .tools-grid img.highlight{opacity:1 !important;filter:none !important;}
 
@@ -138,11 +148,171 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 .social-card{margin-top:12px;}
 .social-card h3{margin:0 0 12px;font-size:17px}
 .social-grid{
-  display:grid;grid-template-columns:repeat(5,1fr);
+  display:grid;grid-template-columns:repeat(5,6fr);
   gap:13px;padding:10px 4px 4px 4px;
 }
-.social-grid img{width:38px;height:38px;object-fit:contain;transition:transform 0.2s;}
-.social-grid img:hover{transform:scale(1.1);filter:grayscale(100%);}
+.social-grid img{width:38px;height:38px;object-fit:contain;transition:transform 0.2s; border-radius: 8px;}
+.social-grid img:hover{transform:scale(1.1); filter: grayscale(70%);}
+
+/* =========================================
+        RESPONSIVE DESKTOP LARGE
+========================================= */
+@media (min-width: 1440px){
+  body{ padding-left: 16em; } /* Ultrawide tetap agak kiri */
+}
+.tools-grid {
+    grid-template-columns: repeat(6, 8fr);
+    gap: 18px 4px;
+  }
+
+/* =========================================
+   TABLET RESPONSIVE (layout sama, ukuran sedikit berbeda)
+========================================= */
+@media (max-width: 1024px) {
+
+  /* Body tetap dua kolom, tapi padding lebih kecil */
+  body {
+    padding: 24px 8vw 0 6vw;
+  }
+
+  /* HEADER tetap dua kolom */
+  .header {
+    flex-direction: row;
+    gap: 36px; /* agak lebih renggang */
+  }
+
+  /* Sidebar kanan lebih kecil */
+  .right {
+    width: 300px;
+    max-width: 38%;
+  }
+
+  /* Bagian kiri tetap besar */
+  .left {
+    flex: 1 1 420px;
+  }
+
+  /* Judul sedikit mengecil */
+  h1 {
+    font-size: 26px;
+  }
+
+  h2 {
+    font-size: 17px;
+  }
+
+  /* Tools grid tetap dua kolom seperti desktop,
+     tapi ukurannya diperkecil agar pas tablet */
+  .tools-grid {
+    grid-template-columns: repeat(5, 3fr);
+    row-gap: 14px;     /* jarak atas-bawah */
+    column-gap: 8px;  /* jarak samping */
+  }
+
+  .tools-grid img {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Project slide juga mengecil */
+  .carousel .slide {
+    flex: 0 0 300px;
+  }
+
+  .card .thumb {
+    height: 160px;
+  }
+
+  /* Social grid tetap 5 kolom tetapi icon sedikit kecil */
+  .social-grid img {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+
+/* =========================================
+        MOBILE (max-width: 768px)
+========================================= */
+@media (max-width: 768px){
+  body{
+    padding:16px;
+  }
+
+  /* HEADER jadi kolom */
+  .header{
+    flex-direction: column;
+    gap:32px;
+  }
+
+  /* Kiri & kanan jadi full width */
+  .left, .right{
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Judul lebih kecil */
+  h1{font-size:24px;}
+  h2{font-size:16px;}
+
+  /* Badges */
+  .badges{gap:6px;flex-wrap:wrap;}
+
+  /* Tools */
+  .tools-grid{
+    grid-template-columns: repeat(8,2fr);
+    gap: 18px 4px;
+  }
+  .tools-grid img{width:32px;height:32px;}
+
+  /* Carousel slides lebih kecil */
+  .carousel .slide{
+    flex:0 0 260px;
+  }
+  .card .thumb{
+    height:150px;
+  }
+
+  /* Social icons grid */
+  .social-grid{
+    grid-template-columns: repeat(8,1fr);
+    gap:10px 2px;
+  }
+  .social-grid img{width:32px;height:32px;}
+}
+
+/* =========================================
+        SMALL MOBILE (max-width: 480px)
+========================================= */
+@media (max-width: 480px){
+  /* Judul lebih kecil lagi */
+  h1{font-size:20px;}
+  h2{font-size:14px;}
+
+  /* Tools grid 3 kolom agar lebih fit */
+  .tools-grid{
+    grid-template-columns: repeat(5,3fr);
+    gap: 18px 4px;
+  }
+  .tools-grid img{width:32px;height:32px;}
+
+  /* Carousel slides lebih kecil */
+  .carousel .slide{flex:0 0 220px;}
+  .project-arrow{padding:4px 8px;font-size:14px;}
+
+  /* Card teks lebih kecil */
+  .card h4{font-size:14px;}
+  .card p{font-size:12px;}
+
+  /* Social icons grid */
+  .social-grid{
+    grid-template-columns: repeat(5,3fr);
+    gap:8px;
+  }
+  .social-grid img{width:28px;height:28px;}
+}
+
 </style>
 </head>
 
@@ -229,13 +399,13 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
     </div>
 
     <aside class="right photo">
-      <img src="https://cdn.cosmos.so/44fe48eb-7188-4d82-b685-f7c6ecb3e533?format=jpeg" alt="cover">
+      <img src="https://cdn.cosmos.so/f8af0a2d-a75e-4ef6-aad0-95ea2e2733e6?format=jpeg" alt="cover">
 
       <div class="social-card">
         <h3>Social Media</h3>
         <div class="social-grid">
           <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/960px-LinkedIn_logo_initials.png"></a>
-          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Github-desktop-logo-symbol.svg/2048px-Github-desktop-logo-symbol.svg.png"></a>
+          <a href="#"><img src="https://cdn.cosmos.so/2569e4fd-edc5-4dc2-b2f0-62029928d298?format=jpeg"></a>
           <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/X_icon_2.svg/1024px-X_icon_2.svg.png"></a>
           <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/960px-Instagram_logo_2022.svg.png"></a>
           <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Tumblr.svg/960px-Tumblr.svg.png"></a>
@@ -302,18 +472,16 @@ function toggleTools(){
   }
 }
 
-/* --- AUTO OPEN ON PAGE LOAD --- */
-function openAccordionOnLoad(){
+/* Open on load */
+window.addEventListener("load",()=>{
   const body=document.getElementById("tools-body");
   const btn=document.getElementById("acc-btn");
-
   body.style.maxHeight=body.scrollHeight+"px";
   body.classList.add("open");
   btn.classList.add("open");
-}
-window.addEventListener("load", openAccordionOnLoad);
+});
 
-/* TAG FILTER */
+/* Filtering */
 let lockedTag=null;
 const tags=document.querySelectorAll(".tag");
 
@@ -340,7 +508,6 @@ function applyFilter(cat){
     img.classList.toggle("highlight", img.dataset.cat===cat);
   });
 }
-
 function clearFilter(){
   grid.classList.remove("dimmed");
   document.querySelectorAll("#tools-grid img").forEach(i=>i.classList.remove("highlight"));
@@ -350,7 +517,7 @@ function clearFilter(){
 const carousel=document.querySelector(".carousel-wrapper");
 function slideLeft(){carousel.scrollBy({left:-350,behavior:"smooth"});}
 function slideRight(){carousel.scrollBy({left:350,behavior:"smooth"});}
-
 </script>
+
 </body>
 </html>
