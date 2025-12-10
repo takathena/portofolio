@@ -25,6 +25,13 @@ body{
   padding:24px 20px 0 4.5em; /* OPTION A — desktop agak kiri */
   -webkit-font-smoothing:antialiased;
 }
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+a:focus,
+a:active {
+  outline: none;
+}
 
 /* Page */
 .page{
@@ -106,15 +113,15 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:12px;
-  padding:4px;
+  padding:4px 4px 4px 10px;
 }
 .tools-grid img{
   width:40px;height:40px;
   object-fit:contain;
   transition:0.25s;
 }
-.tools-grid img:hover{transform:scale(1.1); filter: grayscale(70%);}
-.tools-grid.dimmed img{opacity:0.15;filter:grayscale(100%);}
+.tools-grid img:hover{transform:scale(1.1);}
+.tools-grid.dimmed img{opacity:0.15;}
 .tools-grid img.highlight{opacity:1 !important;filter:none !important;}
 
 /* Projects */
@@ -145,7 +152,7 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
   transition:transform 0.3s ease, border-color 0.3s ease;
 }
 .card:hover{
-  border-color:#b5b5b566;
+  border-color: #52525280;
   border-radius: 12px;
 }
 .card .thumb{height:180px;border-radius:8px 8px 0 0;overflow:hidden;margin-bottom:10px}
@@ -161,10 +168,11 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 .social-card h3{margin:0 0 12px;font-size:17px}
 .social-grid{
   display:grid;grid-template-columns:repeat(5,6fr);
-  gap:22px;padding:10px 4px 4px 4px;
+  gap:22px;
+  padding:10px 4px 4px 10px;
 }
 .social-grid img{width:38px;height:38px;object-fit:contain;transition:transform 0.2s; border-radius: 8px;}
-.social-grid img:hover{transform:scale(1.1); filter: grayscale(70%);}
+.social-grid img:hover{transform:scale(1.1);}
 
 /* GitHub Snake Section */
 .github-snake {
@@ -791,12 +799,12 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 
             <div class="slide">
               <article class="card" onclick="openModal(0)">
-                <div class="thumb"><img src="https://cdn.cosmos.so/715a0d84-49ed-42f5-9883-230cbbd2965c?format=jpeg"></div>
-                <h4>E-Commerce Platform</h4>
-                <p>Full-stack online shopping platform with real-time inventory</p>
+                <div class="thumb"><img src="https://cdn.cosmos.so/93986602-6b07-4e2b-b91c-bf9f2d2688f5?format=jpeg"></div>
+                <h4>Startup-Page</h4>
+                <p>Startup page for your all browser.</p>
               </article>
               <article class="card" onclick="openModal(1)">
-                <div class="thumb"><img src="https://cdn.cosmos.so/6fd2b521-5261-43c7-82cc-5b8b906ee450?format=jpeg"></div>
+                <div class="thumb"><img src="https://cdn.cosmos.so/1f2e94fc-f1c4-44bc-ac22-a39057375542?format=jpeg"></div>
                 <h4>AI Image Generator</h4>
                 <p>AI-powered image generation using stable diffusion</p>
               </article>
@@ -804,12 +812,12 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 
             <div class="slide">
               <article class="card" onclick="openModal(2)">
-                <div class="thumb"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&q=60&auto=format&fit=crop"></div>
+                <div class="thumb"><img src="https://cdn.cosmos.so/c86a7093-03ca-40d8-9b49-43495fb0a493?format=jpeg"></div>
                 <h4>Code Editor Web App</h4>
                 <p>Browser-based code editor with live preview</p>
               </article>
               <article class="card" onclick="openModal(3)">
-                <div class="thumb"><img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=60&auto=format&fit=crop"></div>
+                <div class="thumb"><img src="https://cdn.cosmos.so/2ea75baa-9917-483e-9245-e8eac392c3b2?format=jpeg"></div>
                 <h4>Task Management System</h4>
                 <p>Collaborative task management with real-time updates</p>
               </article>
@@ -895,13 +903,13 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
       <div class="social-card">
         <h3>Get in Touch</h3>
         <div class="social-grid">
-          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/960px-LinkedIn_logo_initials.png"></a>
-          <a href="#"><img src="https://cdn.cosmos.so/2569e4fd-edc5-4dc2-b2f0-62029928d298?format=jpeg"></a>
-          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/X_icon_2.svg/1024px-X_icon_2.svg.png"></a>
-          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/960px-Instagram_logo_2022.svg.png"></a>
-          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Tumblr.svg/960px-Tumblr.svg.png"></a>
-          <a href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLqNIMiklXnPjCckpTiqnNLIlKC4biPA9snQ&s"></a>
-          <a href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7tLgjKmU6bnmbMYK86RFwZaknMMPL8jvI2g&s"></a>
+          <a href="https://www.linkedin.com/in/fitrah-octavio-538080396/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/960px-LinkedIn_logo_initials.png"></a>
+          <a href="https://github.com/takathena"><img src="https://cdn.cosmos.so/2569e4fd-edc5-4dc2-b2f0-62029928d298?format=jpeg"></a>
+          <a href="https://discord.com/users/1409489428707279033"><img src="https://pngimg.com/uploads/discord/discord_PNG8.png"></a>
+          <a href="https://www.instagram.com/pitravs/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/960px-Instagram_logo_2022.svg.png"></a>
+          <a href="https://x.com/takathena"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/X_icon_2.svg/1024px-X_icon_2.svg.png"></a>
+          <a href="https://www.cosmos.so/takathena"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLqNIMiklXnPjCckpTiqnNLIlKC4biPA9snQ&s"></a>
+          <a href="https://open.spotify.com/user/31aro76cun6v222osijbjxw3kpoy?si=2f78522bc08c49d9"><img src="https://cdn.jim-nielsen.com/watchos/512/spotify-music-and-podcasts-2020-03-19.png?rf=1024"></a>
         </div>
       </div>
 
@@ -1235,9 +1243,9 @@ function calculateStats(contributions) {
 const projects = [
   {
     id: 0,
-    title: "E-Commerce Platform",
-    subtitle: "Full-Stack Web Application • 3 Months",
-    image: "https://cdn.cosmos.so/715a0d84-49ed-42f5-9883-230cbbd2965c?format=jpeg",
+    title: "Startup Page",
+    subtitle: "Full-Stack Web Application • 2 Months",
+    image: "https://cdn.cosmos.so/93986602-6b07-4e2b-b91c-bf9f2d2688f5?format=jpeg",
     description: "A comprehensive e-commerce platform built with modern web technologies. Features include user authentication, product catalog, shopping cart, payment integration, and admin dashboard for inventory management.",
     technologies: ["JavaScript", "React", "Node.js", "Express", "MongoDB", "Stripe API", "JWT", "Redux"],
     features: "• User authentication & authorization\n• Product catalog with search & filters\n• Shopping cart with real-time updates\n• Secure payment processing with Stripe\n• Admin dashboard for inventory management\n• Order tracking & history\n• Responsive design for all devices",
