@@ -124,7 +124,7 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 .tools-grid.dimmed img{opacity:0.15;}
 .tools-grid img.highlight{opacity:1 !important;filter:none !important;}
 
-/* Projects */
+/* Projects - DIPERBAIKI DENGAN ANIMASI SMOOTH */
 .project-header{
   display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;
 }
@@ -141,7 +141,7 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
   padding: 4px;
 }
 .carousel-wrapper::-webkit-scrollbar{display:none;}
-.carousel{display:flex;gap:16px;}
+.carousel{display:flex;gap:16px;padding: 4px 0;}
 .slide{flex:0 0 350px;display:flex;flex-direction:column;gap:12px;}
 
 .card{
@@ -149,19 +149,89 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
   border-radius:12px;border:1px solid rgba(255,255,255,0.03);
   cursor:pointer;
   padding: 2px;
-  transition:transform 0.3s ease, border-color 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
 }
-.card:hover{
-  border-color: #52525280;
-  border-radius: 12px;
+
+.card:hover {
+  border-color: #c0c0c033;
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
 }
-.card .thumb{height:180px;border-radius:8px 8px 0 0;overflow:hidden;margin-bottom:10px}
-.card .thumb img{width:100%;height:100%;object-fit:cover; border-radius: 11px 11px 0 0;}
-.card h4{margin:0 0 6px;font-size:15px;padding:0 14px;}
-.card p{margin:0;color:var(--muted);font-size:13px;padding:0 14px 14px 14px;
+
+.card .thumb{
+  height:180px;
+  border-radius:8px 8px 0 0;
+  overflow:hidden;
+  margin-bottom:10px;
+  position: relative;
+}
+
+.card .thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover; 
+  border-radius: 11px 11px 0 0;
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.card:hover .thumb img {
+  transform: scale(1.08);
+}
+
+/* Overlay gradient untuk project card */
+.card .thumb::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(110, 231, 183, 0.1) 0%,
+    transparent 50%,
+    rgba(17, 17, 19, 0.4) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  border-radius: 11px 11px 0 0;
+}
+
+.card:hover .thumb::after {
+  opacity: 1;
+}
+
+.card h4{
+  margin:0 0 6px;
+  font-size:15px;
+  padding:0 14px;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+}
+
+.card:hover h4 {
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.card p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+  padding:0 14px 14px 14px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: color 0.3s ease;
+  opacity: 0.8;
+}
+
+.card:hover p {
+  opacity: 1;
+  color: #c0c6cc;
 }
 
 .social-card{margin-top:12px;}
@@ -471,6 +541,587 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 }
 
 /* =========================================
+   CERTIFICATES SECTION STYLES
+========================================= */
+.certificates-section {
+  margin-top: 60px;
+}
+
+.certificates-section h3 {
+  margin: 0 0 12px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.certificates-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.certificates-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.certificates-filter {
+  position: relative;
+  min-width: 90px;
+}
+
+.filter-select {
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #E9EEF1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: Inter, system-ui;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: all 0.2s ease;
+}
+
+.filter-select:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: #1f1f21;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #c0c0c033;
+  box-shadow: 0 0 0 2px rgba(125, 125, 125, 0.1);
+}
+
+.certificates-arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.cert-arrow {
+  cursor: pointer;
+  background: #00000000;
+  border: none;
+  color: var(--muted);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.2s ease;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cert-arrow:hover {
+  background: #333335;
+  color: #E9EEF1;
+  transform: translateY(-1px);
+}
+
+.certificates-wrapper {
+  margin-top: 4px;
+  width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 4px;
+}
+
+.certificates-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.certificates-carousel {
+  display: flex;
+  padding: 4px 0;
+  gap: 20px;
+}
+
+.certificate-slide {
+  flex: 0 0 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cert-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+  padding: 2px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.cert-card:hover {
+  border-color: #c0c0c033;
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+.cert-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cert-card:hover::before {
+  opacity: 1;
+}
+
+.cert-card .cert-thumb {
+  height: 180px;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.cert-card .cert-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 11px 11px 0 0;
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.cert-card:hover .cert-thumb img {
+  transform: scale(1.08);
+}
+
+/* Overlay gradient untuk cert card */
+.cert-card .cert-thumb::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(110, 231, 183, 0.1) 0%,
+    transparent 50%,
+    rgba(17, 17, 19, 0.4) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  border-radius: 11px 11px 0 0;
+}
+
+.cert-card:hover .cert-thumb::after {
+  opacity: 1;
+}
+
+.cert-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(110, 231, 183, 0.9);
+  color: #111113;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cert-card h4 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  padding: 0 14px;
+  color: #E9EEF1;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+  
+  /* Title - 1 line dengan ellipsis */
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
+.cert-card:hover h4 {
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.cert-card p {
+ margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 0 14px 14px 14px;
+  line-height: 1.4;
+  margin: 0 0 14px 0;
+  
+  /* Description - 2 lines dengan ellipsis */
+  /* WebKit (Chrome, Safari, newer Edge) */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  
+  /* Firefox */
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-line-clamp: 2;
+  
+  /* Standard (future) */
+  display: box;
+  line-clamp: 2;
+  box-orient: vertical;
+  
+  /* Semua browser */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  
+  /* Fallback untuk browser lama */
+  max-height: calc(1.4em * 2); /* line-height × 2 lines */
+
+}
+
+.cert-card:hover p {
+  opacity: 1;
+  color: #c0c6cc;
+}
+
+.cert-issuer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px 12px;
+  transition: transform 0.3s ease;
+}
+
+.cert-card:hover .cert-issuer {
+  transform: translateY(-3px);
+}
+
+.cert-issuer img {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.cert-issuer span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Certificate Modal */
+.cert-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  z-index: 1100;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cert-modal-overlay.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+}
+
+.cert-modal {
+  background: var(--card);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow: hidden;
+  position: relative;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.cert-modal.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.cert-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--muted);
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.cert-modal-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.cert-modal-content {
+  padding: 30px;
+  overflow-y: auto;
+  max-height: calc(90vh - 40px);
+}
+
+.cert-modal-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.cert-modal-image {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.cert-modal-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.cert-modal-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cert-modal-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #fff;
+}
+
+.cert-modal-issuer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.cert-modal-issuer img {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+.cert-modal-issuer span {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.cert-modal-date {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 15px;
+}
+
+.cert-modal-badge {
+  display: inline-block;
+  background: rgba(110, 231, 183, 0.1);
+  color: var(--accent);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.cert-modal-section h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 12px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cert-modal-section h4 i {
+  color: var(--accent);
+}
+
+.cert-modal-description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0 0 15px;
+}
+
+.cert-modal-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.cert-skill {
+  background: rgba(255, 255, 255, 0.05);
+  color: #E9EEF1;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cert-skill i {
+  font-size: 14px;
+}
+
+.cert-modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.cert-modal-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(110, 231, 183, 0.1);
+  color: var(--accent);
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  flex: 1;
+  justify-content: center;
+}
+
+.cert-modal-link:hover {
+  background: rgba(110, 231, 183, 0.2);
+  transform: translateY(-2px);
+}
+
+.cert-modal-link i {
+  font-size: 16px;
+}
+
+.cert-modal-link.secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: #E9EEF1;
+}
+
+.cert-modal-link.secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive for certificates */
+@media (max-width: 1024px) {
+  .certificates-carousel .certificate-slide {
+    flex: 0 0 300px;
+  }
+  
+  .cert-card .cert-thumb {
+    height: 160px;
+  }
+  
+  .cert-modal-main {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .certificates-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .certificates-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .certificates-filter {
+    min-width: 150px;
+  }
+  
+  .certificates-carousel .certificate-slide {
+    flex: 0 0 280px;
+  }
+  
+  .cert-card .cert-thumb {
+    height: 150px;
+  }
+  
+  .cert-modal {
+    width: 95%;
+    border-radius: 12px;
+  }
+  
+  .cert-modal-content {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .certificates-carousel .certificate-slide {
+    flex: 0 0 240px;
+  }
+  
+  .cert-card h4 {
+    font-size: 14px;
+  }
+  
+  .cert-card p {
+    font-size: 12px;
+  }
+  
+  .cert-modal-header h2 {
+    font-size: 20px;
+  }
+  
+  .cert-modal-actions {
+    flex-direction: column;
+  }
+}
+
+/* =========================================
         RESPONSIVE DESKTOP LARGE
 ========================================= */
 @media (min-width: 1440px){
@@ -765,7 +1416,7 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
       <!-- ACCORDION -->
       <div class="tools-card">
         <div class="tools-header" onclick="toggleTools()">
-          <h2>Dabble in</h2>
+          <h2>Immersed in</h2>
           <button class="accordion-btn" id="acc-btn">ᐯ</button>
         </div>
 
@@ -853,6 +1504,38 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
         </div>
       </section>
           
+      <!-- Certificates Section -->
+      <section class="certificates-section" aria-labelledby="certificates-title">
+        <div class="certificates-header">
+          <h3 id="certificates-title">Certificates & Achievements</h3>
+          <div class="certificates-controls">
+            <div class="certificates-filter">
+              <select class="filter-select" id="cert-filter">
+                <option value="all">All Certificates</option>
+                <option value="ai">Artificial</option>
+                <option value="programming">Programming</option>
+                <option value="web">Web Development</option>
+                <option value="data">Data Science</option>
+                <option value="cloud">Cloud Computing</option>
+                <option value="soft-skills">Soft Skills</option>
+                <option value="database">Database</option>
+                <option value="cyber">Cybersecurity</option>
+              </select>
+            </div>
+            <div class="certificates-arrows">
+              <button class="cert-arrow" onclick="slideCertLeft()">ᐸ</button>
+              <button class="cert-arrow" onclick="slideCertRight()">ᐳ</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="certificates-wrapper">
+          <div class="certificates-carousel" id="certificates-carousel">
+            <!-- Certificates will be loaded dynamically -->
+          </div>
+        </div>
+      </section>
+
       <!-- GitHub Snake -->
       <section class="github-snake" aria-labelledby="snake-title">
         <h3 id="snake-title">GitHub Activity</h3>
@@ -973,6 +1656,63 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
           <a href="#" class="modal-link" id="modal-github-link" target="_blank">
             <i>🔗</i> GitHub Repository
           </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Certificate Modal -->
+<div class="cert-modal-overlay" id="cert-modal-overlay" onclick="closeCertModal()">
+  <div class="cert-modal" id="cert-modal" onclick="event.stopPropagation()">
+    <button class="cert-modal-close" onclick="closeCertModal()">×</button>
+    
+    <div class="cert-modal-content">
+      <div class="cert-modal-main">
+        <div class="cert-modal-image">
+          <img id="cert-modal-image" src="" alt="Certificate Image">
+        </div>
+        
+        <div class="cert-modal-details">
+          <div class="cert-modal-header">
+            <h2 id="cert-modal-title">Certificate Title</h2>
+            <div class="cert-modal-issuer">
+              <img id="cert-modal-issuer-icon" src="" alt="Issuer Logo">
+              <span id="cert-modal-issuer">Issuing Organization</span>
+            </div>
+            <div class="cert-modal-date" id="cert-modal-date">Issued Date</div>
+            <div class="cert-modal-badge" id="cert-modal-badge">Certificate</div>
+          </div>
+          
+          <div class="cert-modal-section">
+            <h4><i>📄</i> Description</h4>
+            <p class="cert-modal-description" id="cert-modal-description">
+              Certificate description will appear here...
+            </p>
+          </div>
+          
+          <div class="cert-modal-section">
+            <h4><i>🎯</i> Skills Acquired</h4>
+            <div class="cert-modal-skills" id="cert-modal-skills">
+              <!-- Skills will be added dynamically -->
+            </div>
+          </div>
+          
+          <div class="cert-modal-section">
+            <h4><i>📊</i> Validation</h4>
+            <p class="cert-modal-description" id="cert-modal-validation">
+              Certificate ID: <span id="cert-modal-id">N/A</span>
+            </p>
+          </div>
+          
+          <div class="cert-modal-actions">
+            <a href="#" class="cert-modal-link" id="cert-modal-view-link" target="_blank">
+              <i>🔗</i> View Certificate
+            </a>
+            <a href="#" class="cert-modal-link secondary" id="cert-modal-credential-link" target="_blank">
+              <i>📋</i> Verify Credential
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -1410,7 +2150,306 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('DOMContentLoaded', () => {
   loadGitHubSnake();
 });
+
+/* Certificates Database */
+const certificatesDB = [
+  {
+    id: 0,
+    title: "AI & Machine Learning Fundamentals",
+    issuer: "Google",
+    issuerIcon: "https://cdn-icons-png.flaticon.com/512/2991/2991148.png",
+    date: "March 2024",
+    category: "ai",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000",
+    badge: "Professional Certificate",
+    description: "Comprehensive course covering fundamental concepts of AI and Machine Learning including neural networks, deep learning, natural language processing, and computer vision.",
+    skills: ["Python", "TensorFlow", "Neural Networks", "Deep Learning", "NLP"],
+    validation: "Certificate ID: GOOG-AI-2024-00123",
+    viewLink: "https://example.com/cert/ai-google",
+    credentialLink: "https://credentials.google.com/verify/ai-00123"
+  },
+  {
+    id: 1,
+    title: "Full Stack Web Development",
+    issuer: "Meta",
+    issuerIcon: "https://cdn-icons-png.flaticon.com/512/5968/5968764.png",
+    date: "January 2024",
+    category: "web",
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1000",
+    badge: "Professional Certificate",
+    description: "Complete full-stack development program covering frontend (React) and backend (Node.js, Express) technologies with database integration and deployment.",
+    skills: ["React", "Node.js", "Express", "MongoDB", "JavaScript", "Git"],
+    validation: "Certificate ID: META-WEB-2024-04567",
+    viewLink: "https://example.com/cert/fullstack-meta",
+    credentialLink: "https://credentials.meta.com/verify/web-04567"
+  },
+  {
+    id: 2,
+    title: "Data Science Specialization",
+    issuer: "IBM",
+    issuerIcon: "https://cdn-icons-png.flaticon.com/512/5968/5968322.png",
+    date: "December 2023",
+    category: "data",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000",
+    badge: "Specialization",
+    description: "Advanced data science program covering statistical analysis, machine learning, data visualization, and big data technologies.",
+    skills: ["Python", "Pandas", "NumPy", "SQL", "Data Visualization", "Statistics"],
+    validation: "Certificate ID: IBM-DS-2023-78901",
+    viewLink: "https://example.com/cert/datascience-ibm",
+    credentialLink: "https://credentials.ibm.com/verify/ds-78901"
+  },
+  {
+    id: 3,
+    title: "Python Programming Mastery",
+    issuer: "University of Michigan",
+    issuerIcon: "https://cdn-icons-png.flaticon.com/512/5968/5968520.png",
+    date: "November 2023",
+    category: "programming",
+    image: "https://images.unsplash.com/photo-1526379879527-8559ecfcaec1?q=80&w=1000",
+    badge: "Specialization",
+    description: "Comprehensive Python programming course covering from basics to advanced topics including OOP, data structures, algorithms, and API development.",
+    skills: ["Python", "OOP", "Data Structures", "Algorithms", "APIs"],
+    validation: "Certificate ID: UMICH-PY-2023-33445",
+    viewLink: "https://example.com/cert/python-michigan",
+    credentialLink: "https://credentials.umich.edu/verify/py-33445"
+  },
+  {
+    id: 4,
+    title: "AWS Solutions Architect",
+    issuer: "Amazon Web Services",
+    issuerIcon: "https://cdn-icons-png.flaticon.com/512/873/873107.png",
+    date: "October 2023",
+    category: "cloud",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000",
+    badge: "Associate Level",
+    description: "AWS certification covering cloud architecture best practices, service selection, security, and cost optimization strategies.",
+    skills: ["AWS", "Cloud Architecture", "Security", "DevOps", "Networking"],
+    validation: "Certificate ID: AWS-SA-2023-55678",
+    viewLink: "https://example.com/cert/aws-solutions",
+    credentialLink: "https://aws.amazon.com/verification"
+  },
+  {
+    id: 5,
+    title: "JavaScript Algorithms & Data Structures",
+    issuer: "freeCodeCamp",
+    issuerIcon: "https://cdn-icons-png.flaticon.com/512/5968/5968672.png",
+    date: "September 2023",
+    category: "programming",
+    image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?q=80&w=1000",
+    badge: "Certification",
+    description: "Master JavaScript algorithms and data structures including arrays, objects, recursion, and advanced algorithm patterns.",
+    skills: ["JavaScript", "Algorithms", "Data Structures", "Problem Solving"],
+    validation: "Certificate ID: FCC-JS-2023-11223",
+    viewLink: "https://freecodecamp.org/certification/js-algorithms",
+    credentialLink: "https://freecodecamp.org/verify/js-algorithms"
+  },
+  {
+    id: 6,
+    title: "Leadership & Communication Skills",
+    issuer: "LinkedIn Learning",
+    issuerIcon: "https://cdn-icons-png.flaticon.com/512/174/174857.png",
+    date: "August 2023",
+    category: "soft-skills",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000",
+    badge: "Course Completion",
+    description: "Develop essential leadership and communication skills for effective team management and professional growth.",
+    skills: ["Leadership", "Communication", "Team Management", "Public Speaking"],
+    validation: "Certificate ID: LINKEDIN-LC-2023-66789",
+    viewLink: "https://linkedin.com/learning/certificates/leadership",
+    credentialLink: "https://linkedin.com/verify/leadership"
+  },
+  {
+    id: 7,
+    title: "Database Management Fundamentals",
+    issuer: "Oracle",
+    issuerIcon: "https://cdn-icons-png.flaticon.com/512/5969/5969275.png",
+    date: "July 2023",
+    category: "database",
+    image: "https://images.unsplash.com/photo-1548092372-0d1bd40894a3?q=80&w=1000",
+    badge: "Professional Certificate",
+    description: "Fundamentals of database management including SQL queries, database design, normalization, and performance optimization.",
+    skills: ["SQL", "Database Design", "Normalization", "Oracle DB", "Performance"],
+    validation: "Certificate ID: ORACLE-DB-2023-88901",
+    viewLink: "https://example.com/cert/database-oracle",
+    credentialLink: "https://oracle.com/verify/db-88901"
+  },
+  {
+    id: 8,
+    title: "Cybersecurity Fundamentals",
+    issuer: "Cisco",
+    issuerIcon: "https://cdn-icons-png.flaticon.com/512/5968/5968192.png",
+    date: "June 2023",
+    category: "cyber",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000",
+    badge: "Associate Level",
+    description: "Introduction to cybersecurity concepts including network security, cryptography, threat analysis, and security best practices.",
+    skills: ["Network Security", "Cryptography", "Threat Analysis", "Security Protocols"],
+    validation: "Certificate ID: CISCO-CYBER-2023-99012",
+    viewLink: "https://example.com/cert/cybersecurity-cisco",
+    credentialLink: "https://cisco.com/verify/cyber-99012"
+  }
+];
+
+/* Initialize Certificates */
+function initializeCertificates() {
+  const carousel = document.getElementById('certificates-carousel');
+  const filterSelect = document.getElementById('cert-filter');
+  
+  // Render certificates
+  renderCertificates('all');
+  
+  // Add filter event listener
+  filterSelect.addEventListener('change', (e) => {
+    renderCertificates(e.target.value);
+  });
+}
+
+/* Render Certificates */
+function renderCertificates(category) {
+  const carousel = document.getElementById('certificates-carousel');
+  carousel.innerHTML = '';
+  
+  // Filter certificates
+  const filteredCerts = category === 'all' 
+    ? certificatesDB 
+    : certificatesDB.filter(cert => cert.category === category);
+  
+  // Group certificates into slides (2 per slide)
+  const slides = [];
+  for (let i = 0; i < filteredCerts.length; i += 2) {
+    slides.push(filteredCerts.slice(i, i + 2));
+  }
+  
+  // Create slides
+  slides.forEach((slideCerts, slideIndex) => {
+    const slideDiv = document.createElement('div');
+    slideDiv.className = 'certificate-slide';
+    
+    slideCerts.forEach(cert => {
+      const certCard = document.createElement('article');
+      certCard.className = 'cert-card';
+      certCard.onclick = () => openCertModal(cert.id);
+      
+      certCard.innerHTML = `
+        <div class="cert-thumb">
+          <img src="${cert.image}" alt="${cert.title}">
+          <div class="cert-badge">${cert.badge}</div>
+        </div>
+        <div class="cert-issuer">
+          <img src="${cert.issuerIcon}" alt="${cert.issuer} Logo">
+          <span>${cert.issuer}</span>
+        </div>
+        <h4>${cert.title}</h4>
+        <p>${cert.description.substring(0, 80)}...</p>
+      `;
+      
+      slideDiv.appendChild(certCard);
+    });
+    
+    carousel.appendChild(slideDiv);
+  });
+  
+  // If no certificates found
+  if (filteredCerts.length === 0) {
+    carousel.innerHTML = `
+      <div class="certificate-slide" style="flex: 1; text-align: center; padding: 40px;">
+        <p style="color: var(--muted); font-size: 16px;">No certificates found for this category.</p>
+      </div>
+    `;
+  }
+}
+
+/* Carousel Navigation */
+function slideCertLeft() {
+  const wrapper = document.querySelector('.certificates-wrapper');
+  wrapper.scrollBy({ left: -370, behavior: 'smooth' });
+}
+
+function slideCertRight() {
+  const wrapper = document.querySelector('.certificates-wrapper');
+  wrapper.scrollBy({ left: 370, behavior: 'smooth' });
+}
+
+/* Certificate Modal */
+function openCertModal(certId) {
+  const cert = certificatesDB.find(c => c.id === certId);
+  if (!cert) return;
+  
+  const overlay = document.getElementById('cert-modal-overlay');
+  const modal = document.getElementById('cert-modal');
+  
+  // Update modal content
+  document.getElementById('cert-modal-title').textContent = cert.title;
+  document.getElementById('cert-modal-issuer-icon').src = cert.issuerIcon;
+  document.getElementById('cert-modal-issuer').textContent = cert.issuer;
+  document.getElementById('cert-modal-date').textContent = `Issued: ${cert.date}`;
+  document.getElementById('cert-modal-badge').textContent = cert.badge;
+  document.getElementById('cert-modal-image').src = cert.image;
+  document.getElementById('cert-modal-description').textContent = cert.description;
+  document.getElementById('cert-modal-id').textContent = cert.validation.split(': ')[1];
+  document.getElementById('cert-modal-validation').innerHTML = `
+    ${cert.validation}<br>
+    <small style="color: var(--muted); font-size: 12px;">Valid indefinitely</small>
+  `;
+  document.getElementById('cert-modal-view-link').href = cert.viewLink;
+  document.getElementById('cert-modal-credential-link').href = cert.credentialLink;
+  
+  // Update skills
+  const skillsContainer = document.getElementById('cert-modal-skills');
+  skillsContainer.innerHTML = '';
+  cert.skills.forEach(skill => {
+    const skillItem = document.createElement('div');
+    skillItem.className = 'cert-skill';
+    
+    let icon = '💻';
+    if (skill.toLowerCase().includes('python')) icon = '🐍';
+    if (skill.toLowerCase().includes('react')) icon = '⚛️';
+    if (skill.toLowerCase().includes('node')) icon = '🟢';
+    if (skill.toLowerCase().includes('aws')) icon = '☁️';
+    if (skill.toLowerCase().includes('security')) icon = '🔒';
+    if (skill.toLowerCase().includes('database')) icon = '🗄️';
+    if (skill.toLowerCase().includes('git')) icon = '📦';
+    if (skill.toLowerCase().includes('leadership')) icon = '👥';
+    if (skill.toLowerCase().includes('communication')) icon = '🗣️';
+    
+    skillItem.innerHTML = `<i>${icon}</i> ${skill}`;
+    skillsContainer.appendChild(skillItem);
+  });
+  
+  // Show modal
+  overlay.classList.add('active');
+  setTimeout(() => {
+    modal.classList.add('active');
+  }, 10);
+  
+  // Prevent body scroll
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCertModal() {
+  const overlay = document.getElementById('cert-modal-overlay');
+  const modal = document.getElementById('cert-modal');
+  
+  modal.classList.remove('active');
+  setTimeout(() => {
+    overlay.classList.remove('active');
+    // Restore body scroll
+    document.body.style.overflow = '';
+  }, 300);
+}
+
+// Close cert modal with Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.getElementById('cert-modal-overlay').classList.contains('active')) {
+    closeCertModal();
+  }
+});
+
+// Initialize certificates on page load
+document.addEventListener('DOMContentLoaded', () => {
+  initializeCertificates();
+});
 </script>
 
 </body>
-</html>
+</html> 
