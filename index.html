@@ -220,7 +220,7 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 .card p{
   margin:0;
   color:var(--muted);
-  font-size:13px;
+  font-size:13.3px;
   padding:0 14px 14px 14px;
   white-space: nowrap;
   overflow: hidden;
@@ -606,7 +606,7 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 }
 
 .cert-arrow {
-  cursor: pointer;
+  cursor: pointer;  margin: 0 0 14px 0;
   background: #00000000;
   border: none;
   color: var(--muted);
@@ -772,7 +772,6 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
   font-size: 13px;
   padding: 0 14px 14px 14px;
   line-height: 1.4;
-  margin: 0 0 14px 0;
   
   /* Description - 2 lines dengan ellipsis */
   display: -webkit-box;
@@ -812,6 +811,77 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
   color: var(--muted);
 }
 
+/* Certificate Modal Specific Styles */
+.cert-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+/* Badge styles for certificate */
+.cert-badge-modal {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(110, 231, 183, 0.15);
+  color: var(--accent);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Issuer info in modal */
+.cert-issuer-modal {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cert-issuer-modal img {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+.cert-issuer-modal span {
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Skills styling */
+.tech-item.cert-skill {
+  background: rgba(110, 231, 183, 0.1);
+  color: var(--accent);
+  border: 1px solid rgba(110, 231, 183, 0.2);
+}
+
+.tech-item.cert-skill:hover {
+  background: rgba(110, 231, 183, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Certificate Date Badge */
+.cert-date-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(110, 231, 183, 0.1);
+  color: var(--accent);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  margin-left: 10px;
+}
+
 /* Responsive for certificates */
 @media (max-width: 1024px) {
   .certificates-carousel .certificate-slide {
@@ -845,7 +915,21 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
   .cert-card .cert-thumb {
     height: 150px;
   }
+  
+  .cert-issuer-modal {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 }
+
+.cert-card p {
+    margin-bottom: 14px;
+    line-height: 18px;
+    font-size: 16px;
+    padding-bottom: 0px;
+    font-size: 13.3px;
+  }
 
 @media (max-width: 480px) {
   .certificates-carousel .certificate-slide {
@@ -857,7 +941,11 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
   }
   
   .cert-card p {
-    font-size: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 17px;
+    font-size: 16px;
+    line-height: 17px;
+    font-size: 13.2px;
   }
 }
 
@@ -1083,7 +1171,7 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
 
   /* Card teks lebih kecil */
   .card h4{font-size:14px;}
-  .card p{font-size:12px;}
+  .card p{font-size:13.2px;}
 
   /* Social icons grid */
   .social-grid{
@@ -1304,7 +1392,7 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
             <span class="snake-stat-label">Total Contributions</span>
           </div>
           <div class="snake-stat">
-            <span class="nake-stat-value" id="current-streak">0</span>
+            <span class="snake-stat-value" id="current-streak">0</span>
             <span class="snake-stat-label">Current Streak</span>
           </div>
           <div class="snake-stat">
@@ -1396,6 +1484,55 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:16px 0}
           <a href="#" class="modal-link" id="modal-github-link" target="_blank">
             <i>🔗</i> GitHub Repository
           </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Certificate Modal -->
+<div class="modal-overlay" id="cert-modal-overlay">
+  <div class="modal" id="cert-modal">
+    <button class="modal-close" id="cert-modal-close">×</button>
+    
+    <div class="modal-header">
+      <h2 class="modal-title" id="cert-modal-title">Certificate Title</h2>
+      <p class="modal-subtitle" id="cert-modal-subtitle">Issuer • Date</p>
+    </div>
+    
+    <div class="modal-content">
+      <div class="modal-image">
+        <img id="cert-modal-image" src="" alt="Certificate Image">
+      </div>
+      
+      <div class="modal-scroll">
+        <div class="modal-section">
+          <h4><i>📄</i> Certificate Details</h4>
+          <p class="modal-description" id="cert-modal-description">
+            Certificate description will appear here...
+          </p>
+        </div>
+        
+        <div class="modal-section">
+          <h4><i>🎯</i> Skills Acquired</h4>
+          <div class="tech-stack" id="cert-skills-stack">
+            <!-- Skill items will be added here dynamically -->
+          </div>
+        </div>
+        
+        <div class="modal-section">
+          <h4><i>🔍</i> Validation & Credentials</h4>
+          <p class="modal-description" id="cert-validation">
+            Certificate validation details...
+          </p>
+          <div class="cert-links">
+            <a href="#" class="modal-link" id="cert-view-link" target="_blank">
+              <i>👁️</i> View Certificate
+            </a>
+            <a href="#" class="modal-link" id="cert-credential-link" target="_blank">
+              <i>🔗</i> Verify Credential
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -2040,6 +2177,9 @@ function renderCertificates(category) {
       const certCard = document.createElement('article');
       certCard.className = 'cert-card';
       
+      // Add click event to open modal
+      certCard.onclick = () => openCertificateModal(cert.id);
+      
       certCard.innerHTML = `
         <div class="cert-thumb">
           <img src="${cert.image}" alt="${cert.title}">
@@ -2079,6 +2219,127 @@ function slideCertRight() {
   const wrapper = document.querySelector('.certificates-wrapper');
   wrapper.scrollBy({ left: 370, behavior: 'smooth' });
 }
+
+/* Certificate Modal Functions */
+function openCertificateModal(certId) {
+  const cert = certificatesDB[certId];
+  const overlay = document.getElementById('cert-modal-overlay');
+  const modal = document.getElementById('cert-modal');
+  
+  // Update modal content
+  document.getElementById('cert-modal-title').textContent = cert.title;
+  document.getElementById('cert-modal-subtitle').textContent = `${cert.issuer} • ${cert.date}`;
+  document.getElementById('cert-modal-image').src = cert.image;
+  document.getElementById('cert-modal-description').textContent = cert.description;
+  document.getElementById('cert-validation').textContent = cert.validation;
+  document.getElementById('cert-view-link').href = cert.viewLink;
+  document.getElementById('cert-credential-link').href = cert.credentialLink;
+  
+  // Add badge
+  const badgeHtml = `<div class="cert-badge-modal">${cert.badge}</div>`;
+  document.getElementById('cert-modal-subtitle').innerHTML += badgeHtml;
+  
+  // Add issuer info
+  const issuerHtml = `
+    <div class="cert-issuer-modal">
+      <img src="${cert.issuerIcon}" alt="${cert.issuer}">
+      <span>${cert.issuer}</span>
+    </div>
+  `;
+  document.querySelector('.modal-header').insertAdjacentHTML('beforeend', issuerHtml);
+  
+  // Update skills stack
+  const skillsStack = document.getElementById('cert-skills-stack');
+  skillsStack.innerHTML = '';
+  cert.skills.forEach(skill => {
+    const skillItem = document.createElement('div');
+    skillItem.className = 'tech-item cert-skill';
+    
+    // Add appropriate icon based on skill
+    let icon = '✅';
+    if (skill.toLowerCase().includes('python')) icon = '🐍';
+    if (skill.toLowerCase().includes('javascript')) icon = '📜';
+    if (skill.toLowerCase().includes('react')) icon = '⚛️';
+    if (skill.toLowerCase().includes('aws')) icon = '☁️';
+    if (skill.toLowerCase().includes('sql')) icon = '🗄️';
+    if (skill.toLowerCase().includes('docker')) icon = '🐳';
+    if (skill.toLowerCase().includes('git')) icon = '📊';
+    if (skill.toLowerCase().includes('security')) icon = '🔒';
+    if (skill.toLowerCase().includes('leadership')) icon = '👑';
+    if (skill.toLowerCase().includes('communication')) icon = '💬';
+    
+    skillItem.innerHTML = `<i>${icon}</i> ${skill}`;
+    skillsStack.appendChild(skillItem);
+  });
+  
+  // Show modal
+  overlay.style.display = 'flex';
+  setTimeout(() => {
+    overlay.classList.add('active');
+    modal.classList.add('active');
+  }, 10);
+  
+  // Prevent body scroll
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCertificateModal() {
+  const overlay = document.getElementById('cert-modal-overlay');
+  const modal = document.getElementById('cert-modal');
+  
+  modal.classList.remove('active');
+  overlay.classList.remove('active');
+  
+  setTimeout(() => {
+    overlay.style.display = 'none';
+    // Restore body scroll
+    document.body.style.overflow = '';
+    
+    // Clean up dynamic content
+    const issuerModal = document.querySelector('.cert-issuer-modal');
+    if (issuerModal) issuerModal.remove();
+  }, 300);
+}
+
+// Setup event listeners untuk certificate modal
+document.addEventListener('DOMContentLoaded', function() {
+  // Certificate modal event listeners
+  const certModalOverlay = document.getElementById('cert-modal-overlay');
+  const certModalClose = document.getElementById('cert-modal-close');
+  const certModal = document.getElementById('cert-modal');
+  
+  if (certModalOverlay) {
+    certModalOverlay.addEventListener('click', function(e) {
+      if (e.target === certModalOverlay) {
+        closeCertificateModal();
+      }
+    });
+  }
+  
+  if (certModalClose) {
+    certModalClose.addEventListener('click', closeCertificateModal);
+  }
+  
+  if (certModal) {
+    certModal.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  }
+  
+  // Close modal dengan Escape key (untuk kedua modal)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const certModalOverlay = document.getElementById('cert-modal-overlay');
+      const projectModalOverlay = document.getElementById('modal-overlay');
+      
+      if (certModalOverlay && certModalOverlay.classList.contains('active')) {
+        closeCertificateModal();
+      } else if (projectModalOverlay && projectModalOverlay.classList.contains('active')) {
+        closeModal();
+      }
+    }
+  });
+});
 
 // Initialize certificates
 document.addEventListener('DOMContentLoaded', () => {
