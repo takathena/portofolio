@@ -69,7 +69,6 @@ p.lead{color:var(--muted);line-height:1.6;margin-top:12px}
   display:block;
   width:100%;
   height:auto;
-  border-radius: 8px;
 }
 
 .badges{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
@@ -374,6 +373,7 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:22px 0 16px 0}
   position: absolute;
   top: 20px;
   right: 20px;
+  float: right;
   background: rgba(255, 255, 255, 0.05);
   border: none;
   width: 40px;
@@ -1175,6 +1175,176 @@ a:focus {
     box-shadow: none;
   }
 }
+
+/* =========================================
+        MODAL CLOSE ANIMATIONS - ADDED
+========================================= */
+
+/* Modal overlay fade out animation */
+@keyframes modalFadeOut {
+  from {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+  }
+  to {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+}
+
+/* Modal slide down exit animation */
+@keyframes modalSlideDown {
+  from {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(30px) scale(0.95);
+    opacity: 0;
+  }
+}
+
+/* Modal close button hover animation */
+.modal-close {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-close::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(110, 231, 183, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.modal-close:hover::before {
+  opacity: 1;
+}
+
+.modal-close:hover {
+  transform: rotate(90deg) scale(1.1);
+  color: var(--accent);
+  box-shadow: 0 0 20px rgba(110, 231, 183, 0.3);
+}
+
+/* Modal overlay closing state */
+.modal-overlay.closing {
+  animation: modalFadeOut 0.3s ease-out forwards !important;
+}
+
+/* Modal content closing state */
+.modal.closing,
+#cert-modal.closing {
+  animation: modalSlideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+
+/* Smooth transition for modal image */
+.modal-image img,
+#cert-modal-image {
+  transition: opacity 0.4s ease;
+}
+
+/* Modal content scrollbar animation */
+.modal-scroll::-webkit-scrollbar-thumb {
+  transition: background 0.3s ease;
+}
+
+.modal-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(110, 231, 183, 0.7);
+  animation: subtlePulse 1.5s infinite;
+}
+
+/* Modal link hover animation */
+.modal-link {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.modal-link:hover::after {
+  transform: translateX(0);
+}
+
+/* Tech item hover animation */
+.tech-item {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.tech-item:hover::before {
+  left: 100%;
+}
+
+.tech-item:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(110, 231, 183, 0.2);
+}
+
+/* Certificate badge animation */
+.cert-badge {
+  animation: subtlePulse 2s infinite;
+  transition: all 0.3s ease;
+}
+
+.cert-card:hover .cert-badge {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 4px 15px rgba(110, 231, 183, 0.3);
+}
+
+/* Certificate issuer logo animation */
+.cert-issuer img {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cert-card:hover .cert-issuer img {
+  transform: rotate(10deg) scale(1.2);
+}
+
+/* Filter select animation */
+.filter-select {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.filter-select:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(110, 231, 183, 0.15);
+}
 </style>
 </head>
 
@@ -1844,17 +2014,24 @@ function openModal(projectId) {
   document.body.style.overflow = 'hidden';
 }
 
+/* =========================================
+        UPDATED MODAL CLOSE FUNCTION WITH ANIMATIONS
+========================================= */
 function closeModal() {
   const overlay = document.getElementById('modal-overlay');
   const modal = document.getElementById('modal');
   
-  modal.classList.remove('active');
-  overlay.classList.remove('active');
-  overlay.setAttribute('aria-hidden', 'true');
+  // Add closing animations
+  modal.classList.add('closing');
+  overlay.classList.add('closing');
   
+  // Wait for animation to complete
   setTimeout(() => {
+    modal.classList.remove('active', 'closing');
+    overlay.classList.remove('active', 'closing');
     overlay.style.display = 'none';
     document.body.style.overflow = '';
+    modal.style.animation = ''; // Reset animation
   }, 300);
 }
 
@@ -2181,17 +2358,24 @@ function openCertificateModal(certId) {
   document.body.style.overflow = 'hidden';
 }
 
+/* =========================================
+        UPDATED CERTIFICATE MODAL CLOSE FUNCTION WITH ANIMATIONS
+========================================= */
 function closeCertificateModal() {
   const overlay = document.getElementById('cert-modal-overlay');
   const modal = document.getElementById('cert-modal');
   
-  modal.classList.remove('active');
-  overlay.classList.remove('active');
-  overlay.setAttribute('aria-hidden', 'true');
+  // Add closing animations
+  modal.classList.add('closing');
+  overlay.classList.add('closing');
   
+  // Wait for animation to complete
   setTimeout(() => {
+    modal.classList.remove('active', 'closing');
+    overlay.classList.remove('active', 'closing');
     overlay.style.display = 'none';
     document.body.style.overflow = '';
+    modal.style.animation = ''; // Reset animation
     
     // Clean up dynamic content
     const issuerModal = document.querySelector('.cert-issuer-modal');
