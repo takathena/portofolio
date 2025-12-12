@@ -389,12 +389,12 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:22px 0 16px 0}
   transition: all 0.2s ease;
 }
 .modal-close:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(90, 90, 90, 0.1);
   color: var(--text-primary);
   transform: rotate(90deg);
 }
 .modal-close:focus {
-  outline: 2px solid var(--accent);
+  outline: 0px solid var(--accent);
   outline-offset: 2px;
 }
 
@@ -469,6 +469,7 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:22px 0 16px 0}
 }
 
 .tech-stack {
+  padding: 2px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -1229,9 +1230,7 @@ a:focus {
 }
 
 .modal-close:hover {
-  transform: rotate(90deg) scale(1.1);
   color: var(--accent);
-  box-shadow: 0 0 20px rgba(110, 231, 183, 0.3);
 }
 
 /* Modal overlay closing state */
@@ -1313,7 +1312,7 @@ a:focus {
 
 .tech-item:hover {
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 20px rgba(110, 231, 183, 0.2);
+  box-shadow: 0 0px 4px rgba(110, 231, 183, 0.2);
 }
 
 /* Certificate badge animation */
