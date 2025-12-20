@@ -3,331 +3,805 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Portfolio — Takathena</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Portfolio — Takathena | Brutalist Edition</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="https://cdn.cosmos.so/ce562cca-2d95-47b3-969e-f842ffb4c225?format=jpeg">
 <style>
 /* =========================================
-        CRITICAL CSS (Above the fold)
+        BRUTALIST CSS VARIABLES
 ========================================= */
-:root{
-  --bg: #111113;
-  --card: #1b1b1d;
-  --muted: #9aa0a6;
-  --accent: #6ee7b7;
-  --text-primary: #E9EEF1;
-  --glass: rgba(255,255,255,0.03);
-  --maxw: 980px;
-  --card-width: 350px; /* NEW: Consistent card width variable */
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: #FFFFFF;
+  --bg-accent: #FF0000;
+  --bg-accent2: #00FF00;
+  --bg-accent3: #0000FF;
+  --text-primary: #000000;
+  --text-secondary: #FFFFFF;
+  --text-accent: #FF0000;
+  --border-thick: 8px;
+  --border-thin: 4px;
+  --shadow-offset: 8px;
+  --maxw: 1200px;
+  --card-width: 350px;
+  --transition: all 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-*{box-sizing:border-box}
-html,body{height:100%;margin:0;}
-body{
-  font-family: Inter, system-ui, sans-serif;
-  background: var(--bg);
+/* =========================================
+        RESET & BASE STYLES
+========================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  margin: 0;
+  background: var(--bg-primary);
   color: var(--text-primary);
-  padding:24px 20px 0 4.5em; /* OPTION A — desktop agak kiri */
-  -webkit-font-smoothing:antialiased;
+  font-family: 'IBM Plex Mono', monospace;
+  line-height: 1.4;
+  overflow-x: hidden;
+  -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: grayscale;
 }
-a {
-  -webkit-tap-highlight-color: transparent;
+
+/* =========================================
+        TYPOGRAPHY BRUTALIST
+========================================= */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
 }
-a:focus,
-a:active {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+
+h1 {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  margin-bottom: 0.5rem;
+  color: var(--text-accent);
+  text-shadow: 
+    var(--shadow-offset) var(--shadow-offset) 0 var(--bg-accent2),
+    calc(var(--shadow-offset) * -1) calc(var(--shadow-offset) * -1) 0 var(--bg-accent3);
+  line-height: 1;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  margin-bottom: 1.5rem;
+  background: var(--bg-accent);
+  color: var(--text-secondary);
+  padding: 10px 15px;
+  display: inline-block;
+  border: var(--border-thick) solid var(--text-primary);
+  box-shadow: 
+    var(--shadow-offset) var(--shadow-offset) 0 var(--bg-accent2),
+    calc(var(--shadow-offset) * -1) calc(var(--shadow-offset) * -1) 0 var(--bg-accent3);
+  line-height: 1;
+}
+
+h3 {
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  margin-bottom: 1rem;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border: var(--border-thin) solid var(--text-primary);
+  transform: rotate(-1deg);
+  line-height: 1.1;
+}
+
+h4 {
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  margin-bottom: 0.5rem;
+  background: var(--bg-accent3);
+  color: var(--text-secondary);
+  padding: 5px 10px;
+  border: var(--border-thin) solid var(--text-primary);
+  line-height: 1.2;
 }
 
 /* =========================================
-        PAGE LAYOUT
+        LAYOUT BRUTALIST RESPONSIF
 ========================================= */
-.page{
-  width:100%;
-  max-width:var(--maxw);
-  padding:28px 0;
-  margin-left:0;
-}
-
-.header{
-  display:flex;
-  gap:28px;
-  align-items:flex-start;
-  justify-content:flex-start;
-}
-
-.left{flex:1 1 420px;min-width:240px}
-.right{width:360px;max-width:40%;overflow:hidden;display:flex;flex-direction:column;gap:16px;}
-
-h1{font-size:28px;margin:0 0 8px;font-weight:700;color: var(--text-primary);}
-h2{font-size:18px;margin:0 0 8px;font-weight:600;color:var(--muted)}
-h3{font-size:17px;font-weight:600;color: var(--text-primary);}
-p.lead{color:var(--muted);line-height:1.6;margin-top:12px}
-
-.photo img{
-  display:block;
-  width:100%;
-  height:auto;
-}
-
-.badges{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  background:#262628;
-  padding:6px 10px;
-  border-radius:999px;
-  font-size:13px;
-  color:var(--muted)
-}
-.badge img{width:18px;height:18px;object-fit:contain}
-
-hr.sep{border:0;height:1px;background:#2a2a2c;margin:22px 0 16px 0}
-
-/* =========================================
-        TAG BAR
-========================================= */
-.tag-bar{
-  overflow-x: auto;
-  display:flex;
-  gap:10px;
-  margin:10px 0 14px 0;
-  scrollbar-width:none;
-  -ms-overflow-style:none;
-}
-.tag-bar::-webkit-scrollbar{display:none;}
-
-.tag{
-  background:#1c1c1e;
-  border:1px solid #2a2a2c;
-  padding:6px 12px;
-  border-radius:8px;
-  font-size:13px;
-  color:var(--muted);
-  cursor:pointer;
-  transition:0.2s;
-  white-space:nowrap;
-}
-.tag:hover{background:#2c2c2e;color:var(--text-primary);}
-.tag.active{background:#2C2F30;color:var(--text-primary);}
-
-/* =========================================
-        ACCORDION
-========================================= */
-.tools-card{margin-top:18px;padding:0;}
-.tools-header{
-  display:flex;justify-content:space-between;align-items:center;cursor:pointer;
-}
-.tools-header h2{margin:0;font-weight:700;color:var(--text-primary);}
-.accordion-btn{
-  font-size:16px;background:none;width:32px;height:32px;border:none;
-  color:var(--muted);cursor:pointer;transition:transform 0.3s ease;
-}
-.accordion-btn:hover{background-color:#333335;border-radius:6px;}
-.accordion-btn.open{transform:rotate(180deg);}
-
-.tools-body{
-  overflow:hidden;
-  max-height:0;
-  opacity:0;
-  transition:max-height .45s ease, opacity .35s ease;
-}
-.tools-body.open{opacity:1;}
-
-.tools-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:12px;
-  padding:4px 4px 4px 10px;
-}
-.tools-grid img{
-  width:40px;height:40px;
-  object-fit:contain;
-  transition:0.25s;
-}
-.tools-grid img:hover{transform:scale(1.1);}
-.tools-grid.dimmed img{opacity:0.15;}
-.tools-grid img.highlight{opacity:1 !important;filter:none !important;}
-
-/* =========================================
-        PROJECTS - UPDATED CARD WIDTH
-========================================= */
-.project-header{
-  display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;
-}
-.project-arrows{display:flex;gap:10px;}
-.project-arrow{
-  cursor:pointer;background:#26262800;border:none;color:var(--muted);
-  padding:6px 10px;border-radius:8px;font-size:15px;transition:background 0.25s ease;
-}
-.project-arrow:hover{background:#333335;}
-.project-arrow:focus{outline:2px solid var(--accent);outline-offset:2px;}
-
-.carousel-wrapper{
-  margin-top:-5px;width:100%;overflow-x:auto;scroll-behavior:smooth;
-  -webkit-overflow-scrolling:touch;scrollbar-width:none;
-  padding-top: 2px;
-}
-.carousel-wrapper::-webkit-scrollbar{display:none;}
-.carousel{display:flex;gap:16px;padding: 4px 0; margin-bottom: 22px;}
-.slide{
-  flex: 0 0 var(--card-width); /* UPDATED: Use consistent width */
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-
-.card{
-  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-radius:12px;border:1px solid rgba(255,255,255,0.03);
-  cursor:pointer;
-  padding: 2px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.page {
+  max-width: min(var(--maxw), 95%);
+  margin: 2rem auto;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  background: var(--bg-secondary);
+  border: var(--border-thick) solid var(--text-primary);
+  box-shadow: 
+    var(--shadow-offset) var(--shadow-offset) 0 var(--bg-accent),
+    calc(var(--shadow-offset) * 2) calc(var(--shadow-offset) * 2) 0 var(--bg-accent2),
+    calc(var(--shadow-offset) * 3) calc(var(--shadow-offset) * 3) 0 var(--bg-accent3);
   position: relative;
   overflow: hidden;
-  width: 100%; /* Ensure card takes full width of slide */
 }
 
-.card:hover {
-  border-color: #c0c0c033;
-  transform: translateY(-6px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
-}
-
-.card .thumb{
-  height:180px;
-  border-radius:8px 8px 0 0;
-  overflow:hidden;
-  margin-bottom:10px;
-  position: relative;
-  width: 100%;
-}
-
-.card .thumb img{
-  width:100%;
-  height:100%;
-  object-fit:cover; 
-  border-radius: 11px 11px 0 0;
-  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: transform;
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.card .thumb img.loaded {
-  opacity: 1;
-}
-
-.card:hover .thumb img {
-  transform: scale(1.08);
-}
-
-/* Image placeholder */
-.image-placeholder {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, #2a2a2c 25%, #333335 50%, #2a2a2c 75%);
-  background-size: 200% 100%;
-  animation: loading 1.5s infinite;
-  border-radius: 11px 11px 0 0;
-}
-
-@keyframes loading {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-
-/* Overlay gradient untuk project card */
-.card .thumb::after {
-  content: '';
+.page::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(110, 231, 183, 0.1) 0%,
-    transparent 50%,
-    rgba(17, 17, 19, 0.4) 100%
+  height: 15px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--bg-accent) 0px,
+    var(--bg-accent) 15px,
+    var(--bg-accent2) 15px,
+    var(--bg-accent2) 30px,
+    var(--bg-accent3) 30px,
+    var(--bg-accent3) 45px
   );
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  border-radius: 11px 11px 0 0;
+  z-index: 10;
 }
 
-.card:hover .thumb::after {
-  opacity: 1;
+.header {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 1rem 0;
+  border-bottom: var(--border-thick) solid var(--text-primary);
 }
 
-.card h4{
-  margin:0 0 6px;
-  font-size:15px;
-  padding:0 14px;
-  transition: all 0.3s ease;
-  transform: translateY(0);
-  color: var(--text-primary);
-  
-  /* Title - 1 line dengan ellipsis */
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-word;
-}
-
-.card:hover h4 {
-  color: var(--accent);
-  transform: translateY(-2px);
-}
-
-.card p{
-  margin:0;
-  color:var(--muted);
-  font-size:13.3px;
-  padding:0 14px 14px 14px;
-  line-height: 1.4;
-  
-  /* UPDATED: Description - Max 2 lines dengan ellipsis */
-  display: -webkit-box;
-  -webkit-line-clamp: 2; /* Membatasi maksimal 2 baris */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-word;
-  min-height: 2.8em; /* Kira-kira tinggi untuk 2 baris */
-}
-
-.card:hover p {
-  opacity: 1;
-  color: #c0c6cc;
+@media (min-width: 768px) {
+  .header {
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+  }
 }
 
 /* =========================================
-        SOCIAL CARDS
+        SECTION CONTAINER
 ========================================= */
-.social-card{margin-top:12px;}
-.social-grid{
-  display:grid;grid-template-columns:repeat(5,6fr);
-  gap:22px;
-  padding:10px 4px 4px 10px;
+.section {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: var(--border-thin) solid var(--text-primary);
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 0, 0, 0.02) 10px,
+    rgba(255, 0, 0, 0.02) 20px
+  );
+  position: relative;
 }
-.social-grid img{
-  width:38px;height:38px;
-  object-fit:contain;
-  transition:transform 0.2s; 
-  border-radius: 8px;
+
+.section::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  background: var(--bg-secondary);
+  padding: 0 10px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.9rem;
+  border: var(--border-thin) solid var(--text-primary);
 }
-.social-grid img:hover{transform:scale(1.1);}
+
+.section.tools::before {
+  content: "/// TOOLS ///";
+  color: var(--text-primary);
+}
+
+.section.projects::before {
+  content: "/// PROJECTS ///";
+  background: var(--bg-accent2);
+  color: var(--text-primary);
+}
+
+.section.certificates::before {
+  content: "/// CERTIFICATES ///";
+  background: var(--bg-accent3);
+  color: var(--text-secondary);
+}
+
+.section.connect::before {
+  content: "/// CONNECT ///";
+  background: var(--bg-accent);
+  color: var(--text-secondary);
+}
 
 /* =========================================
-        PROJECT MODAL
+        BADGES BRUTALIST
+========================================= */
+.badges {
+  display: flex;
+  gap: 0.8rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border: var(--border-thin) solid var(--text-primary);
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  position: relative;
+  transform: rotate(1deg);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.badge:nth-child(2n) {
+  transform: rotate(-1deg);
+  background: var(--bg-accent);
+  color: var(--text-secondary);
+}
+
+.badge:nth-child(3n) {
+  transform: rotate(2deg);
+  background: var(--bg-accent2);
+  color: var(--text-primary);
+}
+
+.badge img {
+  width: 18px;
+  height: 18px;
+  filter: grayscale(100%) contrast(200%);
+}
+
+/* =========================================
+        LEAD TEXT
+========================================= */
+.lead {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  line-height: 1.6;
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  background: var(--bg-secondary);
+  border: var(--border-thin) dashed var(--text-primary);
+  transform: rotate(0.3deg);
+  position: relative;
+}
+
+.lead::before {
+  content: "///";
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: var(--bg-secondary);
+  padding: 0 10px;
+  color: var(--text-accent);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.9rem;
+}
+
+/* =========================================
+        ACCORDION BRUTALIST
+========================================= */
+.accordion {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  padding: 0.8rem;
+  background: var(--bg-secondary);
+  border: var(--border-thin) solid var(--text-primary);
+}
+
+.accordion-btn {
+  background: var(--bg-accent);
+  color: var(--text-secondary);
+  border: var(--border-thin) solid var(--text-primary);
+  font-size: 1.2rem;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.accordion-btn:hover {
+  transform: scale(1.2) rotate(90deg);
+  background: var(--bg-accent3);
+}
+
+.accordion-btn.open {
+  background: var(--bg-accent2);
+  color: var(--text-primary);
+  transform: rotate(180deg);
+}
+
+/* =========================================
+        TAG BAR BRUTALIST
+========================================= */
+.tag-bar {
+  display: flex;
+  gap: 0.6rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+  padding: 0.8rem 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tag-bar::-webkit-scrollbar {
+  height: 6px;
+}
+
+.tag-bar::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+.tag-bar::-webkit-scrollbar-thumb {
+  background: var(--bg-accent);
+  border: 1px solid var(--text-primary);
+}
+
+.tag {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border: var(--border-thin) solid var(--text-primary);
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.tag:hover {
+  background: var(--bg-accent);
+  color: var(--text-secondary);
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 var(--bg-accent2);
+}
+
+.tag.active {
+  background: var(--text-primary);
+  color: var(--bg-secondary);
+  border-color: var(--text-primary);
+}
+
+/* =========================================
+        TOOLS GRID BRUTALIST
+========================================= */
+.tools-body {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.3s ease;
+}
+
+.tools-body.open {
+  opacity: 1;
+  max-height: 1000px;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--bg-secondary);
+  border: var(--border-thin) solid var(--text-primary);
+  margin-top: 1rem;
+}
+
+.tools-grid img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  border: var(--border-thin) solid var(--text-primary);
+  background: var(--bg-secondary);
+  padding: 12px;
+  transition: var(--transition);
+  filter: contrast(150%) grayscale(100%);
+}
+
+.tools-grid img:hover {
+  transform: scale(1.15) rotate(5deg);
+  border-color: var(--bg-accent);
+  background: var(--bg-accent2);
+  filter: none;
+  box-shadow: 4px 4px 0 var(--bg-accent3);
+}
+
+.tools-grid.dimmed img {
+  opacity: 0.25;
+}
+
+.tools-grid img.highlight {
+  opacity: 1 !important;
+  transform: scale(1.1);
+  border-width: 2px;
+  box-shadow: 5px 5px 0 var(--bg-accent);
+}
+
+/* =========================================
+        PROJECTS CAROUSEL BRUTALIST
+========================================= */
+.projects-section {
+  margin: 2rem 0;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.project-controls {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.project-arrow {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: var(--border-thin) solid var(--text-primary);
+  font-size: 1.2rem;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-arrow:hover {
+  background: var(--bg-accent);
+  color: var(--text-secondary);
+  transform: scale(1.1);
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-wrapper {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 1rem 0.5rem;
+  margin: 0 -0.5rem;
+}
+
+.carousel-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.5rem;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+/* =========================================
+        CARDS BRUTALIST
+========================================= */
+.card {
+  flex: 0 0 calc(var(--card-width) - 2rem);
+  background: var(--bg-secondary);
+  border: var(--border-thick) solid var(--text-primary);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex: 0 0 calc(100vw - 4rem);
+    min-height: 280px;
+  }
+}
+
+.card:hover {
+  transform: translate(-8px, -8px);
+  box-shadow: 
+    12px 12px 0 var(--bg-accent),
+    24px 24px 0 var(--bg-accent2);
+  border-color: var(--bg-accent3);
+}
+
+.card-image {
+  height: 160px;
+  overflow: hidden;
+  border-bottom: var(--border-thick) solid var(--text-primary);
+  background: var(--bg-primary);
+  position: relative;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.5s ease;
+  filter: contrast(200%) grayscale(100%);
+}
+
+.card:hover .card-image img {
+  transform: scale(1.08);
+  filter: contrast(100%) grayscale(0%);
+}
+
+.card-content {
+  padding: 1.2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  margin: 0 0 0.8rem 0;
+  padding: 0.5rem 0.8rem;
+  background: var(--bg-accent3);
+  color: var(--text-secondary);
+  border: var(--border-thin) solid var(--text-primary);
+  font-size: 1.1rem;
+  line-height: 1.2;
+  transform: rotate(-0.5deg);
+  position: relative;
+  left: -0.5rem;
+  display: inline-block;
+}
+
+.card-description {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.card-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
+}
+
+.tech-tag {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--text-primary);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+/* =========================================
+        SOCIAL CONNECT BRUTALIST
+========================================= */
+.connect-section {
+  margin: 2rem 0;
+}
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--bg-secondary);
+  border: var(--border-thin) solid var(--text-primary);
+}
+
+.social-link {
+  display: block;
+  transition: var(--transition);
+  aspect-ratio: 1;
+}
+
+.social-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border: var(--border-thin) solid var(--text-primary);
+  background: var(--bg-secondary);
+  padding: 12px;
+  transition: var(--transition);
+  filter: grayscale(100%) contrast(200%);
+}
+
+.social-link:hover .social-icon {
+  transform: scale(1.1) rotate(-5deg);
+  border-color: var(--bg-accent);
+  background: var(--bg-accent2);
+  filter: none;
+  box-shadow: 4px 4px 0 var(--bg-accent3);
+}
+
+/* =========================================
+        PHOTO SECTION
+========================================= */
+.photo-container {
+  margin-bottom: 2rem;
+}
+
+.photo-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border: var(--border-thick) solid var(--text-primary);
+  filter: contrast(150%) grayscale(100%);
+  transition: var(--transition);
+}
+
+.photo-image:hover {
+  filter: contrast(100%) grayscale(0%);
+  transform: rotate(1deg) scale(1.01);
+}
+
+/* =========================================
+        CERTIFICATES SECTION
+========================================= */
+.certificates-section {
+  margin: 2rem 0;
+}
+
+.certificates-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.certificates-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.certificates-filter {
+  position: relative;
+  min-width: 150px;
+}
+
+.filter-select {
+  width: 100%;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: var(--border-thin) solid var(--text-primary);
+  padding: 0.6rem 1rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='black' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 12px;
+  padding-right: 40px;
+  transition: var(--transition);
+}
+
+.filter-select:hover {
+  background: var(--bg-accent);
+  color: var(--text-secondary);
+}
+
+.certificates-arrows {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.cert-arrow {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: var(--border-thin) solid var(--text-primary);
+  font-size: 1.2rem;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cert-arrow:hover {
+  background: var(--bg-accent2);
+  transform: scale(1.1);
+}
+
+/* Certificate Card */
+.cert-card {
+  flex: 0 0 calc(var(--card-width) - 2rem);
+  background: var(--bg-secondary);
+  border: var(--border-thick) solid var(--text-primary);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+}
+
+.cert-card:hover {
+  transform: translate(8px, -8px);
+  box-shadow: 
+    -12px 12px 0 var(--bg-accent3),
+    -24px 24px 0 var(--bg-accent2);
+  border-color: var(--bg-accent);
+}
+
+.cert-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--bg-accent);
+  color: var(--text-secondary);
+  padding: 0.3rem 0.6rem;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.65rem;
+  border: var(--border-thin) solid var(--text-primary);
+  transform: rotate(5deg);
+  z-index: 2;
+}
+
+.cert-issuer {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 1rem 0.5rem;
+}
+
+.cert-issuer img {
+  width: 24px;
+  height: 24px;
+  border: var(--border-thin) solid var(--text-primary);
+  filter: grayscale(100%) contrast(200%);
+  flex-shrink: 0;
+}
+
+.cert-issuer span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+/* =========================================
+        MODALS BRUTALIST
 ========================================= */
 .modal-overlay {
   display: none;
@@ -336,365 +810,345 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:22px 0 16px 0}
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
-  z-index: 1000;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(5px);
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
 
 .modal-overlay.active {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 1;
+  animation: modalAppear 0.3s forwards;
+}
+
+@keyframes modalAppear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .modal {
-  background: var(--card);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  width: 90%;
-  max-width: 800px;
-  max-height: 90vh;
-  overflow: hidden;
+  background: var(--bg-secondary);
+  border: var(--border-thick) solid var(--text-primary);
+  max-width: min(800px, 95vw);
+  width: 100%;
+  max-height: min(90vh, 800px);
+  overflow-y: auto;
   position: relative;
-  transform: translateY(20px);
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  animation: modalSlide 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 }
 
-.modal.active {
-  transform: translateY(0);
-  opacity: 1;
+@keyframes modalSlide {
+  from {
+    transform: translateY(100px) scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
 }
 
 .modal-close {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  float: right;
-  background: rgba(255, 255, 255, 0.05);
-  border: none;
+  top: 15px;
+  right: 15px;
+  background: var(--bg-accent);
+  color: var(--text-secondary);
+  border: var(--border-thin) solid var(--text-primary);
+  font-size: 1.5rem;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
-  color: var(--muted);
-  font-size: 20px;
   cursor: pointer;
-  z-index: 10;
+  z-index: 10001;
+  transition: var(--transition);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
 }
+
 .modal-close:hover {
-  background: rgba(90, 90, 90, 0.1);
+  background: var(--bg-accent2);
   color: var(--text-primary);
-  transform: rotate(90deg);
-}
-.modal-close:focus {
-  outline: 0px solid var(--accent);
-  outline-offset: 2px;
+  transform: rotate(90deg) scale(1.1);
 }
 
 .modal-header {
-  padding: 30px 30px 20px;
+  padding: 1.5rem 1.5rem 1rem;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--bg-accent),
+    var(--bg-accent) 8px,
+    var(--bg-accent2) 8px,
+    var(--bg-accent2) 16px,
+    var(--bg-accent3) 16px,
+    var(--bg-accent3) 24px
+  );
+  border-bottom: var(--border-thick) solid var(--text-primary);
 }
 
 .modal-title {
-  font-size: 24px;
-  font-weight: 700;
-  margin: 0 0 8px;
-  color: var(--text-primary);
+  color: var(--text-secondary);
+  text-shadow: 2px 2px 0 var(--text-primary);
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  margin-bottom: 0.5rem;
+  line-height: 1.1;
 }
 
 .modal-subtitle {
-  font-size: 15px;
-  color: var(--muted);
-  margin: 0;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 0.3rem 0.8rem;
+  display: inline-block;
+  border: var(--border-thin) solid var(--text-primary);
 }
 
 .modal-content {
-  padding: 0 30px 30px;
-  overflow-y: auto;
-  max-height: calc(90vh - 200px);
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.modal-content::-webkit-scrollbar {
-  display: none;
+  padding: 1.5rem;
 }
 
 .modal-image {
   width: 100%;
-  height: 300px;
-  border-radius: 12px;
+  height: 200px;
+  border: var(--border-thick) solid var(--text-primary);
+  margin-bottom: 1.5rem;
   overflow: hidden;
-  margin-bottom: 25px;
-  position: relative;
+  background: var(--bg-primary);
 }
+
 .modal-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: all 0.5s;
+  filter: contrast(200%) grayscale(100%);
 }
-.modal-image img.loaded {
-  opacity: 1;
+
+.modal:hover .modal-image img {
+  filter: contrast(100%) grayscale(0%);
 }
 
 .modal-section {
-  margin-bottom: 25px;
+  margin-bottom: 1.5rem;
+  padding: 1.2rem;
+  border: var(--border-thin) solid var(--text-primary);
+  background: var(--bg-secondary);
+  position: relative;
 }
+
 .modal-section h4 {
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0 0 12px;
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.modal-section h4 i {
-  color: var(--accent);
+  background: var(--bg-accent3);
+  color: var(--text-secondary);
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+  border: var(--border-thin) solid var(--text-primary);
+  transform: rotate(-1deg);
+  font-size: 1.1rem;
+  position: relative;
+  left: -0.5rem;
 }
 
 .modal-description {
-  font-size: 15px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.95rem;
   line-height: 1.6;
-  color: var(--muted);
-  margin: 0;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
 }
 
 .tech-stack {
-  padding: 2px;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 0.6rem;
 }
 
 .tech-item {
-  background: rgba(110, 231, 183, 0.1);
-  color: var(--accent);
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 0.4rem 0.8rem;
+  border: var(--border-thin) solid var(--text-primary);
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: var(--transition);
 }
-.tech-item i {
-  font-size: 14px;
+
+.tech-item:hover {
+  background: var(--bg-accent);
+  color: var(--text-secondary);
+  transform: translateY(-3px);
 }
 
 .modal-links {
   display: flex;
-  gap: 12px;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .modal-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(110, 231, 183, 0.1);
-  color: var(--accent);
-  padding: 10px 18px;
-  border-radius: 8px;
-  margin-top: 12px;
+  background: var(--bg-accent2);
+  color: var(--text-primary);
+  padding: 0.8rem 1.5rem;
   text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.2s ease;
+  border: var(--border-thin) solid var(--text-primary);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  flex: 1;
+  text-align: center;
+  min-width: 140px;
 }
+
 .modal-link:hover {
-  background: rgba(110, 231, 183, 0.2);
-  transform: translateY(-2px);
-}
-.modal-link:focus, .modal-link:active {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
-}
-.modal-link i {
-  font-size: 16px;
-}
-
-.modal-scroll {
-  max-height: 400px;
-  overflow-y: auto;
-  padding: 10px 10px 0 3px;
-
-}
-.modal-scroll::-webkit-scrollbar {
-  width: 6px;
-}
-.modal-scroll::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 3px;
-}
-.modal-scroll::-webkit-scrollbar-thumb {
-  background: rgba(110, 231, 183, 0.3);
-  border-radius: 3px;
-}
-.modal-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(110, 231, 183, 0.5);
+  background: var(--bg-accent);
+  color: var(--text-secondary);
+  transform: translate(-3px, -3px);
+  box-shadow: 5px 5px 0 var(--bg-accent3);
 }
 
 /* =========================================
-        CERTIFICATES SECTION - UPDATED CARD WIDTH
+        FOOTER
 ========================================= */
-.certificates-section {
-  margin-top: 60px;
-}
-
-.certificates-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
-  margin-top: -2em;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.certificates-controls {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.certificates-filter {
+.footer {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: var(--bg-primary);
+  color: var(--bg-accent2);
+  text-align: center;
+  border-top: var(--border-thick) solid var(--text-primary);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.8rem;
   position: relative;
-  min-width: 90px;
 }
 
-.filter-select {
-  width: 100%;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-primary);
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-family: Inter, system-ui, sans-serif;
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  transition: all 0.2s ease;
-}
-.filter-select:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: #1f1f21;
-}
-.filter-select:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+.footer::before {
+  content: "///";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-primary);
+  padding: 0 10px;
+  color: var(--bg-accent2);
+  font-size: 1rem;
 }
 
-.certificates-arrows {
-  display: flex;
-  gap: 8px;
+/* =========================================
+        RESPONSIVE BREAKPOINTS
+========================================= */
+@media (max-width: 768px) {
+  :root {
+    --border-thick: 6px;
+    --border-thin: 3px;
+    --shadow-offset: 5px;
+    --card-width: 280px;
+  }
+
+  .page {
+    margin: 1rem auto;
+    padding: 1.5rem;
+  }
+
+  .project-controls,
+  .certificates-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .modal-links {
+    flex-direction: column;
+  }
+
+  .modal-link {
+    min-width: 100%;
+  }
+
+  .tools-grid {
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 0.8rem;
+    padding: 1rem;
+  }
 }
 
-.cert-arrow {
-  cursor: pointer;  
-  background: #00000000;
-  border: none;
-  color: var(--muted);
-  padding: 6px 10px;
-  border-radius: 8px;
-  font-size: 15px;
-  transition: all 0.2s ease;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.cert-arrow:hover {
-  background: #333335;
-  color: var(--text-primary);
-  transform: translateY(-1px);
-}
-.cert-arrow:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+@media (max-width: 480px) {
+  :root {
+    --border-thick: 4px;
+    --border-thin: 2px;
+    --shadow-offset: 3px;
+    --card-width: 250px;
+  }
+
+  .page {
+    margin: 0.5rem auto;
+    padding: 1rem;
+    box-shadow: 
+      var(--shadow-offset) var(--shadow-offset) 0 var(--bg-accent),
+      calc(var(--shadow-offset) * 2) calc(var(--shadow-offset) * 2) 0 var(--bg-accent2);
+  }
+
+  .card,
+  .cert-card {
+    min-height: 260px;
+  }
+
+  .card-image {
+    height: 140px;
+  }
+
+  .modal {
+    max-height: 95vh;
+  }
+
+  .modal-image {
+    height: 160px;
+  }
 }
 
-.certificates-wrapper {
-  margin-top: 4px;
-  width: 100%;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding-top: 2px;
-}
-.certificates-wrapper::-webkit-scrollbar {
-  display: none;
-}
-
-.certificates-carousel {
-  display: flex;
-  padding: 4px 0;
-  gap: 20px;
-}
-
-.certificate-slide {
-  flex: 0 0 var(--card-width); /* UPDATED: Use consistent width */
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+/* =========================================
+        ANIMATIONS & EFFECTS
+========================================= */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
 }
 
-.cert-card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  cursor: pointer;
-  padding: 2px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.glitch:hover {
+  animation: glitch 0.3s linear;
+}
+
+/* Scanline effect */
+.scanlines {
   position: relative;
   overflow: hidden;
-  width: 100%; /* Ensure card takes full width of slide */
-}
-.cert-card:hover {
-  border-color: #c0c0c033;
-  transform: translateY(-6px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
 }
 
-.cert-card .cert-thumb {
-  height: 180px;
-  border-radius: 8px 8px 0 0;
-  overflow: hidden;
-  margin-bottom: 10px;
-  position: relative;
-  width: 100%;
-}
-.cert-card .cert-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 11px 11px 0 0;
-  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: transform;
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.cert-card .cert-thumb img.loaded {
-  opacity: 1;
-}
-.cert-card:hover .cert-thumb img {
-  transform: scale(1.08);
-}
-
-/* Overlay gradient untuk cert card */
-.cert-card .cert-thumb::after {
-  content: '';
+.scanlines::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -702,424 +1156,31 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:22px 0 16px 0}
   bottom: 0;
   background: linear-gradient(
     to bottom,
-    rgba(110, 231, 183, 0.1) 0%,
     transparent 50%,
-    rgba(17, 17, 19, 0.4) 100%
+    rgba(0, 255, 0, 0.02) 50%
   );
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  border-radius: 11px 11px 0 0;
-}
-.cert-card:hover .cert-thumb::after {
-  opacity: 1;
+  background-size: 100% 3px;
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: overlay;
 }
 
-.cert-badge {
+/* Noise texture */
+.noise::after {
+  content: "";
   position: absolute;
-  top: 12px;
-  right: 12px;
-  background: rgba(110, 231, 183, 0.9);
-  color: var(--bg);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 8px;
-  border-radius: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.cert-card h4 {
-  margin: 0 0 6px;
-  font-size: 15px;
-  padding: 0 14px;
-  color: var(--text-primary);
-  transition: all 0.3s ease;
-  transform: translateY(0);
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-word;
-}
-.cert-card:hover h4 {
-  color: var(--accent);
-  transform: translateY(-2px);
-}
-
-.cert-card p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 13px;
-  padding: 0 14px 14px 14px;
-  line-height: 1.4;
-  
-  /* UPDATED: Description - Max 2 lines dengan ellipsis */
-  display: -webkit-box;
-  -webkit-line-clamp: 2; /* Membatasi maksimal 2 baris */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-word;
-  min-height: 2.8em; /* Kira-kira tinggi untuk 2 baris */
-}
-.cert-card:hover p {
-  opacity: 1;
-  color: #c0c6cc;
-}
-
-.cert-issuer {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0 14px 12px;
-  transition: transform 0.3s ease;
-}
-.cert-card:hover .cert-issuer {
-  transform: translateY(-3px);
-}
-.cert-issuer img {
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  object-fit: cover;
-}
-.cert-issuer span {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-/* Certificate Modal Specific Styles */
-.cert-links {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-/* Badge styles for certificate */
-.cert-badge-modal {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(110, 231, 183, 0.15);
-  color: var(--accent);
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  margin-top: 8px;
-  margin-left: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-/* Issuer info in modal */
-.cert-issuer-modal {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-.cert-issuer-modal img {
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
-}
-.cert-issuer-modal span {
-  font-size: 14px;
-  color: var(--muted);
-  font-weight: 500;
-}
-
-/* Skills styling */
-.tech-item.cert-skill {
-  background: rgba(110, 231, 183, 0.1);
-  color: var(--accent);
-  border: 1px solid rgba(110, 231, 183, 0.2);
-}
-.tech-item.cert-skill:hover {
-  background: rgba(110, 231, 183, 0.15);
-  transform: translateY(-1px);
-}
-
-/* Certificate Date Badge */
-.cert-date-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(110, 231, 183, 0.1);
-  color: var(--accent);
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  margin-left: 10px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: overlay;
 }
 
 /* =========================================
-        RESPONSIVE STYLES
-========================================= */
-@media (min-width: 1440px){
-  body{ padding-left: 16em; }
-}
-
-/* Tools grid untuk desktop large */
-.tools-grid {
-  grid-template-columns: repeat(6, 8fr);
-  gap: 18px 4px;
-}
-
-/* =========================================
-        TABLET RESPONSIVE
-========================================= */
-@media (max-width: 1024px) {
-  body {
-    padding: 24px 8vw 0 6vw;
-  }
-
-  .header {
-    flex-direction: row;
-    gap: 36px;
-  }
-
-  .right {
-    width: 300px;
-    max-width: 38%;
-  }
-
-  .left {
-    flex: 1 1 420px;
-  }
-
-  h1 {
-    font-size: 26px;
-  }
-
-  h2 {
-    font-size: 17px;
-  }
-
-  .tools-grid {
-    grid-template-columns: repeat(5, 3fr);
-    row-gap: 14px;
-    column-gap: 8px;
-  }
-  .tools-grid img {
-    width: 36px;
-    height: 36px;
-  }
-
-  /* UPDATED: Consistent card width for tablet */
-  :root {
-    --card-width: 300px;
-  }
-
-  .carousel .slide {
-    flex: 0 0 var(--card-width);
-  }
-
-  .card .thumb {
-    height: 160px;
-  }
-
-  .social-grid img {
-    width: 34px;
-    height: 34px;
-  }
-
-  .modal {
-    width: 95%;
-    max-width: 700px;
-  }
-  
-  .modal-image {
-    height: 250px;
-  }
-
-  .certificates-carousel .certificate-slide {
-    flex: 0 0 var(--card-width);
-  }
-  
-  .cert-card .cert-thumb {
-    height: 160px;
-  }
-}
-
-/* =========================================
-        MOBILE (max-width: 768px)
-========================================= */
-@media (max-width: 768px){
-  body{
-    padding:16px;
-  }
-
-  .header{
-    flex-direction: column;
-    gap:32px;
-  }
-
-  .left, .right{
-    flex: 1 1 100%;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  h1{font-size:24px;}
-  h2{font-size:16px;}
-
-  .badges{gap:6px;flex-wrap:wrap;}
-
-  .tools-grid{
-    grid-template-columns: repeat(8,2fr);
-    gap: 18px 4px;
-  }
-  .tools-grid img{width:32px;height:32px;}
-
-  /* UPDATED: Consistent card width for mobile */
-  :root {
-    --card-width: 260px;
-  }
-
-  .carousel .slide{
-    flex:0 0 var(--card-width);
-  }
-  .card .thumb{
-    height:150px;
-  }
-
-  .social-grid{
-    grid-template-columns: repeat(8,1fr);
-    gap: 2px;
-  }
-  .social-grid img{width:32px;height:32px;}
-
-  .modal {
-    width: 95%;
-    max-height: 95vh;
-    border-radius: 12px;
-  }
-  
-  .modal-header {
-    padding: 20px 20px 15px;
-  }
-  
-  .modal-content {
-    padding: 0 20px 20px;
-  }
-  
-  .modal-title {
-    font-size: 20px;
-  }
-  
-  .modal-image {
-    height: 200px;
-    margin-bottom: 20px;
-  }
-  
-  .modal-section {
-    margin-bottom: 20px;
-  }
-  
-  .modal-links {
-    flex-direction: column;
-  }
-  
-  .modal-link {
-    justify-content: center;
-  }
-
-  .certificates-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .certificates-controls {
-    width: 100%;
-    justify-content: space-between;
-  }
-  
-  .certificates-filter {
-    min-width: 150px;
-  }
-  
-  .certificates-carousel .certificate-slide {
-    flex: 0 0 var(--card-width);
-  }
-  
-  .cert-card .cert-thumb {
-    height: 150px;
-  }
-  
-  .cert-issuer-modal {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-}
-
-/* =========================================
-        SMALL MOBILE (max-width: 480px)
-========================================= */
-@media (max-width: 480px){
-  h1{font-size:20px;}
-  h2{font-size:14px;}
-
-  .tools-grid{
-    grid-template-columns: repeat(5,3fr);
-    gap: 18px 4px;
-  }
-  .tools-grid img{width:32px;height:32px;}
-
-  /* UPDATED: Consistent card width for small mobile */
-  :root {
-    --card-width: 220px;
-  }
-
-  .carousel .slide{flex:0 0 var(--card-width);}
-  .project-arrow{padding:4px 8px;font-size:14px;}
-
-  .card h4{font-size:14px;}
-  .card p{font-size:13.2px;}
-
-  .social-grid{
-    grid-template-columns: repeat(7,3fr);
-    gap: 20px 8px;
-  }
-  .social-grid img{width:32px;height:32px;}
-
-  .modal-image {
-    height: 180px;
-  }
-  
-  .modal-title {
-    font-size: 18px;
-  }
-  
-  .tech-stack {
-    gap: 8px;
-  }
-  
-  .tech-item {
-    padding: 5px 10px;
-    font-size: 12px;
-  }
-
-  .certificates-carousel .certificate-slide {
-    flex: 0 0 var(--card-width);
-  }
-  
-  .cert-card h4 {
-    font-size: 14px;
-  }
-  
-  .cert-card p {
-    font-size: 13.2px;
-  }
-}
-
-/* =========================================
-        ACCESSIBILITY IMPROVEMENTS
+        UTILITY CLASSES
 ========================================= */
 .sr-only {
   position: absolute;
@@ -1133,421 +1194,175 @@ hr.sep{border:0;height:1px;background:#2a2a2c;margin:22px 0 16px 0}
   border: 0;
 }
 
-/* Focus styles for all interactive elements */
-button:focus,
-input:focus,
-select:focus,
-a:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+.text-center {
+  text-align: center;
 }
 
-/* Skip to main content link */
-.skip-to-content {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--accent);
-  color: var(--bg);
-  padding: 8px;
-  z-index: 1001;
-  text-decoration: none;
-  border-radius: 0 0 4px 0;
-}
-.skip-to-content:focus {
-  top: 0;
-}
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
 
-/* Print styles */
-@media print {
-  .modal-overlay,
-  .cert-modal-overlay {
-    display: none !important;
-  }
-  
-  body {
-    padding: 0;
-    background: white;
-    color: black;
-  }
-  
-  .card:hover,
-  .cert-card:hover {
-    transform: none;
-    box-shadow: none;
-  }
-}
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
 
-/* =========================================
-        MODAL CLOSE ANIMATIONS - ADDED
-========================================= */
-
-/* Modal overlay fade out animation */
-@keyframes modalFadeOut {
-  from {
-    opacity: 1;
-    backdrop-filter: blur(8px);
-  }
-  to {
-    opacity: 0;
-    backdrop-filter: blur(0px);
-  }
-}
-
-/* Modal slide down exit animation */
-@keyframes modalSlideDown {
-  from {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(30px) scale(0.95);
-    opacity: 0;
-  }
-}
-
-/* Modal close button hover animation */
-.modal-close {
-  position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.modal-close::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(110, 231, 183, 0.1) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: -1;
-}
-
-.modal-close:hover::before {
-  opacity: 1;
-}
-
-.modal-close:hover {
-  color: var(--accent);
-}
-
-/* Modal overlay closing state */
-.modal-overlay.closing {
-  animation: modalFadeOut 0.3s ease-out forwards !important;
-}
-
-/* Modal content closing state */
-.modal.closing,
-#cert-modal.closing {
-  animation: modalSlideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
-}
-
-/* Smooth transition for modal image */
-.modal-image img,
-#cert-modal-image {
-  transition: opacity 0.4s ease;
-}
-
-/* Modal content scrollbar animation */
-.modal-scroll::-webkit-scrollbar-thumb {
-  transition: background 0.3s ease;
-}
-
-.modal-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(110, 231, 183, 0.7);
-  animation: subtlePulse 1.5s infinite;
-}
-
-/* Modal link hover animation */
-.modal-link {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.modal-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--accent);
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-}
-
-.modal-link:hover::after {
-  transform: translateX(0);
-}
-
-/* Tech item hover animation */
-.tech-item {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.tech-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  transition: left 0.6s ease;
-}
-
-.tech-item:hover::before {
-  left: 100%;
-}
-
-.tech-item:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 0px 4px rgba(110, 231, 183, 0.2);
-}
-
-/* Certificate badge animation */
-.cert-badge {
-  animation: subtlePulse 2s infinite;
-  transition: all 0.3s ease;
-}
-
-.cert-card:hover .cert-badge {
-  transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 4px 15px rgba(110, 231, 183, 0.3);
-}
-
-/* Certificate issuer logo animation */
-.cert-issuer img {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.cert-card:hover .cert-issuer img {
-  transform: rotate(10deg) scale(1.2);
-}
-
-/* Filter select animation */
-.filter-select {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.filter-select:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(110, 231, 183, 0.15);
-}
+.p-1 { padding: 0.5rem; }
+.p-2 { padding: 1rem; }
+.p-3 { padding: 1.5rem; }
+.p-4 { padding: 2rem; }
 </style>
 </head>
 
-<body>
-
-<a href="#main-content" class="skip-to-content">Skip to main content</a>
+<body class="scanlines noise">
 
 <div class="page" role="main" id="main-content">
-  <div class="header">
-    
+  
+  <!-- HEADER SECTION -->
+  <header class="header">
     <div class="left">
-      <h1>Hi, I'm Takathena! <span style="font-size:20px;font-weight:600;color:var(--muted);">(he / him)</span></h1>
-      <h2>a curious learner and a creative mind obsessed with building innovative projects and exploring the world of technology.</h2>
+      <h1 class="glitch">TAKATHENA</h1>
+      <h2>BRUTALIST DEVELOPER & CREATIVE CODER</h2>
       
       <div class="badges">
-        <span class="badge"><img src="https://decisive-platypus-f3d.notion.site/icons/butterfly_gray.svg?mode=dark" alt="Student icon">Student</span>
-        <span class="badge">Ai Enthusiast</span>
-        <span class="badge">Vibe coder</span>
+        <span class="badge"><img src="https://decisive-platypus-f3d.notion.site/icons/butterfly_gray.svg?mode=" alt="Student icon">STUDENT</span>
+        <span class="badge">AI ENTHUSIAST</span>
+        <span class="badge">VIBE CODER</span>
+        <span class="badge">BRUTALIST</span>
+        <span class="badge">EXPERIMENTAL</span>
       </div>
 
       <p class="lead">
-        From exploring the latest gadgets and apps to building small projects and learning new programming languages, 
-        I dive into technology with curiosity and creativity...
+        EXPLORING THE INTERSECTION OF TECHNOLOGY, ART, AND BRUTALIST DESIGN. 
+        BUILDING UNCONVENTIONAL PROJECTS THAT CHALLENGE DIGITAL NORMS. 
+        EMBRACING RAW AESTHETICS AND FUNCTIONAL HONESTY IN EVERY LINE OF CODE.
       </p>
+    </div>
 
-      <hr class="sep">
+    <aside class="photo-container">
+      <img class="photo-image" src="https://cdn.cosmos.so/f8af0a2d-a75e-4ef6-aad0-95ea2e2733e6?format=jpeg" alt="Takathena profile cover image" loading="lazy">
+    </aside>
+  </header>
 
-      <!-- ACCORDION -->
-      <div class="tools-card">
-        <div class="tools-header" onclick="toggleTools()" role="button" aria-expanded="true" aria-controls="tools-body">
-          <h2>Immersed in</h2>
-          <button class="accordion-btn" id="acc-btn" aria-label="Toggle tools section">ᐯ</button>
-        </div>
+  <!-- TOOLS SECTION -->
+  <section class="section tools">
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleTools()" role="button" aria-expanded="true" aria-controls="tools-body">
+        <h3>IMMERSED IN</h3>
+        <button class="accordion-btn" id="acc-btn" aria-label="Toggle tools section">▼</button>
+      </div>
 
-        <div class="tag-bar">
-          <div class="tag" data-tag="software" role="button" tabindex="0" aria-label="Filter by software tools">Software</div>
-          <div class="tag" data-tag="programming" role="button" tabindex="0" aria-label="Filter by programming languages">Programming</div>
-          <div class="tag" data-tag="database" role="button" tabindex="0" aria-label="Filter by database tools">Database</div>
-          <div class="tag" data-tag="etc" role="button" tabindex="0" aria-label="Filter by other tools">Etc</div>
-        </div>
+      <div class="tag-bar">
+        <div class="tag" data-tag="software" role="button" tabindex="0" aria-label="Filter by software tools">SOFTWARE</div>
+        <div class="tag" data-tag="programming" role="button" tabindex="0" aria-label="Filter by programming languages">PROGRAMMING</div>
+        <div class="tag" data-tag="database" role="button" tabindex="0" aria-label="Filter by database tools">DATABASE</div>
+        <div class="tag" data-tag="etc" role="button" tabindex="0" aria-label="Filter by other tools">ETC</div>
+      </div>
 
-        <div class="tools-body" id="tools-body" aria-labelledby="tools-header">
-          <div class="tools-grid" id="tools-grid"></div>
+      <div class="tools-body" id="tools-body" aria-labelledby="tools-header">
+        <div class="tools-grid" id="tools-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section class="section projects">
+    <div class="projects-section">
+      <div class="project-header">
+        <h3 id="projects-title">PROJECTS</h3>
+        <div class="project-controls">
+          <div class="project-arrows">
+            <button class="project-arrow" onclick="slideLeft()" aria-label="Scroll projects left">◄</button>
+            <button class="project-arrow" onclick="slideRight()" aria-label="Scroll projects right">►</button>
+          </div>
         </div>
       </div>
 
-      <hr class="sep">
-
-      <!-- PROJECTS -->
-      <section class="projects" aria-labelledby="projects-title">
-
-        <div class="project-header">
-          <h3 id="projects-title">Projects</h3>
-          <div class="project-arrows">
-            <button class="project-arrow" onclick="slideLeft()" aria-label="Scroll projects left">ᐸ</button>
-            <button class="project-arrow" onclick="slideRight()" aria-label="Scroll projects right">ᐳ</button>
+      <div class="carousel-container">
+        <div class="carousel-wrapper" id="projects-carousel">
+          <div class="carousel" id="projects-track" role="list" aria-label="Projects list">
+            <!-- Projects will be loaded dynamically -->
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="carousel-wrapper">
-          <div class="carousel" role="list" aria-label="Projects list">
-
-            <div class="slide" role="listitem">
-              <article class="card" onclick="openModal(0)" tabindex="0" role="button" aria-label="View Startup Page project details">
-                <div class="thumb">
-                  <div class="image-placeholder"></div>
-                  <img src="https://picsum.photos/400/200?random=0" alt="Startup Page project screenshot" loading="lazy" width="400" height="200">
-                </div>
-                <h4>Startup-Page</h4>
-                <p>Startup page for your all browser. This is a comprehensive startup page designed to improve productivity.</p>
-              </article>
-              <article class="card" onclick="openModal(1)" tabindex="0" role="button" aria-label="View AI Image Generator project details">
-                <div class="thumb">
-                  <div class="image-placeholder"></div>
-                  <img src="https://picsum.photos/400/200?random=1" alt="AI Image Generator project screenshot" loading="lazy" width="400" height="200">
-                </div>
-                <h4>AI Image Generator</h4>
-                <p>AI-powered image generation using stable diffusion and machine learning algorithms for creative content.</p>
-              </article>
-            </div>
-
-            <div class="slide" role="listitem">
-              <article class="card" onclick="openModal(2)" tabindex="0" role="button" aria-label="View Code Editor Web App project details">
-                <div class="thumb">
-                  <div class="image-placeholder"></div>
-                  <img src="https://picsum.photos/400/200?random=2" alt="Code Editor Web App project screenshot" loading="lazy" width="400" height="200">
-                </div>
-                <h4>Code Editor Web App</h4>
-                <p>Browser-based code editor with live preview, syntax highlighting, and collaborative editing features.</p>
-              </article>
-              <article class="card" onclick="openModal(3)" tabindex="0" role="button" aria-label="View Task Management System project details">
-                <div class="thumb">
-                  <div class="image-placeholder"></div>
-                  <img src="https://picsum.photos/400/200?random=3" alt="Task Management System project screenshot" loading="lazy" width="400" height="200">
-                </div>
-                <h4>Task Management System</h4>
-                <p>Collaborative task management with real-time updates, drag-drop interface, and team collaboration.</p>
-              </article>
-            </div>
-
-            <div class="slide" role="listitem">
-              <article class="card" onclick="openModal(4)" tabindex="0" role="button" aria-label="View Weather Dashboard project details">
-                <div class="thumb">
-                  <div class="image-placeholder"></div>
-                  <img src="https://picsum.photos/400/200?random=4" alt="Weather Dashboard project screenshot" loading="lazy" width="400" height="200">
-                </div>
-                <h4>Weather Dashboard</h4>
-                <p>Real-time weather data visualization dashboard with interactive maps and historical data analysis.</p>
-              </article>
-              <article class="card" onclick="openModal(5)" tabindex="0" role="button" aria-label="View Chat Application project details">
-                <div class="thumb">
-                  <div class="image-placeholder"></div>
-                  <img src="https://picsum.photos/400/200?random=5" alt="Chat Application project screenshot" loading="lazy" width="400" height="200">
-                </div>
-                <h4>Chat Application</h4>
-                <p>Real-time messaging app with end-to-end encryption, file sharing, and voice/video call capabilities.</p>
-              </article>
-            </div>
-
-            <div class="slide" role="listitem">
-              <article class="card" onclick="openModal(6)" tabindex="0" role="button" aria-label="View Portfolio Website project details">
-                <div class="thumb">
-                  <div class="image-placeholder"></div>
-                  <img src="https://picsum.photos/400/200?random=6" alt="Portfolio Website project screenshot" loading="lazy" width="400" height="200">
-                </div>
-                <h4>Portfolio Website</h4>
-                <p>Responsive portfolio with dark/light mode toggle, smooth animations, and project showcase gallery.</p>
-              </article>
-              <article class="card" onclick="openModal(7)" tabindex="0" role="button" aria-label="View Data Analytics Dashboard project details">
-                <div class="thumb">
-                  <div class="image-placeholder"></div>
-                  <img src="https://picsum.photos/400/200?random=7" alt="Data Analytics Dashboard project screenshot" loading="lazy" width="400" height="200">
-                </div>
-                <h4>Data Analytics Dashboard</h4>
-                <p>Interactive dashboard for data analysis and visualization with real-time data streaming capabilities.</p>
-              </article>
-            </div>
-
+  <!-- CERTIFICATES SECTION -->
+  <section class="section certificates">
+    <div class="certificates-section">
+      <div class="certificates-header">
+        <h3 id="certificates-title">CERTIFICATES & ACHIEVEMENTS</h3>
+        <div class="certificates-controls">
+          <div class="certificates-filter">
+            <label for="cert-filter" class="sr-only">Filter certificates by category</label>
+            <select class="filter-select" id="cert-filter">
+              <option value="all">ALL CERTIFICATES</option>
+              <option value="ai">ARTIFICIAL INTELLIGENCE</option>
+              <option value="programming">PROGRAMMING</option>
+              <option value="web">WEB DEVELOPMENT</option>
+              <option value="data">DATA SCIENCE</option>
+              <option value="cloud">CLOUD COMPUTING</option>
+              <option value="soft-skills">SOFT SKILLS</option>
+              <option value="database">DATABASE</option>
+              <option value="cyber">CYBERSECURITY</option>
+            </select>
+          </div>
+          <div class="certificates-arrows">
+            <button class="cert-arrow" onclick="slideCertLeft()" aria-label="Scroll certificates left">◄</button>
+            <button class="cert-arrow" onclick="slideCertRight()" aria-label="Scroll certificates right">►</button>
           </div>
         </div>
-      </section>
+      </div>
 
-      <hr class="sep">
-
-          
-      <!-- Certificates Section -->
-      <section class="certificates-section" aria-labelledby="certificates-title">
-        <div class="certificates-header">
-          <h3 id="certificates-title">Certificates & Achievements</h3>
-          <div class="certificates-controls">
-            <div class="certificates-filter">
-              <label for="cert-filter" class="sr-only">Filter certificates by category</label>
-              <select class="filter-select" id="cert-filter">
-                <option value="all">All Certificates</option>
-                <option value="ai">Artificial</option>
-                <option value="programming">Programming</option>
-                <option value="web">Web Development</option>
-                <option value="data">Data Science</option>
-                <option value="cloud">Cloud Computing</option>
-                <option value="soft-skills">Soft Skills</option>
-                <option value="database">Database</option>
-                <option value="cyber">Cybersecurity</option>
-              </select>
-            </div>
-            <div class="certificates-arrows">
-              <button class="cert-arrow" onclick="slideCertLeft()" aria-label="Scroll certificates left">ᐸ</button>
-              <button class="cert-arrow" onclick="slideCertRight()" aria-label="Scroll certificates right">ᐳ</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="certificates-wrapper">
-          <div class="certificates-carousel" id="certificates-carousel" role="list" aria-label="Certificates list">
+      <div class="carousel-container">
+        <div class="carousel-wrapper" id="certificates-carousel">
+          <div class="carousel" id="certificates-track" role="list" aria-label="Certificates list">
             <!-- Certificates will be loaded dynamically -->
           </div>
         </div>
-      </section>
-
-    </div>
-
-    <aside class="right photo">
-      <img src="https://cdn.cosmos.so/f8af0a2d-a75e-4ef6-aad0-95ea2e2733e6?format=jpeg" alt="Takathena profile cover image" loading="lazy">
-
-      <div class="social-card">
-        <h3>Get in Touch</h3>
-        <div class="social-grid">
-          <a href="https://www.linkedin.com/in/fitrah-octavio-538080396/" aria-label="Visit LinkedIn profile"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/960px-LinkedIn_logo_initials.png" alt="LinkedIn logo"></a>
-          <a href="https://github.com/takathena" aria-label="Visit GitHub profile"><img src="https://cdn.cosmos.so/2569e4fd-edc5-4dc2-b2f0-62029928d298?format=jpeg" alt="GitHub logo"></a>
-          <a href="https://www.instagram.com/pitravs/" aria-label="Visit Instagram profile"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/960px-Instagram_logo_2022.svg.png" alt="Instagram logo"></a>
-          <a href="https://www.cosmos.so/takathena" aria-label="Visit Cosmos profile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLqNIMiklXnPjCckpTiqnNLIlKC4biPA9snQ&s" alt="Cosmos logo"></a>
-          <a href="https://open.spotify.com/user/31aro76cun6v222osijbjxw3kpoy?si=2f78522bc08c49d9" aria-label="Visit Spotify profile"><img src="https://cdn.jim-nielsen.com/watchos/512/spotify-music-and-podcasts-2020-03-19.png?rf=1024" alt="Spotify logo"></a>
-          <a href="https://x.com/takathena" aria-label="Visit X (Twitter) profile"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/X_icon_2.svg/1024px-X_icon_2.svg.png" alt="X (Twitter) logo"></a>
-          <a href="https://discord.com/users/1409489428707279033" aria-label="Visit Discord profile"><img src="https://pngimg.com/uploads/discord/discord_PNG8.png" alt="Discord logo"></a>
-        </div>
       </div>
+    </div>
+  </section>
 
-      <div style="margin-top: 0px; font-size: 14px; color: var(--muted);">
-          <p>© 2025 Takathena</p>
-        </div>
+  <!-- CONNECT SECTION -->
+  <section class="section connect">
+    <div class="connect-section">
+      <h3>GET IN TOUCH</h3>
+      <div class="social-grid">
+        <a href="https://www.linkedin.com/in/fitrah-octavio-538080396/" aria-label="Visit LinkedIn profile" class="social-link">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/960px-LinkedIn_logo_initials.png" alt="LinkedIn logo" class="social-icon">
+        </a>
+        <a href="https://github.com/takathena" aria-label="Visit GitHub profile" class="social-link">
+          <img src="https://cdn.cosmos.so/2569e4fd-edc5-4dc2-b2f0-62029928d298?format=jpeg" alt="GitHub logo" class="social-icon">
+        </a>
+        <a href="https://www.instagram.com/pitravs/" aria-label="Visit Instagram profile" class="social-link">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/960px-Instagram_logo_2022.svg.png" alt="Instagram logo" class="social-icon">
+        </a>
+        <a href="https://www.cosmos.so/takathena" aria-label="Visit Cosmos profile" class="social-link">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLqNIMiklXnPjCckpTiqnNLIlKC4biPA9snQ&s" alt="Cosmos logo" class="social-icon">
+        </a>
+        <a href="https://open.spotify.com/user/31aro76cun6v222osijbjxw3kpoy?si=2f78522bc08c49d9" aria-label="Visit Spotify profile" class="social-link">
+          <img src="https://cdn.jim-nielsen.com/watchos/512/spotify-music-and-podcasts-2020-03-19.png?rf=1024" alt="Spotify logo" class="social-icon">
+        </a>
+        <a href="https://x.com/takathena" aria-label="Visit X (Twitter) profile" class="social-link">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/X_icon_2.svg/1024px-X_icon_2.svg.png" alt="X (Twitter) logo" class="social-icon">
+        </a>
+        <a href="https://discord.com/users/1409489428707279033" aria-label="Visit Discord profile" class="social-link">
+          <img src="https://pngimg.com/uploads/discord/discord_PNG8.png" alt="Discord logo" class="social-icon">
+        </a>
+        <a href="mailto:example@takathena.com" aria-label="Send email" class="social-link">
+          <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email icon" class="social-icon">
+        </a>
+      </div>
+    </div>
+  </section>
 
-    </aside>
-
-  </div>
+  <!-- FOOTER -->
+  <footer class="footer">
+    © 2025 TAKATHENA — BRUTALIST EDITION
+  </footer>
 </div>
 
 <!-- Project Modal -->
@@ -1556,51 +1371,43 @@ a:focus {
     <button class="modal-close" id="modal-close" aria-label="Close modal">×</button>
     
     <div class="modal-header">
-      <h2 class="modal-title" id="modal-title">Project Title</h2>
-      <p class="modal-subtitle" id="modal-subtitle">Project Type • Timeline</p>
+      <h2 class="modal-title" id="modal-title">PROJECT TITLE</h2>
+      <p class="modal-subtitle" id="modal-subtitle">PROJECT TYPE • TIMELINE</p>
     </div>
     
     <div class="modal-content">
       <div class="modal-image">
-        <div class="image-placeholder"></div>
         <img id="modal-image" src="" alt="Project screenshot" loading="lazy">
       </div>
       
       <div class="modal-scroll">
         <div class="modal-section">
-          <h4><i>📋</i> Project Overview</h4>
+          <h4>PROJECT OVERVIEW</h4>
           <p class="modal-description" id="modal-description">
             Project description will appear here...
           </p>
         </div>
         
         <div class="modal-section">
-          <h4><i>💻</i> Technology Stack</h4>
+          <h4>TECHNOLOGY STACK</h4>
           <div class="tech-stack" id="tech-stack" role="list" aria-label="Technology stack used in this project">
             <!-- Technology items will be added here dynamically -->
           </div>
         </div>
         
         <div class="modal-section">
-          <h4><i>🎯</i> Key Features</h4>
+          <h4>KEY FEATURES</h4>
           <p class="modal-description" id="modal-features">
             Key features will be listed here...
           </p>
         </div>
         
-        <div class="modal-section">
-          <h4><i>🚀</i> Challenges & Solutions</h4>
-          <p class="modal-description" id="modal-challenges">
-            Technical challenges and solutions...
-          </p>
-        </div>
-        
         <div class="modal-links">
           <a href="#" class="modal-link" id="modal-live-link" target="_blank" rel="noopener noreferrer">
-            <i>🌐</i> Live Demo
+            LIVE DEMO
           </a>
           <a href="#" class="modal-link" id="modal-github-link" target="_blank" rel="noopener noreferrer">
-            <i>🔗</i> GitHub Repository
+            GITHUB REPOSITORY
           </a>
         </div>
       </div>
@@ -1614,42 +1421,41 @@ a:focus {
     <button class="modal-close" id="cert-modal-close" aria-label="Close certificate modal">×</button>
     
     <div class="modal-header">
-      <h2 class="modal-title" id="cert-modal-title">Certificate Title</h2>
-      <p class="modal-subtitle" id="cert-modal-subtitle">Issuer • Date</p>
+      <h2 class="modal-title" id="cert-modal-title">CERTIFICATE TITLE</h2>
+      <p class="modal-subtitle" id="cert-modal-subtitle">ISSUER • DATE</p>
     </div>
     
     <div class="modal-content">
       <div class="modal-image">
-        <div class="image-placeholder"></div>
         <img id="cert-modal-image" src="" alt="Certificate image" loading="lazy">
       </div>
       
       <div class="modal-scroll">
         <div class="modal-section">
-          <h4><i>📄</i> Certificate Details</h4>
+          <h4>CERTIFICATE DETAILS</h4>
           <p class="modal-description" id="cert-modal-description">
             Certificate description will appear here...
           </p>
         </div>
         
         <div class="modal-section">
-          <h4><i>🎯</i> Skills Acquired</h4>
+          <h4>SKILLS ACQUIRED</h4>
           <div class="tech-stack" id="cert-skills-stack" role="list" aria-label="Skills acquired from this certificate">
             <!-- Skill items will be added here dynamically -->
           </div>
         </div>
         
         <div class="modal-section">
-          <h4><i>🔍</i> Validation & Credentials</h4>
+          <h4>VALIDATION & CREDENTIALS</h4>
           <p class="modal-description" id="cert-validation">
             Certificate validation details...
           </p>
-          <div class="cert-links">
+          <div class="modal-links">
             <a href="#" class="modal-link" id="cert-view-link" target="_blank" rel="noopener noreferrer">
-              <i>👁️</i> View Certificate
+              VIEW CERTIFICATE
             </a>
             <a href="#" class="modal-link" id="cert-credential-link" target="_blank" rel="noopener noreferrer">
-              <i>🔗</i> Verify Credential
+              VERIFY CREDENTIAL
             </a>
           </div>
         </div>
@@ -1660,8 +1466,10 @@ a:focus {
 
 <script>
 /* =========================================
-        DATABASE ICONS
+        BRUTALIST JAVASCRIPT - IMPROVED
 ========================================= */
+
+// Database icons
 const toolsDB = [
   {cat:"etc", src:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Arch_Linux_%22Crystal%22_icon.svg/960px-Arch_Linux_%22Crystal%22_icon.svg.png"},
   {cat:"etc", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"},
@@ -1685,34 +1493,263 @@ const toolsDB = [
   {cat:"programming", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"}
 ];
 
-/* =========================================
-        IMAGE LOADING UTILITY
-========================================= */
-function loadImage(imgElement) {
-  return new Promise((resolve, reject) => {
-    if (imgElement.complete) {
-      resolve();
-    } else {
-      imgElement.onload = () => {
-        imgElement.classList.add('loaded');
-        resolve();
-      };
-      imgElement.onerror = reject;
-    }
-  });
-}
+// Projects data - Full 8 projects
+const projects = [
+  {
+    id: 0,
+    title: "BRUTALIST STARTUP PAGE",
+    subtitle: "EXPERIMENTAL WEB • 1 MONTH",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop",
+    description: "A radical browser startup page that rejects conventional design norms. Features brutalist aesthetics, glitch effects, and minimalist functionality. Built with raw HTML/CSS and JavaScript.",
+    technologies: ["HTML5", "CSS3", "JAVASCRIPT", "BRUTALIST DESIGN", "GLITCH ART"],
+    features: "• RAW, UNFILTERED UI\n• GLITCH ANIMATIONS\n• MINIMALIST NAVIGATION\n• CUSTOM TYPOGRAPHY\n• EXPERIMENTAL LAYOUTS\n• DARK MODE ONLY",
+    liveLink: "https://brutal.takathena.com",
+    githubLink: "https://github.com/takathena/brutalist-startpage"
+  },
+  {
+    id: 1,
+    title: "GLITCH AI GENERATOR",
+    subtitle: "AI/ML ART • 2 MONTHS",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop",
+    description: "An AI image generator that intentionally creates glitched and distorted art. Embraces imperfection and digital artifacts as aesthetic features.",
+    technologies: ["PYTHON", "TENSORFLOW", "GLSL", "WEBGL", "AI ART"],
+    features: "• GLITCH-STYLE GENERATION\n• REAL-TIME DISTORTION\n• NOISE INJECTION\n• COLOR CHANNEL SHIFTING\n• PIXELATION CONTROLS\n• BATCH PROCESSING",
+    liveLink: "https://glitch-ai.takathena.com",
+    githubLink: "https://github.com/takathena/glitch-ai-generator"
+  },
+  {
+    id: 2,
+    title: "TERMINAL CODE EDITOR",
+    subtitle: "DEVELOPMENT TOOL • 1.5 MONTHS",
+    image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=800&h=400&fit=crop",
+    description: "A terminal-based code editor with brutalist UI. No syntax highlighting, no autocomplete—just raw text editing in monospace fonts.",
+    technologies: ["NODE.JS", "TERMINAL UI", "STREAMS", "FILE SYSTEM", "CLI"],
+    features: "• TERMINAL INTERFACE\n• MONOSPACE ONLY\n• FILE SYSTEM INTEGRATION\n• MINIMAL FEATURES\n• KEYBOARD-ONLY NAVIGATION\n• PLUGIN SYSTEM",
+    liveLink: "https://terminal.takathena.com",
+    githubLink: "https://github.com/takathena/terminal-editor"
+  },
+  {
+    id: 3,
+    title: "DATA BRUTALISM DASHBOARD",
+    subtitle: "DATA VISUALIZATION • 2 MONTHS",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop&auto=format&fit=crop&q=80",
+    description: "A data visualization dashboard that rejects conventional charting libraries. Uses raw SVG and canvas for maximum performance.",
+    technologies: ["D3.JS", "SVG", "CANVAS", "WEB WORKERS", "DATA VIZ"],
+    features: "• RAW SVG RENDERING\n• REAL-TIME UPDATES\n• MINIMALIST CHARTS\n• CUSTOM GRID SYSTEM\n• PERFORMANCE OPTIMIZED\n• OFFLINE SUPPORT",
+    liveLink: "https://data-brutal.takathena.com",
+    githubLink: "https://github.com/takathena/data-brutalism"
+  },
+  {
+    id: 4,
+    title: "BRUTAL CHAT",
+    subtitle: "REAL-TIME APP • 2.5 MONTHS",
+    image: "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=800&h=400&fit=crop",
+    description: "A real-time chat application with brutalist design principles. No emojis, no rich text—just pure text communication.",
+    technologies: ["WEBSOCKETS", "NODE.JS", "EXPRESS", "MONGO", "REDIS"],
+    features: "• REAL-TIME MESSAGING\n• NO EMOJIS\n• MONOSPACE TEXT ONLY\n• MINIMAL PROTOCOL\n• OFFLINE QUEUE\n• END-TO-END ENCRYPTION",
+    liveLink: "https://chat-brutal.takathena.com",
+    githubLink: "https://github.com/takathena/brutal-chat"
+  },
+  {
+    id: 5,
+    title: "GLITCH PORTFOLIO",
+    subtitle: "PERSONAL SITE • 1 MONTH",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
+    description: "My personal portfolio website built with glitch aesthetics and brutalist design principles.",
+    technologies: ["HTML", "CSS", "JS", "GLITCH ART", "BRUTALISM"],
+    features: "• GLITCH ANIMATIONS\n• BRUTALIST LAYOUT\n• PERFORMANCE FOCUSED\n• NO FRAMEWORKS\n• CUSTOM TYPOGRAPHY\n• DARK MODE ONLY",
+    liveLink: "https://takathena.com",
+    githubLink: "https://github.com/takathena/glitch-portfolio"
+  },
+  {
+    id: 6,
+    title: "RAW CALCULATOR",
+    subtitle: "UTILITY APP • 3 WEEKS",
+    image: "https://images.unsplash.com/photo-1587145820266-a5951ee6f620?w=800&h=400&fit=crop",
+    description: "A calculator app that rejects conventional UI patterns. Uses raw buttons and direct feedback.",
+    technologies: ["VANILLA JS", "CSS GRID", "CALC ENGINE", "PWA"],
+    features: "• RAW BUTTONS\n• INSTANT FEEDBACK\n• NO ANIMATIONS\n• KEYBOARD SUPPORT\n• PWA INSTALLABLE\n• OFFLINE READY",
+    liveLink: "https://calc-brutal.takathena.com",
+    githubLink: "https://github.com/takathena/raw-calculator"
+  },
+  {
+    id: 7,
+    title: "FILE BRUTALIZER",
+    subtitle: "DESKTOP APP • 2 MONTHS",
+    image: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=800&h=400&fit=crop",
+    description: "A desktop application for applying brutalist effects to files and images.",
+    technologies: ["ELECTRON", "NODE.JS", "IMAGE PROCESSING", "FILE SYSTEM"],
+    features: "• FILE PROCESSING\n• BRUTALIST FILTERS\n• BATCH OPERATIONS\n• CLI INTERFACE\n• CUSTOM PLUGINS\n• PERFORMANCE METRICS",
+    liveLink: "https://file-brutal.takathena.com",
+    githubLink: "https://github.com/takathena/file-brutalizer"
+  }
+];
 
+// Certificates data - Full 8 certificates
+const certificatesDB = [
+  {
+    id: 0,
+    title: "BRUTALIST WEB DESIGN",
+    issuer: "DIGITAL ARTS ACADEMY",
+    issuerIcon: "https://cdn-icons-png.flaticon.com/512/2991/2991148.png",
+    date: "MARCH 2024",
+    category: "web",
+    image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=400&fit=crop",
+    badge: "EXPERIMENTAL",
+    description: "Mastering the art of brutalist web design: raw aesthetics, bold typography, and intentional design choices that challenge convention.",
+    skills: ["BRUTALIST DESIGN", "TYPOGRAPHY", "COLOR THEORY", "LAYOUT", "UX"],
+    validation: "CERT ID: DAA-BRUTAL-2024-001",
+    viewLink: "https://example.com/cert/brutalist-design",
+    credentialLink: "https://verify.digitalarts.com/brutalist-001"
+  },
+  {
+    id: 1,
+    title: "EXPERIMENTAL CODING",
+    issuer: "CODING REBELLION",
+    issuerIcon: "https://cdn-icons-png.flaticon.com/512/5968/5968764.png",
+    date: "JANUARY 2024",
+    category: "programming",
+    image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&h=400&fit=crop",
+    badge: "ADVANCED",
+    description: "Pushing the boundaries of conventional programming with unorthodox approaches and experimental techniques.",
+    skills: ["EXPERIMENTAL CODE", "ALGORITHMS", "CREATIVE CODING", "PROTOTYPING"],
+    validation: "CERT ID: CR-EXPCODE-2024-002",
+    viewLink: "https://example.com/cert/experimental-coding",
+    credentialLink: "https://verify.codingrebellion.com/expcode-002"
+  },
+  {
+    id: 2,
+    title: "AI & MACHINE LEARNING",
+    issuer: "GOOGLE",
+    issuerIcon: "https://cdn-icons-png.flaticon.com/512/2991/2991148.png",
+    date: "DECEMBER 2023",
+    category: "ai",
+    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=400&fit=crop",
+    badge: "PROFESSIONAL",
+    description: "Comprehensive AI and machine learning certification covering neural networks, deep learning, and practical applications.",
+    skills: ["PYTHON", "TENSORFLOW", "NEURAL NETWORKS", "DEEP LEARNING", "NLP"],
+    validation: "CERT ID: GOOGLE-AI-2023-789",
+    viewLink: "https://example.com/cert/google-ai",
+    credentialLink: "https://verify.google.com/ai-789"
+  },
+  {
+    id: 3,
+    title: "WEB DEVELOPMENT",
+    issuer: "META",
+    issuerIcon: "https://cdn-icons-png.flaticon.com/512/5968/5968764.png",
+    date: "NOVEMBER 2023",
+    category: "web",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop",
+    badge: "SPECIALIZATION",
+    description: "Full stack web development certification covering modern frameworks, databases, and deployment strategies.",
+    skills: ["REACT", "NODE.JS", "EXPRESS", "MONGODB", "DOCKER"],
+    validation: "CERT ID: META-WEB-2023-456",
+    viewLink: "https://example.com/cert/meta-web",
+    credentialLink: "https://verify.meta.com/web-456"
+  },
+  {
+    id: 4,
+    title: "CLOUD COMPUTING",
+    issuer: "AWS",
+    issuerIcon: "https://cdn-icons-png.flaticon.com/512/873/873107.png",
+    date: "OCTOBER 2023",
+    category: "cloud",
+    image: "https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?w=800&h=400&fit=crop",
+    badge: "ASSOCIATE",
+    description: "AWS cloud practitioner certification covering cloud fundamentals, services, and architecture.",
+    skills: ["AWS", "CLOUD ARCHITECTURE", "DEVOPS", "SECURITY", "SCALING"],
+    validation: "CERT ID: AWS-CLOUD-2023-123",
+    viewLink: "https://example.com/cert/aws-cloud",
+    credentialLink: "https://verify.aws.com/cloud-123"
+  },
+  {
+    id: 5,
+    title: "DATA SCIENCE",
+    issuer: "IBM",
+    issuerIcon: "https://cdn-icons-png.flaticon.com/512/5968/5968322.png",
+    date: "SEPTEMBER 2023",
+    category: "data",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop",
+    badge: "PROFESSIONAL",
+    description: "Data science specialization covering statistics, machine learning, and data visualization.",
+    skills: ["PYTHON", "PANDAS", "NUMPY", "STATISTICS", "DATA VIZ"],
+    validation: "CERT ID: IBM-DATA-2023-987",
+    viewLink: "https://example.com/cert/ibm-data",
+    credentialLink: "https://verify.ibm.com/data-987"
+  },
+  {
+    id: 6,
+    title: "CYBERSECURITY",
+    issuer: "CISCO",
+    issuerIcon: "https://cdn-icons-png.flaticon.com/512/5968/5968192.png",
+    date: "AUGUST 2023",
+    category: "cyber",
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=400&fit=crop",
+    badge: "FUNDAMENTALS",
+    description: "Cybersecurity fundamentals covering network security, cryptography, and threat analysis.",
+    skills: ["NETWORK SECURITY", "CRYPTOGRAPHY", "THREAT ANALYSIS", "ETHICAL HACKING"],
+    validation: "CERT ID: CISCO-CYBER-2023-654",
+    viewLink: "https://example.com/cert/cisco-cyber",
+    credentialLink: "https://verify.cisco.com/cyber-654"
+  },
+  {
+    id: 7,
+    title: "DATABASE MANAGEMENT",
+    issuer: "ORACLE",
+    issuerIcon: "https://cdn-icons-png.flaticon.com/512/5969/5969275.png",
+    date: "JULY 2023",
+    category: "database",
+    image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800&h=400&fit=crop",
+    badge: "ASSOCIATE",
+    description: "Database management certification covering SQL, normalization, and performance optimization.",
+    skills: ["SQL", "DATABASE DESIGN", "NORMALIZATION", "PERFORMANCE", "BACKUP"],
+    validation: "CERT ID: ORACLE-DB-2023-321",
+    viewLink: "https://example.com/cert/oracle-db",
+    credentialLink: "https://verify.oracle.com/db-321"
+  }
+];
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', function() {
+  // Render tools grid
+  const grid = document.getElementById("tools-grid");
+  toolsDB.forEach(t => {
+    const img = document.createElement("img");
+    img.src = t.src;
+    img.alt = `${t.cat} icon`;
+    img.dataset.cat = t.cat;
+    img.loading = "lazy";
+    img.addEventListener('error', function() {
+      this.style.display = 'none';
+    });
+    grid.appendChild(img);
+  });
+
+  // Render projects
+  renderProjects();
+  
+  // Initialize certificates
+  initializeCertificates();
+  
+  // Set up event listeners
+  setupEventListeners();
+  
+  // Open accordion by default
+  setTimeout(toggleTools, 100);
+  
+  // Lazy load images
+  lazyLoadImages();
+});
+
+// Lazy load images
 function lazyLoadImages() {
   const images = document.querySelectorAll('img[loading="lazy"]');
-  
-  const imageObserver = new IntersectionObserver((entries, observer) => {
+  const imageObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const img = entry.target;
-        loadImage(img).catch(() => {
-          console.warn('Failed to load image:', img.src);
-        });
-        observer.unobserve(img);
+        img.src = img.dataset.src || img.src;
+        imageObserver.unobserve(img);
       }
     });
   });
@@ -1720,28 +1757,54 @@ function lazyLoadImages() {
   images.forEach(img => imageObserver.observe(img));
 }
 
-/* =========================================
-        RENDER TOOLS
-========================================= */
-const grid = document.getElementById("tools-grid");
-toolsDB.forEach(t => {
-  const img = document.createElement("img");
-  img.src = t.src;
-  img.alt = `${t.cat} icon`;
-  img.dataset.cat = t.cat;
-  img.loading = "lazy";
-  grid.appendChild(img);
-});
+// Render projects
+function renderProjects() {
+  const track = document.getElementById('projects-track');
+  track.innerHTML = '';
+  
+  projects.forEach(project => {
+    const card = createProjectCard(project);
+    track.appendChild(card);
+  });
+}
 
-/* =========================================
-        ACCORDION
-========================================= */
-function toggleTools(){
+// Create project card
+function createProjectCard(project) {
+  const card = document.createElement('article');
+  card.className = 'card';
+  card.onclick = () => openModal(project.id);
+  card.tabIndex = 0;
+  card.setAttribute('role', 'button');
+  card.setAttribute('aria-label', `View ${project.title} project details`);
+  
+  card.innerHTML = `
+    <div class="card-image">
+      <img src="${project.image}" alt="${project.title}" loading="lazy">
+    </div>
+    <div class="card-content">
+      <h4 class="card-title">${project.title}</h4>
+      <p class="card-description">${project.description.substring(0, 120)}...</p>
+      <div class="card-tech">
+        ${project.technologies.slice(0, 3).map(tech => 
+          `<span class="tech-tag">${tech}</span>`
+        ).join('')}
+        ${project.technologies.length > 3 ? 
+          `<span class="tech-tag">+${project.technologies.length - 3}</span>` : ''
+        }
+      </div>
+    </div>
+  `;
+  
+  return card;
+}
+
+// Accordion toggle
+function toggleTools() {
   const body = document.getElementById("tools-body");
   const btn = document.getElementById("acc-btn");
   const isOpen = body.classList.contains("open");
 
-  if(!isOpen){
+  if(!isOpen) {
     body.style.maxHeight = body.scrollHeight + "px";
     body.classList.add("open");
     btn.classList.add("open");
@@ -1756,22 +1819,7 @@ function toggleTools(){
   }
 }
 
-/* Open on load */
-window.addEventListener("load", () => {
-  const body = document.getElementById("tools-body");
-  const btn = document.getElementById("acc-btn");
-  body.style.maxHeight = body.scrollHeight + "px";
-  body.classList.add("open");
-  btn.classList.add("open");
-  btn.setAttribute("aria-expanded", "true");
-  
-  // Initialize lazy loading
-  lazyLoadImages();
-});
-
-/* =========================================
-        FILTERING
-========================================= */
+// Filtering
 let lockedTag = null;
 const tags = document.querySelectorAll(".tag");
 
@@ -1779,11 +1827,13 @@ tags.forEach(tag => {
   tag.addEventListener("mouseenter", () => { 
     if(!lockedTag) applyFilter(tag.dataset.tag); 
   });
+  
   tag.addEventListener("mouseleave", () => { 
     if(!lockedTag) clearFilter(); 
   });
+  
   tag.addEventListener("click", () => {
-    if(lockedTag === tag.dataset.tag){
+    if(lockedTag === tag.dataset.tag) {
       lockedTag = null;
       tag.classList.remove("active");
       tag.setAttribute("aria-pressed", "false");
@@ -1799,174 +1849,54 @@ tags.forEach(tag => {
       applyFilter(lockedTag);
     }
   });
-  
-  // Add keyboard support
-  tag.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      tag.click();
-    }
-  });
 });
 
-function applyFilter(cat){
+function applyFilter(cat) {
+  const grid = document.getElementById("tools-grid");
   grid.classList.add("dimmed");
   document.querySelectorAll("#tools-grid img").forEach(img => {
     img.classList.toggle("highlight", img.dataset.cat === cat);
   });
 }
 
-function clearFilter(){
+function clearFilter() {
+  const grid = document.getElementById("tools-grid");
   grid.classList.remove("dimmed");
   document.querySelectorAll("#tools-grid img").forEach(i => i.classList.remove("highlight"));
 }
 
-/* =========================================
-        CAROUSEL - UPDATED WITH CONSISTENT WIDTH
-========================================= */
-const carousel = document.querySelector(".carousel-wrapper");
-
-// Get card width from CSS variable
-function getCardWidth() {
-  return parseInt(getComputedStyle(document.documentElement).getPropertyValue('--card-width').replace('px', ''));
+// Carousel navigation
+function slideLeft() {
+  const carousel = document.getElementById("projects-carousel");
+  carousel.scrollBy({ left: -350, behavior: "smooth" });
 }
 
-function slideLeft(){
-  const cardWidth = getCardWidth();
-  carousel.scrollBy({left: -(cardWidth + 16), behavior: "smooth"}); // 16px gap
+function slideRight() {
+  const carousel = document.getElementById("projects-carousel");
+  carousel.scrollBy({ left: 350, behavior: "smooth" });
 }
 
-function slideRight(){
-  const cardWidth = getCardWidth();
-  carousel.scrollBy({left: cardWidth + 16, behavior: "smooth"}); // 16px gap
+function slideCertLeft() {
+  const carousel = document.getElementById("certificates-carousel");
+  carousel.scrollBy({ left: -350, behavior: "smooth" });
 }
 
-/* =========================================
-        PROJECTS DATA
-========================================= */
-const projects = [
-  {
-    id: 0,
-    title: "Startup Page",
-    subtitle: "Full-Stack Web Application • 2 Months",
-    image: "https://picsum.photos/800/400?random=10",
-    description: "A comprehensive e-commerce platform built with modern web technologies. Features include user authentication, product catalog, shopping cart, payment integration, and admin dashboard for inventory management.",
-    technologies: ["JavaScript", "React", "Node.js", "Express", "MongoDB", "Stripe API", "JWT", "Redux"],
-    features: "• User authentication & authorization\n• Product catalog with search & filters\n• Shopping cart with real-time updates\n• Secure payment processing with Stripe\n• Admin dashboard for inventory management\n• Order tracking & history\n• Responsive design for all devices",
-    challenges: "Implementing secure payment gateway integration while maintaining PCI compliance. Solved by using Stripe's secure payment elements and storing minimal payment data.",
-    liveLink: "https://demo-ecommerce.takathena.com",
-    githubLink: "https://github.com/takathena/ecommerce-platform"
-  },
-  {
-    id: 1,
-    title: "AI Image Generator",
-    subtitle: "AI/ML Application • 2 Months",
-    image: "https://picsum.photos/800/400?random=11",
-    description: "An AI-powered image generation tool using Stable Diffusion. Users can input text prompts to generate unique images, with options for style customization and image enhancement.",
-    technologies: ["Python", "TensorFlow", "Flask", "React", "Stable Diffusion", "OpenCV", "Docker", "Redis"],
-    features: "• Text-to-image generation\n• Multiple artistic style options\n• Image upscaling & enhancement\n• Batch processing capabilities\n• User gallery & history\n• API for third-party integration\n• Real-time generation progress",
-    challenges: "Managing GPU memory constraints for multiple concurrent users. Implemented queue system with Redis and optimized model loading strategies.",
-    liveLink: "https://ai-images.takathena.com",
-    githubLink: "https://github.com/takathena/ai-image-generator"
-  },
-  {
-    id: 2,
-    title: "Code Editor Web App",
-    subtitle: "Web Development Tool • 1.5 Months",
-    image: "https://picsum.photos/800/400?random=12",
-    description: "A browser-based code editor with live preview functionality. Supports multiple programming languages with syntax highlighting, auto-completion, and collaborative editing features.",
-    technologies: ["TypeScript", "Monaco Editor", "WebSocket", "Node.js", "Express", "PostgreSQL", "Docker", "Nginx"],
-    features: "• Real-time code editing\n• Live preview for HTML/CSS/JS\n• Multiple language support\n• Syntax highlighting & auto-complete\n• Collaborative editing sessions\n• Code sharing & export\n• Customizable themes",
-    challenges: "Implementing real-time collaboration with conflict resolution. Used Operational Transformation algorithm to handle concurrent edits.",
-    liveLink: "https://code-editor.takathena.com",
-    githubLink: "https://github.com/takathena/web-code-editor"
-  },
-  {
-    id: 3,
-    title: "Task Management System",
-    subtitle: "Productivity Application • 2 Months",
-    image: "https://picsum.photos/800/400?random=13",
-    description: "A collaborative task management application with real-time updates, team collaboration features, and productivity analytics.",
-    technologies: ["Vue.js", "Firebase", "Vuex", "SCSS", "Chart.js", "Jest", "Webpack", "PWA"],
-    features: "• Real-time task updates\n• Team collaboration & assignment\n• Drag-and-drop interface\n• Priority & deadline management\n• Productivity analytics dashboard\n• Mobile app (PWA)\n• Email notifications",
-    challenges: "Ensuring real-time sync across multiple devices. Implemented using Firebase Firestore with offline persistence and conflict resolution.",
-    liveLink: "https://tasks.takathena.com",
-    githubLink: "https://github.com/takathena/task-manager"
-  },
-  {
-    id: 4,
-    title: "Weather Dashboard",
-    subtitle: "Data Visualization • 1 Month",
-    image: "https://picsum.photos/800/400?random=14",
-    description: "A real-time weather data visualization dashboard with interactive maps, forecasts, and historical data analysis.",
-    technologies: ["React", "D3.js", "OpenWeather API", "Leaflet", "Chart.js", "Axios", "Service Workers", "IndexedDB"],
-    features: "• Real-time weather data\n• Interactive weather maps\n• 7-day forecast\n• Historical data analysis\n• Location-based weather\n• Severe weather alerts\n• Offline functionality",
-    challenges: "Handling API rate limits and caching data efficiently. Implemented service workers for offline access and IndexedDB for local storage.",
-    liveLink: "https://weather.takathena.com",
-    githubLink: "https://github.com/takathena/weather-dashboard"
-  },
-  {
-    id: 5,
-    title: "Chat Application",
-    subtitle: "Real-time Communication • 2.5 Months",
-    image: "https://picsum.photos/800/400?random=15",
-    description: "A real-time messaging application with end-to-end encryption, file sharing, and voice/video call capabilities.",
-    technologies: ["Socket.io", "React Native", "Node.js", "MongoDB", "WebRTC", "AES-256", "JWT", "Redis"],
-    features: "• Real-time messaging\n• End-to-end encryption\n• File & media sharing\n• Voice & video calls\n• Group chats & channels\n• Message history\n• Read receipts & typing indicators",
-    challenges: "Implementing secure end-to-end encryption while maintaining performance. Used AES-256 with key exchange via Diffie-Hellman.",
-    liveLink: "https://chat.takathena.com",
-    githubLink: "https://github.com/takathena/secure-chat-app"
-  },
-  {
-    id: 6,
-    title: "Portfolio Website",
-    subtitle: "Personal Website • 1 Month",
-    image: "https://picsum.photos/800/400?random=16",
-    description: "A responsive portfolio website with dark/light mode toggle, project showcase, and interactive elements.",
-    technologies: ["HTML5", "CSS3", "JavaScript", "GSAP", "Intersection Observer", "CSS Grid", "Flexbox", "Webpack"],
-    features: "• Responsive design\n• Dark/light mode toggle\n• Smooth animations\n• Project showcase\n• Contact form\n• Performance optimized\n• SEO friendly",
-    challenges: "Creating smooth animations without performance issues. Used CSS transitions and GSAP for complex animations with hardware acceleration.",
-    liveLink: "https://takathena.com",
-    githubLink: "https://github.com/takathena/portfolio"
-  },
-  {
-    id: 7,
-    title: "Data Analytics Dashboard",
-    subtitle: "Business Intelligence • 3 Months",
-    image: "https://picsum.photos/800/400?random=17",
-    description: "An interactive dashboard for data analysis and visualization with real-time data streaming and custom reporting.",
-    technologies: ["Python", "Django", "React", "Plotly", "Pandas", "Celery", "PostgreSQL", "Docker Compose"],
-    features: "• Real-time data visualization\n• Custom report generation\n• Data filtering & segmentation\n• Export to PDF/Excel\n• User role management\n• Automated data pipelines\n• Alert system",
-    challenges: "Handling large datasets with real-time updates. Implemented pagination, server-side processing, and WebSocket for live updates.",
-    liveLink: "https://analytics.takathena.com",
-    githubLink: "https://github.com/takathena/data-analytics-dashboard"
-  }
-];
+function slideCertRight() {
+  const carousel = document.getElementById("certificates-carousel");
+  carousel.scrollBy({ left: 350, behavior: "smooth" });
+}
 
-/* =========================================
-        PROJECT MODAL
-========================================= */
+// Project modal
 function openModal(projectId) {
   const project = projects[projectId];
   const overlay = document.getElementById('modal-overlay');
   const modal = document.getElementById('modal');
   
-  // Update modal content
   document.getElementById('modal-title').textContent = project.title;
   document.getElementById('modal-subtitle').textContent = project.subtitle;
-  
-  const modalImage = document.getElementById('modal-image');
-  modalImage.src = project.image;
-  modalImage.alt = `${project.title} project screenshot`;
-  
-  // Load modal image
-  loadImage(modalImage).catch(() => {
-    console.warn('Failed to load modal image:', project.image);
-  });
-  
+  document.getElementById('modal-image').src = project.image;
   document.getElementById('modal-description').textContent = project.description;
   document.getElementById('modal-features').innerHTML = project.features.replace(/\n/g, '<br>• ');
-  document.getElementById('modal-challenges').textContent = project.challenges;
   
   const liveLink = document.getElementById('modal-live-link');
   liveLink.href = project.liveLink;
@@ -1982,20 +1912,8 @@ function openModal(projectId) {
   project.technologies.forEach(tech => {
     const techItem = document.createElement('div');
     techItem.className = 'tech-item';
+    techItem.textContent = tech;
     techItem.setAttribute('role', 'listitem');
-    
-    let icon = '💻';
-    if (tech.toLowerCase().includes('react')) icon = '⚛️';
-    if (tech.toLowerCase().includes('node')) icon = '🟢';
-    if (tech.toLowerCase().includes('python')) icon = '🐍';
-    if (tech.toLowerCase().includes('mongodb')) icon = '🍃';
-    if (tech.toLowerCase().includes('docker')) icon = '🐳';
-    if (tech.toLowerCase().includes('firebase')) icon = '🔥';
-    if (tech.toLowerCase().includes('tensorflow')) icon = '🤖';
-    if (tech.toLowerCase().includes('vue')) icon = '🟢';
-    if (tech.toLowerCase().includes('typescript')) icon = '📘';
-    
-    techItem.innerHTML = `<i>${icon}</i> ${tech}`;
     techStack.appendChild(techItem);
   });
   
@@ -2004,297 +1922,100 @@ function openModal(projectId) {
   overlay.setAttribute('aria-hidden', 'false');
   setTimeout(() => {
     overlay.classList.add('active');
-    modal.classList.add('active');
   }, 10);
-  
-  // Trap focus inside modal
-  trapFocus(modal);
   
   // Prevent body scroll
   document.body.style.overflow = 'hidden';
+  document.body.style.paddingRight = '15px';
 }
 
-/* =========================================
-        UPDATED MODAL CLOSE FUNCTION WITH ANIMATIONS
-========================================= */
+// Close modal
 function closeModal() {
   const overlay = document.getElementById('modal-overlay');
-  const modal = document.getElementById('modal');
-  
-  // Add closing animations
-  modal.classList.add('closing');
-  overlay.classList.add('closing');
-  
-  // Wait for animation to complete
+  overlay.classList.remove('active');
+  overlay.setAttribute('aria-hidden', 'true');
   setTimeout(() => {
-    modal.classList.remove('active', 'closing');
-    overlay.classList.remove('active', 'closing');
     overlay.style.display = 'none';
     document.body.style.overflow = '';
-    modal.style.animation = ''; // Reset animation
+    document.body.style.paddingRight = '';
   }, 300);
 }
 
-/* =========================================
-        CERTIFICATES DATABASE
-========================================= */
-const certificatesDB = [
-  {
-    id: 0,
-    title: "AI & Machine Learning Fundamentals",
-    issuer: "Google",
-    issuerIcon: "https://cdn-icons-png.flaticon.com/512/2991/2991148.png",
-    date: "March 2024",
-    category: "ai",
-    image: "https://picsum.photos/800/400?random=20",
-    badge: "Professional Certificate",
-    description: "Comprehensive course covering fundamental concepts of AI and Machine Learning including neural networks, deep learning, natural language processing, and computer vision.",
-    skills: ["Python", "TensorFlow", "Neural Networks", "Deep Learning", "NLP"],
-    validation: "Certificate ID: GOOG-AI-2024-00123",
-    viewLink: "https://example.com/cert/ai-google",
-    credentialLink: "https://credentials.google.com/verify/ai-00123"
-  },
-  {
-    id: 1,
-    title: "Full Stack Web Development",
-    issuer: "Meta",
-    issuerIcon: "https://cdn-icons-png.flaticon.com/512/5968/5968764.png",
-    date: "January 2024",
-    category: "web",
-    image: "https://picsum.photos/800/400?random=21",
-    badge: "Professional Certificate",
-    description: "Complete full-stack development program covering frontend (React) and backend (Node.js, Express) technologies with database integration and deployment.",
-    skills: ["React", "Node.js", "Express", "MongoDB", "JavaScript", "Git"],
-    validation: "Certificate ID: META-WEB-2024-04567",
-    viewLink: "https://example.com/cert/fullstack-meta",
-    credentialLink: "https://credentials.meta.com/verify/web-04567"
-  },
-  {
-    id: 2,
-    title: "Data Science Specialization",
-    issuer: "IBM",
-    issuerIcon: "https://cdn-icons-png.flaticon.com/512/5968/5968322.png",
-    date: "December 2023",
-    category: "data",
-    image: "https://picsum.photos/800/400?random=22",
-    badge: "Specialization",
-    description: "Advanced data science program covering statistical analysis, machine learning, data visualization, and big data technologies.",
-    skills: ["Python", "Pandas", "NumPy", "SQL", "Data Visualization", "Statistics"],
-    validation: "Certificate ID: IBM-DS-2023-78901",
-    viewLink: "https://example.com/cert/datascience-ibm",
-    credentialLink: "https://credentials.ibm.com/verify/ds-78901"
-  },
-  {
-    id: 3,
-    title: "Python Programming Mastery",
-    issuer: "University of Michigan",
-    issuerIcon: "https://cdn-icons-png.flaticon.com/512/5968/5968520.png",
-    date: "November 2023",
-    category: "programming",
-    image: "https://picsum.photos/800/400?random=23",
-    badge: "Specialization",
-    description: "Comprehensive Python programming course covering from basics to advanced topics including OOP, data structures, algorithms, and API development.",
-    skills: ["Python", "OOP", "Data Structures", "Algorithms", "APIs"],
-    validation: "Certificate ID: UMICH-PY-2023-33445",
-    viewLink: "https://example.com/cert/python-michigan",
-    credentialLink: "https://credentials.umich.edu/verify/py-33445"
-  },
-  {
-    id: 4,
-    title: "AWS Solutions Architect",
-    issuer: "Amazon Web Services",
-    issuerIcon: "https://cdn-icons-png.flaticon.com/512/873/873107.png",
-    date: "October 2023",
-    category: "cloud",
-    image: "https://picsum.photos/800/400?random=24",
-    badge: "Associate Level",
-    description: "AWS certification covering cloud architecture best practices, service selection, security, and cost optimization strategies.",
-    skills: ["AWS", "Cloud Architecture", "Security", "DevOps", "Networking"],
-    validation: "Certificate ID: AWS-SA-2023-55678",
-    viewLink: "https://example.com/cert/aws-solutions",
-    credentialLink: "https://aws.amazon.com/verification"
-  },
-  {
-    id: 5,
-    title: "JavaScript Algorithms & Data Structures",
-    issuer: "freeCodeCamp",
-    issuerIcon: "https://cdn-icons-png.flaticon.com/512/5968/5968672.png",
-    date: "September 2023",
-    category: "programming",
-    image: "https://picsum.photos/800/400?random=25",
-    badge: "Certification",
-    description: "Master JavaScript algorithms and data structures including arrays, objects, recursion, and advanced algorithm patterns.",
-    skills: ["JavaScript", "Algorithms", "Data Structures", "Problem Solving"],
-    validation: "Certificate ID: FCC-JS-2023-11223",
-    viewLink: "https://freecodecamp.org/certification/js-algorithms",
-    credentialLink: "https://freecodecamp.org/verify/js-algorithms"
-  },
-  {
-    id: 6,
-    title: "Leadership & Communication Skills",
-    issuer: "LinkedIn Learning",
-    issuerIcon: "https://cdn-icons-png.flaticon.com/512/174/174857.png",
-    date: "August 2023",
-    category: "soft-skills",
-    image: "https://picsum.photos/800/400?random=26",
-    badge: "Course Completion",
-    description: "Develop essential leadership and communication skills for effective team management and professional growth.",
-    skills: ["Leadership", "Communication", "Team Management", "Public Speaking"],
-    validation: "Certificate ID: LINKEDIN-LC-2023-66789",
-    viewLink: "https://linkedin.com/learning/certificates/leadership",
-    credentialLink: "https://linkedin.com/verify/leadership"
-  },
-  {
-    id: 7,
-    title: "Database Management Fundamentals",
-    issuer: "Oracle",
-    issuerIcon: "https://cdn-icons-png.flaticon.com/512/5969/5969275.png",
-    date: "July 2023",
-    category: "database",
-    image: "https://picsum.photos/800/400?random=27",
-    badge: "Professional Certificate",
-    description: "Fundamentals of database management including SQL queries, database design, normalization, and performance optimization.",
-    skills: ["SQL", "Database Design", "Normalization", "Oracle DB", "Performance"],
-    validation: "Certificate ID: ORACLE-DB-2023-88901",
-    viewLink: "https://example.com/cert/database-oracle",
-    credentialLink: "https://oracle.com/verify/db-88901"
-  },
-  {
-    id: 8,
-    title: "Cybersecurity Fundamentals",
-    issuer: "Cisco",
-    issuerIcon: "https://cdn-icons-png.flaticon.com/512/5968/5968192.png",
-    date: "June 2023",
-    category: "cyber",
-    image: "https://picsum.photos/800/400?random=28",
-    badge: "Associate Level",
-    description: "Introduction to cybersecurity concepts including network security, cryptography, threat analysis, and security best practices.",
-    skills: ["Network Security", "Cryptography", "Threat Analysis", "Security Protocols"],
-    validation: "Certificate ID: CISCO-CYBER-2023-99012",
-    viewLink: "https://example.com/cert/cybersecurity-cisco",
-    credentialLink: "https://cisco.com/verify/cyber-99012"
-  }
-];
-
-/* =========================================
-        INITIALIZE CERTIFICATES
-========================================= */
+// Initialize certificates
 function initializeCertificates() {
-  const carousel = document.getElementById('certificates-carousel');
   const filterSelect = document.getElementById('cert-filter');
-  
-  // Render certificates
-  renderCertificates('all');
-  
-  // Add filter event listener
   filterSelect.addEventListener('change', (e) => {
     renderCertificates(e.target.value);
   });
+  
+  renderCertificates('all');
 }
 
-/* =========================================
-        RENDER CERTIFICATES
-========================================= */
+// Render certificates
 function renderCertificates(category) {
-  const carousel = document.getElementById('certificates-carousel');
-  carousel.innerHTML = '';
+  const track = document.getElementById('certificates-track');
+  track.innerHTML = '';
   
-  // Filter certificates
   const filteredCerts = category === 'all' 
     ? certificatesDB 
     : certificatesDB.filter(cert => cert.category === category);
   
-  // Group certificates into slides (2 per slide)
-  const slides = [];
-  for (let i = 0; i < filteredCerts.length; i += 2) {
-    slides.push(filteredCerts.slice(i, i + 2));
-  }
-  
-  // Create slides
-  slides.forEach((slideCerts, slideIndex) => {
-    const slideDiv = document.createElement('div');
-    slideDiv.className = 'certificate-slide';
-    slideDiv.setAttribute('role', 'listitem');
-    
-    slideCerts.forEach(cert => {
-      const certCard = document.createElement('article');
-      certCard.className = 'cert-card';
-      
-      // Add click event to open modal
-      certCard.onclick = () => openCertificateModal(cert.id);
-      certCard.tabIndex = 0;
-      certCard.setAttribute('role', 'button');
-      certCard.setAttribute('aria-label', `View ${cert.title} certificate details`);
-      
-      certCard.innerHTML = `
-        <div class="cert-thumb">
-          <div class="image-placeholder"></div>
-          <img src="${cert.image}" alt="${cert.title} certificate" loading="lazy" width="400" height="200">
-          <div class="cert-badge">${cert.badge}</div>
-        </div>
-        <div class="cert-issuer">
-          <img src="${cert.issuerIcon}" alt="${cert.issuer} logo" loading="lazy">
-          <span>${cert.issuer}</span>
-        </div>
-        <h4>${cert.title}</h4>
-        <p>${cert.description.substring(0, 120)}...</p>
-      `;
-      
-      slideDiv.appendChild(certCard);
-    });
-    
-    carousel.appendChild(slideDiv);
-  });
-  
-  // If no certificates found
   if (filteredCerts.length === 0) {
-    carousel.innerHTML = `
-      <div class="certificate-slide" style="flex: 1; text-align: center; padding: 40px;">
-        <p style="color: var(--muted); font-size: 16px;">No certificates found for this category.</p>
+    track.innerHTML = `
+      <div style="padding: 3rem; text-align: center; color: var(--text-primary); font-family: 'IBM Plex Mono';">
+        <h4 style="color: var(--text-accent); margin-bottom: 1rem;">NO CERTIFICATES FOUND</h4>
+        <p>Try selecting a different category</p>
       </div>
     `;
+    return;
   }
   
-  // Lazy load certificate images
-  setTimeout(lazyLoadImages, 100);
+  filteredCerts.forEach(cert => {
+    const certCard = createCertificateCard(cert);
+    track.appendChild(certCard);
+  });
 }
 
-/* =========================================
-        CERTIFICATE CAROUSEL NAVIGATION - UPDATED
-========================================= */
-function slideCertLeft() {
-  const wrapper = document.querySelector('.certificates-wrapper');
-  const cardWidth = getCardWidth();
-  wrapper.scrollBy({ left: -(cardWidth + 20), behavior: 'smooth' }); // 20px gap
+// Create certificate card
+function createCertificateCard(cert) {
+  const certCard = document.createElement('article');
+  certCard.className = 'card cert-card';
+  certCard.onclick = () => openCertificateModal(cert.id);
+  certCard.tabIndex = 0;
+  certCard.setAttribute('role', 'button');
+  certCard.setAttribute('aria-label', `View ${cert.title} certificate details`);
+  
+  certCard.innerHTML = `
+    <div class="card-image">
+      <img src="${cert.image}" alt="${cert.title}" loading="lazy">
+      <div class="cert-badge">${cert.badge}</div>
+    </div>
+    <div class="card-content">
+      <div class="cert-issuer">
+        <img src="${cert.issuerIcon}" alt="${cert.issuer} logo" loading="lazy">
+        <span>${cert.issuer}</span>
+      </div>
+      <h4 class="card-title">${cert.title}</h4>
+      <p class="card-description">${cert.description.substring(0, 100)}...</p>
+      <div class="card-tech">
+        <span class="tech-tag">${cert.date}</span>
+        <span class="tech-tag">${cert.category.toUpperCase()}</span>
+      </div>
+    </div>
+  `;
+  
+  return certCard;
 }
 
-function slideCertRight() {
-  const wrapper = document.querySelector('.certificates-wrapper');
-  const cardWidth = getCardWidth();
-  wrapper.scrollBy({ left: cardWidth + 20, behavior: 'smooth' }); // 20px gap
-}
-
-/* =========================================
-        CERTIFICATE MODAL FUNCTIONS
-========================================= */
+// Open certificate modal
 function openCertificateModal(certId) {
   const cert = certificatesDB[certId];
   const overlay = document.getElementById('cert-modal-overlay');
   const modal = document.getElementById('cert-modal');
   
-  // Update modal content
   document.getElementById('cert-modal-title').textContent = cert.title;
   document.getElementById('cert-modal-subtitle').textContent = `${cert.issuer} • ${cert.date}`;
-  
-  const certImage = document.getElementById('cert-modal-image');
-  certImage.src = cert.image;
-  certImage.alt = `${cert.title} certificate`;
-  
-  // Load certificate image
-  loadImage(certImage).catch(() => {
-    console.warn('Failed to load certificate image:', cert.image);
-  });
-  
+  document.getElementById('cert-modal-image').src = cert.image;
   document.getElementById('cert-modal-description').textContent = cert.description;
   document.getElementById('cert-validation').textContent = cert.validation;
   
@@ -2306,40 +2027,14 @@ function openCertificateModal(certId) {
   credentialLink.href = cert.credentialLink;
   credentialLink.setAttribute('aria-label', `Verify ${cert.title} credential`);
   
-  // Add badge
-  const badgeHtml = `<div class="cert-badge-modal">${cert.badge}</div>`;
-  document.getElementById('cert-modal-subtitle').innerHTML += badgeHtml;
-  
-  // Add issuer info
-  const issuerHtml = `
-    <div class="cert-issuer-modal">
-      <img src="${cert.issuerIcon}" alt="${cert.issuer} logo" loading="lazy">
-      <span>${cert.issuer}</span>
-    </div>
-  `;
-  document.querySelector('.modal-header').insertAdjacentHTML('beforeend', issuerHtml);
-  
   // Update skills stack
   const skillsStack = document.getElementById('cert-skills-stack');
   skillsStack.innerHTML = '';
   cert.skills.forEach(skill => {
     const skillItem = document.createElement('div');
-    skillItem.className = 'tech-item cert-skill';
+    skillItem.className = 'tech-item';
+    skillItem.textContent = skill;
     skillItem.setAttribute('role', 'listitem');
-    
-    let icon = '✅';
-    if (skill.toLowerCase().includes('python')) icon = '🐍';
-    if (skill.toLowerCase().includes('javascript')) icon = '📜';
-    if (skill.toLowerCase().includes('react')) icon = '⚛️';
-    if (skill.toLowerCase().includes('aws')) icon = '☁️';
-    if (skill.toLowerCase().includes('sql')) icon = '🗄️';
-    if (skill.toLowerCase().includes('docker')) icon = '🐳';
-    if (skill.toLowerCase().includes('git')) icon = '📊';
-    if (skill.toLowerCase().includes('security')) icon = '🔒';
-    if (skill.toLowerCase().includes('leadership')) icon = '👑';
-    if (skill.toLowerCase().includes('communication')) icon = '💬';
-    
-    skillItem.innerHTML = `<i>${icon}</i> ${skill}`;
     skillsStack.appendChild(skillItem);
   });
   
@@ -2348,162 +2043,129 @@ function openCertificateModal(certId) {
   overlay.setAttribute('aria-hidden', 'false');
   setTimeout(() => {
     overlay.classList.add('active');
-    modal.classList.add('active');
   }, 10);
-  
-  // Trap focus inside modal
-  trapFocus(modal);
   
   // Prevent body scroll
   document.body.style.overflow = 'hidden';
+  document.body.style.paddingRight = '15px';
 }
 
-/* =========================================
-        UPDATED CERTIFICATE MODAL CLOSE FUNCTION WITH ANIMATIONS
-========================================= */
+// Close certificate modal
 function closeCertificateModal() {
   const overlay = document.getElementById('cert-modal-overlay');
-  const modal = document.getElementById('cert-modal');
-  
-  // Add closing animations
-  modal.classList.add('closing');
-  overlay.classList.add('closing');
-  
-  // Wait for animation to complete
+  overlay.classList.remove('active');
+  overlay.setAttribute('aria-hidden', 'true');
   setTimeout(() => {
-    modal.classList.remove('active', 'closing');
-    overlay.classList.remove('active', 'closing');
     overlay.style.display = 'none';
     document.body.style.overflow = '';
-    modal.style.animation = ''; // Reset animation
-    
-    // Clean up dynamic content
-    const issuerModal = document.querySelector('.cert-issuer-modal');
-    if (issuerModal) issuerModal.remove();
+    document.body.style.paddingRight = '';
   }, 300);
 }
 
-/* =========================================
-        ACCESSIBILITY: TRAP FOCUS IN MODAL
-========================================= */
-function trapFocus(element) {
-  const focusableElements = element.querySelectorAll(
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-  );
-  
-  if (focusableElements.length === 0) return;
-  
-  const firstFocusableElement = focusableElements[0];
-  const lastFocusableElement = focusableElements[focusableElements.length - 1];
-  
-  element.addEventListener('keydown', function(e) {
-    if (e.key === 'Tab') {
-      if (e.shiftKey) {
-        if (document.activeElement === firstFocusableElement) {
-          lastFocusableElement.focus();
-          e.preventDefault();
-        }
-      } else {
-        if (document.activeElement === lastFocusableElement) {
-          firstFocusableElement.focus();
-          e.preventDefault();
-        }
-      }
-    }
-    
-    if (e.key === 'Escape') {
-      if (element.id === 'modal') {
-        closeModal();
-      } else if (element.id === 'cert-modal') {
-        closeCertificateModal();
-      }
-    }
-  });
-  
-  // Focus first element
-  setTimeout(() => firstFocusableElement.focus(), 100);
-}
-
-/* =========================================
-        EVENT LISTENERS SETUP
-========================================= */
-document.addEventListener('DOMContentLoaded', function() {
-  // Project modal event listeners
+// Set up event listeners
+function setupEventListeners() {
+  // Project modal
   const modalOverlay = document.getElementById('modal-overlay');
   const modalClose = document.getElementById('modal-close');
   const modal = document.getElementById('modal');
   
-  if (modalOverlay) {
-    modalOverlay.addEventListener('click', function(e) {
-      if (e.target === modalOverlay) {
-        closeModal();
-      }
-    });
-  }
+  modalOverlay.addEventListener('click', function(e) {
+    if (e.target === modalOverlay) closeModal();
+  });
   
-  if (modalClose) {
-    modalClose.addEventListener('click', closeModal);
-  }
+  modalClose.addEventListener('click', closeModal);
   
-  if (modal) {
-    modal.addEventListener('click', function(e) {
-      e.stopPropagation();
-    });
-  }
+  modal.addEventListener('click', function(e) {
+    e.stopPropagation();
+  });
   
-  // Certificate modal event listeners
+  // Certificate modal
   const certModalOverlay = document.getElementById('cert-modal-overlay');
   const certModalClose = document.getElementById('cert-modal-close');
   const certModal = document.getElementById('cert-modal');
   
-  if (certModalOverlay) {
-    certModalOverlay.addEventListener('click', function(e) {
-      if (e.target === certModalOverlay) {
-        closeCertificateModal();
-      }
-    });
-  }
+  certModalOverlay.addEventListener('click', function(e) {
+    if (e.target === certModalOverlay) closeCertificateModal();
+  });
   
-  if (certModalClose) {
-    certModalClose.addEventListener('click', closeCertificateModal);
-  }
+  certModalClose.addEventListener('click', closeCertificateModal);
   
-  if (certModal) {
-    certModal.addEventListener('click', function(e) {
-      e.stopPropagation();
-    });
-  }
+  certModal.addEventListener('click', function(e) {
+    e.stopPropagation();
+  });
   
-  // Close modal dengan Escape key
+  // Escape key to close modals
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      const certModalOverlay = document.getElementById('cert-modal-overlay');
-      const projectModalOverlay = document.getElementById('modal-overlay');
-      
-      if (certModalOverlay && certModalOverlay.classList.contains('active')) {
-        closeCertificateModal();
-      } else if (projectModalOverlay && projectModalOverlay.classList.contains('active')) {
+      if (document.getElementById('modal-overlay').classList.contains('active')) {
         closeModal();
+      }
+      if (document.getElementById('cert-modal-overlay').classList.contains('active')) {
+        closeCertificateModal();
       }
     }
   });
   
-  // Initialize certificates
-  initializeCertificates();
-  
-  // Lazy load images on page load
-  window.addEventListener('load', lazyLoadImages);
-});
+  // Touch and keyboard navigation for carousels
+  setupCarouselNavigation('projects-carousel');
+  setupCarouselNavigation('certificates-carousel');
+}
 
-/* =========================================
-        ERROR HANDLING FOR IMAGES
-========================================= */
-document.addEventListener('error', function(e) {
-  if (e.target.tagName === 'IMG') {
-    console.warn('Failed to load image:', e.target.src);
-    e.target.style.opacity = '0.5';
-  }
-}, true);
+// Setup carousel navigation with touch support
+function setupCarouselNavigation(carouselId) {
+  const carousel = document.getElementById(carouselId);
+  let isDragging = false;
+  let startX;
+  let scrollLeft;
+  
+  carousel.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.pageX - carousel.offsetLeft;
+    scrollLeft = carousel.scrollLeft;
+    carousel.style.cursor = 'grabbing';
+    carousel.style.scrollBehavior = 'auto';
+  });
+  
+  carousel.addEventListener('mouseleave', () => {
+    isDragging = false;
+    carousel.style.cursor = 'grab';
+    carousel.style.scrollBehavior = 'smooth';
+  });
+  
+  carousel.addEventListener('mouseup', () => {
+    isDragging = false;
+    carousel.style.cursor = 'grab';
+    carousel.style.scrollBehavior = 'smooth';
+  });
+  
+  carousel.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - carousel.offsetLeft;
+    const walk = (x - startX) * 2;
+    carousel.scrollLeft = scrollLeft - walk;
+  });
+  
+  // Touch support
+  carousel.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    startX = e.touches[0].pageX - carousel.offsetLeft;
+    scrollLeft = carousel.scrollLeft;
+    carousel.style.scrollBehavior = 'auto';
+  });
+  
+  carousel.addEventListener('touchend', () => {
+    isDragging = false;
+    carousel.style.scrollBehavior = 'smooth';
+  });
+  
+  carousel.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    const x = e.touches[0].pageX - carousel.offsetLeft;
+    const walk = (x - startX) * 2;
+    carousel.scrollLeft = scrollLeft - walk;
+  });
+}
 </script>
 
 </body>
