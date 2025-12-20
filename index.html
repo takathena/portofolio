@@ -16,6 +16,7 @@
   --bg-accent: #FF0000;
   --bg-accent2: #00FF00;
   --bg-accent3: #0000FF;
+  --bg-accent4: #f6ff00;
   --text-primary: #000000;
   --text-secondary: #FFFFFF;
   --text-accent: #FF0000;
@@ -185,7 +186,8 @@ h4 {
 
 .section.tools::before {
   content: "/// TOOLS ///";
-  color: var(--text-primary);
+  color: var(--text-);
+  background: var(--bg-accent4);
 }
 
 .section.projects::before {
@@ -298,8 +300,8 @@ h4 {
 }
 
 .accordion-btn {
-  background: var(--bg-accent);
-  color: var(--text-secondary);
+  background: var(--bg-accent4);
+  color: var(--text-primary4);
   border: var(--border-thin) solid var(--text-primary);
   font-size: 1.2rem;
   width: 36px;
@@ -315,7 +317,7 @@ h4 {
 }
 
 .accordion-btn.open {
-  background: var(--bg-accent2);
+  background: var(--bg-accent);
   color: var(--text-primary);
   transform: rotate(180deg);
 }
@@ -362,9 +364,24 @@ h4 {
 
 .tag:hover {
   background: var(--bg-accent);
-  color: var(--text-secondary);
+  color: var(--text-primary);
   transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 var(--bg-accent4);
+}
+.tag:nth-child(4n):hover {
+  background: var(--bg-accent2);
+  color: var(--text-primary);
+  box-shadow: 3px 3px 0 var(--bg-accent3);
+}
+.tag:nth-child(2n):hover {
+  background: var(--bg-accent3);
+  color: var(--text-secondary);
   box-shadow: 3px 3px 0 var(--bg-accent2);
+}
+.tag:nth-child(3n):hover {
+  background: var(--bg-accent4);
+  color: var(--text-primary);
+  box-shadow: 3px 3px 0 var(--bg-accent);
 }
 
 .tag.active {
@@ -418,6 +435,14 @@ h4 {
   box-shadow: 4px 4px 0 var(--bg-accent3);
 }
 
+.tools-grid img:nth-child(even):hover {
+  transform: scale(1.15) rotate(-5deg);
+  border-color: var(--bg-accent3);
+  background: var(--bg-secondary);
+  filter: none;
+  box-shadow: 4px 4px 0 var(--bg-accent);
+}
+
 .tools-grid.dimmed img {
   opacity: 0.25;
 }
@@ -452,7 +477,7 @@ h4 {
 }
 
 .project-arrow {
-  background: var(--bg-secondary);
+  background: var(--bg-accent4);
   color: var(--text-primary);
   border: var(--border-thin) solid var(--text-primary);
   font-size: 1.2rem;
@@ -468,8 +493,12 @@ h4 {
   justify-content: center;
 }
 
-.project-arrow:hover {
+.project-arrow:nth-child(1) {
   background: var(--bg-accent);
+}
+
+.project-arrow:hover {
+  background: var(--bg-accent2);
   color: var(--text-secondary);
   transform: scale(1.1);
 }
@@ -647,6 +676,14 @@ h4 {
   box-shadow: 4px 4px 0 var(--bg-accent3);
 }
 
+.social-link:nth-child(even):hover .social-icon {
+  transform: scale(1.1) rotate(5deg);
+  border-color: var(--bg-accent);
+  background: var(--bg-secondary);
+  filter: none;
+  box-shadow: 4px 4px 0 var(--bg-accent3);
+}
+
 /* =========================================
         PHOTO SECTION
 ========================================= */
@@ -731,7 +768,7 @@ h4 {
 }
 
 .cert-arrow {
-  background: var(--bg-secondary);
+  background: var(--bg-accent4);
   color: var(--text-primary);
   border: var(--border-thin) solid var(--text-primary);
   font-size: 1.2rem;
@@ -742,6 +779,10 @@ h4 {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.cert-arrow:nth-child(1) {
+  background: var(--bg-accent);
 }
 
 .cert-arrow:hover {
@@ -1367,7 +1408,7 @@ h4 {
 
   <!-- FOOTER -->
   <footer class="footer">
-    © 2025 <a style="color: blue;" href="https://github.com/takathena">TAKATHENA</a> — MAKE W L0VE
+    <span style="color: var(--bg-accent);">© 2025</span> <a style="color: var(--bg-accent3);" href="https://github.com/takathena">TAKATHENA</a>　—　<span style="color: yellow;">MAKE WITH L*VE</span>
   </footer>
 </div>
 
