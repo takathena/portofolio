@@ -16,6 +16,8 @@
   --bg-accent: #FF0000;
   --bg-accent2: #00FF00;
   --bg-accent3: #0000FF;
+  --bg-accent4: #fff700;
+  --bg-accent5: #ff00f2;
   --text-primary: #000000;
   --text-secondary: #FFFFFF;
   --text-accent: #FF0000;
@@ -521,8 +523,8 @@ h4 {
   animation: snapFocus 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   border-color: var(--bg-accent);
   box-shadow: 
-    0 0 0 2px var(--bg-accent),
-    6px 6px 0 var(--bg-accent2),
+    0 0 0 2px var(--bg-primary),
+    6px 6px 0 var(--bg-accent4),
     12px 12px 0 var(--bg-accent3);
 }
 
@@ -657,10 +659,12 @@ h4 {
   font-size: clamp(1rem, 3vw, 1.2rem);
   width: clamp(36px, 9vw, 40px);
   height: clamp(36px, 9vw, 40px);
+  float: left;
   cursor: pointer;
   transition: var(--transition);
   flex-shrink: 0;
   display: flex;
+  margin: 0 4px;
   align-items: center;
   justify-content: center;
   min-width: 36px;
@@ -716,11 +720,21 @@ h4 {
 }
 
 .card:hover, .cert-card:hover {
-  transform: translate(-8px, -8px);
-  box-shadow: 
-    12px 12px 0 var(--bg-accent),
-    24px 24px 0 var(--bg-accent2);
-  border-color: var(--bg-accent3);
+  /* transform: translate(-8px, -8px); */
+  transform: scale(1.08);
+  /* box-shadow: 
+    12px 12px 0 var(--bg-accent2),
+    -12px -12px 0 var(--bg-accent5); */
+  border-color: var(--bg-accent4);
+}
+
+.card:nth-child(even):hover, .cert-card:nth-child(even):hover {
+  /* transform: translate(-8px, -8px); */
+  transform: scale(1.08);
+  /* box-shadow: 
+    12px 12px 0 var(--bg-accent2),
+    -12px -12px 0 var(--bg-accent5); */
+  border-color: var(--bg-accent5);
 }
 
 .card-image, .cert-image {
@@ -1561,7 +1575,7 @@ html {
       <h2>BRUTALIST DEVELOPER & CREATIVE CODER</h2>
       
       <div class="badges">
-        <span class="badge"><img src="https://decisive-platypus-f3d.notion.site/icons/butterfly_gray.svg?mode=dark" alt="Student icon">STUDENT</span>
+        <span class="badge"><img src="https://decisive-platypus-f3d.notion.site/icons/butterfly_gray.svg?mode=" alt="Student icon">STUDENT</span>
         <span class="badge">AI ENTHUSIAST</span>
         <span class="badge">VIBE CODER</span>
         <span class="badge">BRUTALIST</span>
