@@ -469,11 +469,15 @@ h4 {
 }
 
 .tools-grid img:hover {
-  transform: scale(1.15) rotate(5deg);
+  transform: scale(1.15) rotate(-5deg);
   border-color: var(--bg-accent);
   background: var(--bg-accent2);
   filter: none;
   box-shadow: 4px 4px 0 var(--bg-accent3);
+}
+
+.tools-grid img:nth-child(even):hover {
+  transform: scale(1.15) rotate(5deg);
 }
 
 .tools-grid.dimmed img {
@@ -783,7 +787,7 @@ h4 {
   margin: 0 0 clamp(0.5rem, 1.5vw, 0.8rem) 0;
   padding: clamp(0.375rem, 1vw, 0.5rem) clamp(0.5rem, 1.5vw, 0.8rem);
   background: #08D9D6;
-  color: var(--text-primary);
+  color: #142d3f;
   border: var(--border-thin) solid var(--text-primary);
   font-size: clamp(0.9rem, 2.5vw, 1.1rem);
   line-height: 1.2;
@@ -873,6 +877,10 @@ h4 {
   background: var(--bg-accent2);
   filter: none;
   box-shadow: 4px 4px 0 var(--bg-accent3);
+}
+
+.social-link:nth-child(even):hover .social-icon {
+  transform: scale(1.1) rotate(5deg);
 }
 
 /* =========================================
@@ -1021,8 +1029,6 @@ h4 {
 .cert-issuer img {
   width: clamp(20px, 4vw, 24px);
   height: clamp(20px, 4vw, 24px);
-  border: var(--border-thin) solid var(--text-primary);
-  filter: grayscale(100%) contrast(200%);
   flex-shrink: 0;
 }
 
