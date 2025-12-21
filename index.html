@@ -2,13 +2,13 @@
 <html lang="id">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
 <title>Portfolio — Takathena | Brutalist Edition</title>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="https://cdn.cosmos.so/ce562cca-2d95-47b3-969e-f842ffb4c225?format=jpeg">
 <style>
 /* =========================================
-        BRUTALIST CSS VARIABLES
+        BRUTALIST CSS VARIABLES - RESPONSIVE
 ========================================= */
 :root {
   --bg-primary: #000000;
@@ -16,25 +16,42 @@
   --bg-accent: #FF0000;
   --bg-accent2: #00FF00;
   --bg-accent3: #0000FF;
-  --bg-accent4: #f6ff00;
   --text-primary: #000000;
   --text-secondary: #FFFFFF;
   --text-accent: #FF0000;
-  --border-thick: 8px;
-  --border-thin: 4px;
-  --shadow-offset: 8px;
-  --maxw: 1200px;
-  --card-width: 350px;
+  
+  /* Responsive variables */
+  --border-thick: clamp(4px, 1vw, 8px);
+  --border-thin: clamp(2px, 0.5vw, 4px);
+  --shadow-offset: clamp(3px, 0.8vw, 8px);
+  --maxw: min(1200px, 95vw);
+  --card-width: min(350px, 90vw);
   --transition: all 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  
+  /* Spacing variables */
+  --spacing-xs: clamp(0.25rem, 0.5vw, 0.5rem);
+  --spacing-sm: clamp(0.5rem, 1vw, 1rem);
+  --spacing-md: clamp(1rem, 2vw, 1.5rem);
+  --spacing-lg: clamp(1.5rem, 3vw, 2rem);
+  --spacing-xl: clamp(2rem, 4vw, 3rem);
+  
+  /* Typography variables */
+  --font-size-xs: clamp(0.7rem, 2vw, 0.85rem);
+  --font-size-sm: clamp(0.85rem, 2.5vw, 1rem);
+  --font-size-md: clamp(1rem, 3vw, 1.2rem);
+  --font-size-lg: clamp(1.2rem, 4vw, 1.8rem);
+  --font-size-xl: clamp(1.5rem, 5vw, 2.5rem);
+  --font-size-xxl: clamp(2.5rem, 8vw, 4.5rem);
 }
 
 /* =========================================
-        RESET & BASE STYLES
+        RESET & BASE STYLES - RESPONSIVE
 ========================================= */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html, body {
@@ -46,76 +63,85 @@ html, body {
   overflow-x: hidden;
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: grayscale;
+  font-size: clamp(14px, 2.5vw, 16px);
 }
 
 /* =========================================
-        TYPOGRAPHY BRUTALIST
+        TYPOGRAPHY BRUTALIST - RESPONSIVE
 ========================================= */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Archivo Black', sans-serif;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.5px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 h1 {
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
-  margin-bottom: 0.5rem;
+  font-size: var(--font-size-xxl);
+  margin-bottom: clamp(0.25rem, 1vw, 0.5rem);
   color: var(--text-accent);
   text-shadow: 
     var(--shadow-offset) var(--shadow-offset) 0 var(--bg-accent2),
     calc(var(--shadow-offset) * -1) calc(var(--shadow-offset) * -1) 0 var(--bg-accent3);
   line-height: 1;
+  padding: 0 var(--spacing-sm);
 }
 
 h2 {
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
-  margin-bottom: 1.5rem;
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-md);
   background: var(--bg-accent);
   color: var(--text-secondary);
-  padding: 10px 15px;
+  padding: clamp(0.5rem, 1.5vw, 0.625rem) clamp(0.75rem, 2vw, 0.9375rem);
   display: inline-block;
   border: var(--border-thick) solid var(--text-primary);
   box-shadow: 
     var(--shadow-offset) var(--shadow-offset) 0 var(--bg-accent2),
     calc(var(--shadow-offset) * -1) calc(var(--shadow-offset) * -1) 0 var(--bg-accent3);
-  line-height: 1;
+  line-height: 1.1;
+  width: 100%;
+  max-width: 100%;
 }
 
 h3 {
-  font-size: clamp(1.2rem, 4vw, 1.8rem);
-  margin-bottom: 1rem;
+  font-size: var(--font-size-lg);
+  margin-bottom: clamp(0.75rem, 2vw, 1rem);
   background: var(--bg-secondary);
   color: var(--text-primary);
-  padding: 8px 12px;
+  padding: clamp(0.5rem, 1.5vw, 0.5rem) clamp(0.75rem, 2vw, 0.75rem);
   border: var(--border-thin) solid var(--text-primary);
   transform: rotate(-1deg);
-  line-height: 1.1;
+  line-height: 1.2;
+  display: inline-block;
+  width: fit-content;
 }
 
 h4 {
-  font-size: clamp(1rem, 3vw, 1.3rem);
-  margin-bottom: 0.5rem;
+  font-size: var(--font-size-md);
+  margin-bottom: clamp(0.25rem, 1vw, 0.5rem);
   background: var(--bg-accent3);
   color: var(--text-secondary);
-  padding: 5px 10px;
+  padding: clamp(0.375rem, 1vw, 0.5rem) clamp(0.625rem, 1.5vw, 0.75rem);
   border: var(--border-thin) solid var(--text-primary);
-  line-height: 1.2;
+  line-height: 1.3;
+  display: inline-block;
 }
 
 /* =========================================
-        LAYOUT BRUTALIST RESPONSIF
+        LAYOUT BRUTALIST RESPONSIF - IMPROVED
 ========================================= */
 .page {
-  max-width: min(var(--maxw), 95%);
-  margin: 2rem auto;
-  padding: clamp(1rem, 4vw, 2.5rem);
+  max-width: min(var(--maxw), 98%);
+  margin: clamp(0.5rem, 2vw, 1.5rem) auto;
+  padding: clamp(1rem, 3vw, 2rem);
   background: var(--bg-secondary);
   border: var(--border-thick) solid var(--text-primary);
   box-shadow: 
     var(--shadow-offset) var(--shadow-offset) 0 var(--bg-accent),
-    calc(var(--shadow-offset) * 2) calc(var(--shadow-offset) * 2) 0 var(--bg-accent2),
-    calc(var(--shadow-offset) * 3) calc(var(--shadow-offset) * 3) 0 var(--bg-accent3);
+    calc(var(--shadow-offset) * 1.5) calc(var(--shadow-offset) * 1.5) 0 var(--bg-accent2),
+    calc(var(--shadow-offset) * 2) calc(var(--shadow-offset) * 2) 0 var(--bg-accent3);
   position: relative;
   overflow: hidden;
 }
@@ -126,15 +152,15 @@ h4 {
   top: 0;
   left: 0;
   right: 0;
-  height: 15px;
+  height: clamp(10px, 2vw, 15px);
   background: repeating-linear-gradient(
     90deg,
     var(--bg-accent) 0px,
-    var(--bg-accent) 15px,
-    var(--bg-accent2) 15px,
-    var(--bg-accent2) 30px,
-    var(--bg-accent3) 30px,
-    var(--bg-accent3) 45px
+    var(--bg-accent) clamp(10px, 2vw, 15px),
+    var(--bg-accent2) clamp(10px, 2vw, 15px),
+    var(--bg-accent2) clamp(20px, 4vw, 30px),
+    var(--bg-accent3) clamp(20px, 4vw, 30px),
+    var(--bg-accent3) clamp(30px, 6vw, 45px)
   );
   z-index: 10;
 }
@@ -142,25 +168,25 @@ h4 {
 .header {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-bottom: 2rem;
-  padding: 1rem 0;
+  gap: clamp(1rem, 3vw, 2rem);
+  margin-bottom: clamp(1.5rem, 4vw, 2rem);
+  padding: var(--spacing-sm) 0;
   border-bottom: var(--border-thick) solid var(--text-primary);
 }
 
 @media (min-width: 768px) {
   .header {
     grid-template-columns: 2fr 1fr;
-    gap: 3rem;
+    gap: clamp(1.5rem, 4vw, 3rem);
   }
 }
 
 /* =========================================
-        SECTION CONTAINER
+        SECTION CONTAINER - RESPONSIVE
 ========================================= */
 .section {
-  margin: 2rem 0;
-  padding: 1.5rem;
+  margin: clamp(1rem, 3vw, 2rem) 0;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
   border: var(--border-thin) solid var(--text-primary);
   background: repeating-linear-gradient(
     45deg,
@@ -175,19 +201,18 @@ h4 {
 .section::before {
   content: "";
   position: absolute;
-  top: -10px;
-  left: 20px;
+  top: clamp(-8px, -1.5vw, -10px);
+  left: clamp(10px, 3vw, 20px);
   background: var(--bg-secondary);
-  padding: 0 10px;
+  padding: 0 clamp(5px, 1.5vw, 10px);
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.9rem;
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
   border: var(--border-thin) solid var(--text-primary);
 }
 
 .section.tools::before {
   content: "/// TOOLS ///";
-  color: var(--text-);
-  background: var(--bg-accent4);
+  color: var(--text-primary);
 }
 
 .section.projects::before {
@@ -209,30 +234,34 @@ h4 {
 }
 
 /* =========================================
-        BADGES BRUTALIST
+        BADGES BRUTALIST - RESPONSIVE
 ========================================= */
 .badges {
   display: flex;
-  gap: 0.8rem;
-  margin: 1.5rem 0;
+  gap: clamp(0.5rem, 1.5vw, 0.8rem);
+  margin: clamp(1rem, 3vw, 1.5rem) 0;
   flex-wrap: wrap;
 }
 
 .badge {
   background: var(--bg-secondary);
   color: var(--text-primary);
-  padding: 0.5rem 1rem;
+  padding: clamp(0.375rem, 1vw, 0.5rem) clamp(0.75rem, 2vw, 1rem);
   border: var(--border-thin) solid var(--text-primary);
   font-family: 'Space Mono', monospace;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: clamp(0.7rem, 2vw, 0.85rem);
   text-transform: uppercase;
   position: relative;
   transform: rotate(1deg);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: clamp(0.25rem, 1vw, 0.5rem);
   white-space: nowrap;
+  flex-shrink: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .badge:nth-child(2n) {
@@ -248,67 +277,75 @@ h4 {
 }
 
 .badge img {
-  width: 18px;
-  height: 18px;
+  width: clamp(16px, 3vw, 18px);
+  height: clamp(16px, 3vw, 18px);
+  flex-shrink: 0;
   filter: grayscale(100%) contrast(200%);
 }
 
 /* =========================================
-        LEAD TEXT
+        LEAD TEXT - RESPONSIVE
 ========================================= */
 .lead {
   font-family: 'Space Mono', monospace;
-  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-  line-height: 1.6;
-  margin: 1.5rem 0;
-  padding: 1.5rem;
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  margin: var(--spacing-md) 0;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
   background: var(--bg-secondary);
   border: var(--border-thin) dashed var(--text-primary);
   transform: rotate(0.3deg);
   position: relative;
+  word-wrap: break-word;
+  hyphens: auto;
 }
 
 .lead::before {
   content: "///";
   position: absolute;
-  top: -12px;
-  left: 20px;
+  top: clamp(-10px, -2vw, -12px);
+  left: clamp(10px, 3vw, 20px);
   background: var(--bg-secondary);
-  padding: 0 10px;
+  padding: 0 clamp(5px, 1.5vw, 10px);
   color: var(--text-accent);
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.9rem;
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
 }
 
 /* =========================================
-        ACCORDION BRUTALIST
+        ACCORDION BRUTALIST - RESPONSIVE
 ========================================= */
 .accordion {
   width: 100%;
-  margin: 1rem 0;
+  margin: var(--spacing-sm) 0;
 }
 
 .accordion-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-sm);
   cursor: pointer;
-  padding: 0.8rem;
+  padding: clamp(0.5rem, 1.5vw, 0.8rem);
   background: var(--bg-secondary);
   border: var(--border-thin) solid var(--text-primary);
+  flex-wrap: wrap;
 }
 
 .accordion-btn {
-  background: var(--bg-accent4);
-  color: var(--text-primary4);
+  background: var(--bg-accent);
+  color: var(--text-secondary);
   border: var(--border-thin) solid var(--text-primary);
-  font-size: 1.2rem;
-  width: 36px;
-  height: 36px;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  width: clamp(32px, 8vw, 36px);
+  height: clamp(32px, 8vw, 36px);
   cursor: pointer;
   transition: var(--transition);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
 }
 
 .accordion-btn:hover {
@@ -317,25 +354,27 @@ h4 {
 }
 
 .accordion-btn.open {
-  background: var(--bg-accent);
+  background: var(--bg-accent2);
   color: var(--text-primary);
   transform: rotate(180deg);
 }
 
 /* =========================================
-        TAG BAR BRUTALIST
+        TAG BAR BRUTALIST - RESPONSIVE
 ========================================= */
 .tag-bar {
   display: flex;
-  gap: 0.6rem;
-  margin: 1rem 0;
+  gap: clamp(0.4rem, 1.5vw, 0.6rem);
+  margin: var(--spacing-sm) 0;
   overflow-x: auto;
-  padding: 0.8rem;
+  padding: var(--spacing-sm) 0;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-accent) var(--bg-primary);
 }
 
 .tag-bar::-webkit-scrollbar {
-  height: 6px;
+  height: clamp(4px, 1vw, 6px);
 }
 
 .tag-bar::-webkit-scrollbar-track {
@@ -345,43 +384,30 @@ h4 {
 .tag-bar::-webkit-scrollbar-thumb {
   background: var(--bg-accent);
   border: 1px solid var(--text-primary);
+  border-radius: 2px;
 }
 
 .tag {
   background: var(--bg-secondary);
   color: var(--text-primary);
-  padding: 0.5rem 1rem;
+  padding: clamp(0.375rem, 1vw, 0.5rem) clamp(0.75rem, 2vw, 1rem);
   border: var(--border-thin) solid var(--text-primary);
   font-family: 'IBM Plex Mono', monospace;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: clamp(0.7rem, 2vw, 0.85rem);
   text-transform: uppercase;
   white-space: nowrap;
   cursor: pointer;
   transition: var(--transition);
   flex-shrink: 0;
+  min-width: fit-content;
 }
 
 .tag:hover {
   background: var(--bg-accent);
-  color: var(--text-primary);
-  transform: translate(-2px, -2px);
-  box-shadow: 3px 3px 0 var(--bg-accent4);
-}
-.tag:nth-child(4n):hover {
-  background: var(--bg-accent2);
-  color: var(--text-primary);
-  box-shadow: 3px 3px 0 var(--bg-accent3);
-}
-.tag:nth-child(2n):hover {
-  background: var(--bg-accent3);
   color: var(--text-secondary);
+  transform: translate(-2px, -2px);
   box-shadow: 3px 3px 0 var(--bg-accent2);
-}
-.tag:nth-child(3n):hover {
-  background: var(--bg-accent4);
-  color: var(--text-primary);
-  box-shadow: 3px 3px 0 var(--bg-accent);
 }
 
 .tag.active {
@@ -391,7 +417,7 @@ h4 {
 }
 
 /* =========================================
-        TOOLS GRID BRUTALIST
+        TOOLS GRID BRUTALIST - RESPONSIVE
 ========================================= */
 .tools-body {
   overflow: hidden;
@@ -407,12 +433,12 @@ h4 {
 
 .tools-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-  gap: 1rem;
-  padding: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(50px, 10vw, 60px), 1fr));
+  gap: clamp(0.75rem, 2vw, 1rem);
+  padding: clamp(1rem, 2.5vw, 1.5rem);
   background: var(--bg-secondary);
   border: var(--border-thin) solid var(--text-primary);
-  margin-top: 1rem;
+  margin-top: var(--spacing-sm);
 }
 
 .tools-grid img {
@@ -422,25 +448,18 @@ h4 {
   object-fit: contain;
   border: var(--border-thin) solid var(--text-primary);
   background: var(--bg-secondary);
-  padding: 12px;
+  padding: clamp(8px, 2vw, 12px);
   transition: var(--transition);
   filter: contrast(150%) grayscale(100%);
+  max-width: 100%;
 }
 
 .tools-grid img:hover {
   transform: scale(1.15) rotate(5deg);
   border-color: var(--bg-accent);
-  background: var(--bg-secondary);
+  background: var(--bg-accent2);
   filter: none;
   box-shadow: 4px 4px 0 var(--bg-accent3);
-}
-
-.tools-grid img:nth-child(even):hover {
-  transform: scale(1.15) rotate(-5deg);
-  border-color: var(--bg-accent3);
-  background: var(--bg-secondary);
-  filter: none;
-  box-shadow: 4px 4px 0 var(--bg-accent);
 }
 
 .tools-grid.dimmed img {
@@ -455,67 +474,17 @@ h4 {
 }
 
 /* =========================================
-        PROJECTS CAROUSEL BRUTALIST
+        CAROUSEL SNAP EFFECT
 ========================================= */
-.projects-section {
-  margin: 2rem 0;
-}
-
-.project-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.project-controls {
-  display: flex;
-  gap: 0.8rem;
-  align-items: center;
-}
-
-.project-arrow {
-  background: var(--bg-accent4);
-  color: var(--text-primary);
-  border: var(--border-thin) solid var(--text-primary);
-  font-size: 1.2rem;
-  width: 40px;
-  height: 40px;
-  margin: 4px;
-  float: left;
-  cursor: pointer;
-  transition: var(--transition);
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.project-arrow:nth-child(1) {
-  background: var(--bg-accent);
-}
-
-.project-arrow:hover {
-  background: var(--bg-accent2);
-  color: var(--text-secondary);
-  transform: scale(1.1);
-}
-
-.carousel-container {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
 .carousel-wrapper {
   overflow-x: auto;
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding: 1rem 0.5rem;
-  margin: 0 0.8rem;
+  padding: var(--spacing-sm) clamp(0.25rem, 1vw, 0.5rem);
+  margin: 0 clamp(-0.25rem, -1vw, -0.5rem);
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
 }
 
 .carousel-wrapper::-webkit-scrollbar {
@@ -524,20 +493,196 @@ h4 {
 
 .carousel {
   display: flex;
-  gap: 1.5rem;
-  padding: 0.5rem;
+  gap: clamp(1rem, 3vw, 1.5rem);
+  padding: clamp(0.25rem, 1vw, 0.5rem);
+  min-width: min-content;
 }
 
 .carousel-track {
   display: flex;
-  gap: 1.5rem;
+  gap: clamp(1rem, 3vw, 1.5rem);
   transition: transform 0.3s ease;
 }
 
+/* Animation for snap effect */
+@keyframes snapFocus {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.card.snap-focus, .cert-card.snap-focus {
+  animation: snapFocus 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  border-color: var(--bg-accent);
+  box-shadow: 
+    0 0 0 2px var(--bg-accent),
+    6px 6px 0 var(--bg-accent2),
+    12px 12px 0 var(--bg-accent3);
+}
+
+/* Active dot indicator */
+.carousel-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0.5rem;
+}
+
+.indicator-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 2px solid var(--text-primary);
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.indicator-dot.active {
+  background: var(--bg-accent);
+  transform: scale(1.2);
+}
+
+.indicator-dot:hover {
+  background: var(--bg-accent2);
+  transform: scale(1.3);
+}
+
+/* Arrow animation */
+.project-arrow:active, .cert-arrow:active {
+  transform: scale(0.95);
+  background: var(--bg-accent3);
+}
+
+/* Highlight current item */
+.current-item {
+  position: relative;
+}
+
+.current-item::after {
+  content: "CURRENT";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--bg-accent);
+  color: var(--text-secondary);
+  padding: 0.2rem 0.5rem;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.6rem;
+  border: 2px solid var(--text-primary);
+  z-index: 2;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Progress bar */
+.carousel-progress {
+  width: 100%;
+  height: 4px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--text-primary);
+  margin-top: 1rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--bg-accent);
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 5px,
+    rgba(255, 255, 255, 0.3) 5px,
+    rgba(255, 255, 255, 0.3) 10px
+  );
+}
+
 /* =========================================
-        CARDS BRUTALIST
+        PROJECTS CAROUSEL BRUTALIST - RESPONSIVE
 ========================================= */
-.card {
+.projects-section {
+  margin: var(--spacing-md) 0;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
+  flex-wrap: wrap;
+  gap: clamp(0.75rem, 2vw, 1rem);
+}
+
+.project-controls {
+  display: flex;
+  gap: clamp(0.5rem, 1.5vw, 0.8rem);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.project-arrow {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: var(--border-thin) solid var(--text-primary);
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  width: clamp(36px, 9vw, 40px);
+  height: clamp(36px, 9vw, 40px);
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+}
+
+.project-arrow:hover {
+  background: var(--bg-accent);
+  color: var(--text-secondary);
+  transform: scale(1.1);
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+/* =========================================
+        CARDS BRUTALIST - RESPONSIVE
+========================================= */
+.card, .cert-card {
   flex: 0 0 calc(var(--card-width) - 2rem);
   background: var(--bg-secondary);
   border: var(--border-thick) solid var(--text-primary);
@@ -546,17 +691,31 @@ h4 {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 320px;
+  min-height: clamp(280px, 80vw, 320px);
+  width: 100%;
+  max-width: calc(var(--card-width) - 2rem);
+  min-width: 280px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
-@media (max-width: 768px) {
-  .card {
-    flex: 0 0 calc(100vw - 4rem);
+@media (max-width: 640px) {
+  .card, .cert-card {
+    flex: 0 0 calc(90vw - 2rem);
     min-height: 280px;
+    min-width: 260px;
   }
 }
 
-.card:hover {
+@media (max-width: 480px) {
+  .card, .cert-card {
+    flex: 0 0 calc(95vw - 2rem);
+    min-height: 260px;
+    min-width: 240px;
+  }
+}
+
+.card:hover, .cert-card:hover {
   transform: translate(-8px, -8px);
   box-shadow: 
     12px 12px 0 var(--bg-accent),
@@ -564,15 +723,16 @@ h4 {
   border-color: var(--bg-accent3);
 }
 
-.card-image {
-  height: 160px;
+.card-image, .cert-image {
+  height: clamp(140px, 40vw, 160px);
   overflow: hidden;
   border-bottom: var(--border-thick) solid var(--text-primary);
   background: var(--bg-primary);
   position: relative;
+  flex-shrink: 0;
 }
 
-.card-image img {
+.card-image img, .cert-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -580,73 +740,84 @@ h4 {
   filter: contrast(200%) grayscale(100%);
 }
 
-.card:hover .card-image img {
+.card:hover .card-image img, .cert-card:hover .cert-image img {
   transform: scale(1.08);
   filter: contrast(100%) grayscale(0%);
 }
 
-.card-content {
-  padding: 1.2rem;
+.card-content, .cert-content {
+  padding: clamp(0.75rem, 2vw, 1.2rem);
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  min-height: 0;
 }
 
 .card-title {
-  margin: 0 0 0.8rem 0;
-  padding: 0.5rem 0.8rem;
+  margin: 0 0 clamp(0.5rem, 1.5vw, 0.8rem) 0;
+  padding: clamp(0.375rem, 1vw, 0.5rem) clamp(0.5rem, 1.5vw, 0.8rem);
   background: var(--bg-accent3);
   color: var(--text-secondary);
   border: var(--border-thin) solid var(--text-primary);
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
   line-height: 1.2;
   transform: rotate(-0.5deg);
   position: relative;
-  left: -0.5rem;
+  left: clamp(-0.25rem, -1vw, -0.5rem);
   display: inline-block;
+  max-width: calc(100% + 0.5rem);
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card-description {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.9rem;
-  line-height: 1.5;
+  font-size: clamp(0.8rem, 2.2vw, 0.9rem);
+  line-height: 1.4;
   color: var(--text-primary);
   flex-grow: 1;
   display: -webkit-box;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-bottom: 0.5rem;
+  margin-bottom: clamp(0.25rem, 1vw, 0.5rem);
+  word-break: break-word;
+  hyphens: auto;
+  max-height: 3.6em;
 }
 
 .card-tech {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: clamp(0.25rem, 1vw, 0.4rem);
   margin-top: auto;
 }
 
 .tech-tag {
   background: var(--bg-secondary);
   color: var(--text-primary);
-  padding: 0.2rem 0.6rem;
+  padding: clamp(0.15rem, 0.5vw, 0.2rem) clamp(0.375rem, 1vw, 0.5rem);
   border: 1px solid var(--text-primary);
   font-family: 'Space Mono', monospace;
-  font-size: 0.7rem;
+  font-size: clamp(0.6rem, 1.8vw, 0.7rem);
   font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* =========================================
-        SOCIAL CONNECT BRUTALIST
+        SOCIAL CONNECT BRUTALIST - RESPONSIVE
 ========================================= */
 .connect-section {
-  margin: 2rem 0;
+  margin: var(--spacing-md) 0;
 }
 
 .social-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-  gap: 1rem;
-  padding: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(50px, 12vw, 60px), 1fr));
+  gap: clamp(0.75rem, 2vw, 1rem);
+  padding: clamp(1rem, 2.5vw, 1.5rem);
   background: var(--bg-secondary);
   border: var(--border-thin) solid var(--text-primary);
 }
@@ -655,6 +826,8 @@ h4 {
   display: block;
   transition: var(--transition);
   aspect-ratio: 1;
+  width: 100%;
+  height: auto;
 }
 
 .social-icon {
@@ -663,7 +836,7 @@ h4 {
   object-fit: contain;
   border: var(--border-thin) solid var(--text-primary);
   background: var(--bg-secondary);
-  padding: 12px;
+  padding: clamp(8px, 2vw, 12px);
   transition: var(--transition);
   filter: grayscale(100%) contrast(200%);
 }
@@ -671,71 +844,76 @@ h4 {
 .social-link:hover .social-icon {
   transform: scale(1.1) rotate(-5deg);
   border-color: var(--bg-accent);
-  background: var(--bg-secondary);
+  background: var(--bg-accent2);
   filter: none;
   box-shadow: 4px 4px 0 var(--bg-accent3);
 }
 
-.social-link:nth-child(even):hover .social-icon {
-  transform: scale(1.1) rotate(5deg);
-  border-color: var(--bg-accent3);
-  background: var(--bg-secondary);
-  filter: none;
-  box-shadow: 4px 4px 0 var(--bg-accent);
-}
-
 /* =========================================
-        PHOTO SECTION
+        PHOTO SECTION - RESPONSIVE
 ========================================= */
 .photo-container {
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-md);
+  width: 100%;
+  height: auto;
 }
 
 .photo-image {
   width: 100%;
   height: auto;
+  aspect-ratio: 4/3;
   object-fit: cover;
   border: var(--border-thick) solid var(--text-primary);
   filter: contrast(150%) grayscale(100%);
   transition: var(--transition);
+  max-width: 100%;
 }
 
 .photo-image:hover {
-  transform: translate(-8px, -8px);
-  box-shadow: 
-    12px 12px 0 var(--bg-accent),
-    24px 24px 0 var(--bg-accent2);
-  border-color: var(--bg-accent3);
   filter: contrast(100%) grayscale(0%);
   transform: rotate(1deg) scale(1.01);
 }
 
 /* =========================================
-        CERTIFICATES SECTION
+        CERTIFICATES SECTION - RESPONSIVE
 ========================================= */
 .certificates-section {
-  margin: 2rem 0;
+  margin: var(--spacing-md) 0;
 }
 
 .certificates-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
+  align-items: flex-start;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: clamp(0.75rem, 2vw, 1rem);
 }
 
 .certificates-controls {
   display: flex;
-  gap: 1rem;
+  gap: clamp(0.75rem, 2vw, 1rem);
   align-items: center;
   flex-wrap: wrap;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .certificates-controls {
+    width: auto;
+  }
 }
 
 .certificates-filter {
   position: relative;
-  min-width: 150px;
+  min-width: clamp(150px, 30vw, 200px);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .certificates-filter {
+    width: auto;
+  }
 }
 
 .filter-select {
@@ -743,18 +921,19 @@ h4 {
   background: var(--bg-secondary);
   color: var(--text-primary);
   border: var(--border-thin) solid var(--text-primary);
-  padding: 0.6rem 1rem;
+  padding: clamp(0.5rem, 1.5vw, 0.6rem) clamp(0.75rem, 2vw, 1rem);
   font-family: 'IBM Plex Mono', monospace;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 2.2vw, 0.9rem);
   cursor: pointer;
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='black' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 15px center;
-  background-size: 12px;
-  padding-right: 40px;
+  background-position: right clamp(10px, 2vw, 15px) center;
+  background-size: clamp(10px, 2vw, 12px);
+  padding-right: clamp(35px, 8vw, 40px);
   transition: var(--transition);
+  min-height: 40px;
 }
 
 .filter-select:hover {
@@ -764,25 +943,24 @@ h4 {
 
 .certificates-arrows {
   display: flex;
-  gap: 0.5rem;
+  gap: clamp(0.375rem, 1vw, 0.5rem);
+  flex-shrink: 0;
 }
 
 .cert-arrow {
-  background: var(--bg-accent4);
+  background: var(--bg-secondary);
   color: var(--text-primary);
   border: var(--border-thin) solid var(--text-primary);
-  font-size: 1.2rem;
-  width: 36px;
-  height: 36px;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  width: clamp(32px, 8vw, 36px);
+  height: clamp(32px, 8vw, 36px);
   cursor: pointer;
   transition: var(--transition);
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.cert-arrow:nth-child(1) {
-  background: var(--bg-accent);
+  flex-shrink: 0;
+  min-width: 32px;
 }
 
 .cert-arrow:hover {
@@ -790,51 +968,33 @@ h4 {
   transform: scale(1.1);
 }
 
-/* Certificate Card */
-.cert-card {
-  flex: 0 0 calc(var(--card-width) - 2rem);
-  background: var(--bg-secondary);
-  border: var(--border-thick) solid var(--text-primary);
-  cursor: pointer;
-  transition: var(--transition);
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-height: 300px;
-}
-
-.cert-card:hover {
-  transform: translate(8px, -8px);
-  box-shadow: 
-    -12px 12px 0 var(--bg-accent3),
-    -24px 24px 0 var(--bg-accent2);
-  border-color: var(--bg-accent);
-}
-
+/* Certificate Card Specific */
 .cert-badge {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: clamp(8px, 2vw, 12px);
+  right: clamp(8px, 2vw, 12px);
   background: var(--bg-accent);
   color: var(--text-secondary);
-  padding: 0.3rem 0.6rem;
+  padding: clamp(0.2rem, 0.8vw, 0.3rem) clamp(0.4rem, 1.2vw, 0.6rem);
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.65rem;
+  font-size: clamp(0.6rem, 1.8vw, 0.65rem);
   border: var(--border-thin) solid var(--text-primary);
   transform: rotate(5deg);
   z-index: 2;
+  white-space: nowrap;
 }
 
 .cert-issuer {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
-  padding: 1rem 1rem 0.5rem;
+  gap: clamp(0.5rem, 1.5vw, 0.8rem);
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(0.75rem, 2vw, 1rem) clamp(0.375rem, 1vw, 0.5rem);
+  flex-wrap: wrap;
 }
 
 .cert-issuer img {
-  width: 24px;
-  height: 24px;
+  width: clamp(20px, 4vw, 24px);
+  height: clamp(20px, 4vw, 24px);
   border: var(--border-thin) solid var(--text-primary);
   filter: grayscale(100%) contrast(200%);
   flex-shrink: 0;
@@ -843,12 +1003,13 @@ h4 {
 .cert-issuer span {
   font-family: 'IBM Plex Mono', monospace;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 2vw, 0.85rem);
   color: var(--text-primary);
+  word-break: break-word;
 }
 
 /* =========================================
-        MODALS BRUTALIST
+        MODALS BRUTALIST - RESPONSIVE
 ========================================= */
 .modal-overlay {
   display: none;
@@ -862,7 +1023,8 @@ h4 {
   z-index: 10000;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: clamp(0.5rem, 2vw, 1rem);
+  overflow-y: auto;
 }
 
 .modal-overlay.active {
@@ -888,6 +1050,7 @@ h4 {
   overflow-y: auto;
   position: relative;
   animation: modalSlide 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+  margin: auto;
 }
 
 @keyframes modalSlide {
@@ -903,14 +1066,14 @@ h4 {
 
 .modal-close {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: clamp(10px, 2vw, 15px);
+  right: clamp(10px, 2vw, 15px);
   background: var(--bg-accent);
   color: var(--text-secondary);
   border: var(--border-thin) solid var(--text-primary);
-  font-size: 1.5rem;
-  width: 40px;
-  height: 40px;
+  font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+  width: clamp(32px, 8vw, 40px);
+  height: clamp(32px, 8vw, 40px);
   cursor: pointer;
   z-index: 10001;
   transition: var(--transition);
@@ -926,7 +1089,7 @@ h4 {
 }
 
 .modal-header {
-  padding: 1.5rem 1.5rem 1rem;
+  padding: clamp(1rem, 2.5vw, 1.5rem) clamp(1rem, 2.5vw, 1.5rem) clamp(0.75rem, 2vw, 1rem);
   background: repeating-linear-gradient(
     45deg,
     var(--bg-accent),
@@ -942,32 +1105,35 @@ h4 {
 .modal-title {
   color: var(--text-secondary);
   text-shadow: 2px 2px 0 var(--text-primary);
-  font-size: clamp(1.5rem, 5vw, 2rem);
-  margin-bottom: 0.5rem;
-  line-height: 1.1;
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  margin-bottom: clamp(0.25rem, 1vw, 0.5rem);
+  line-height: 1.2;
+  word-wrap: break-word;
 }
 
 .modal-subtitle {
   font-family: 'Space Mono', monospace;
-  font-size: 0.95rem;
+  font-size: clamp(0.8rem, 2.2vw, 0.95rem);
   color: var(--text-secondary);
   background: rgba(0, 0, 0, 0.7);
-  padding: 0.3rem 0.8rem;
+  padding: clamp(0.2rem, 0.8vw, 0.3rem) clamp(0.5rem, 1.5vw, 0.8rem);
   display: inline-block;
   border: var(--border-thin) solid var(--text-primary);
+  word-break: break-word;
 }
 
 .modal-content {
-  padding: 1.5rem;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
 }
 
 .modal-image {
   width: 100%;
-  height: 200px;
+  height: clamp(160px, 40vw, 200px);
   border: var(--border-thick) solid var(--text-primary);
-  margin-bottom: 1.5rem;
+  margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
   overflow: hidden;
   background: var(--bg-primary);
+  flex-shrink: 0;
 }
 
 .modal-image img {
@@ -983,8 +1149,8 @@ h4 {
 }
 
 .modal-section {
-  margin-bottom: 1.5rem;
-  padding: 1.2rem;
+  margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
+  padding: clamp(0.75rem, 2vw, 1.2rem);
   border: var(--border-thin) solid var(--text-primary);
   background: var(--bg-secondary);
   position: relative;
@@ -993,39 +1159,43 @@ h4 {
 .modal-section h4 {
   background: var(--bg-accent3);
   color: var(--text-secondary);
-  padding: 0.5rem 1rem;
-  margin-bottom: 1rem;
+  padding: clamp(0.375rem, 1vw, 0.5rem) clamp(0.75rem, 2vw, 1rem);
+  margin-bottom: clamp(0.75rem, 2vw, 1rem);
   display: inline-block;
   border: var(--border-thin) solid var(--text-primary);
   transform: rotate(-1deg);
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
   position: relative;
-  left: -0.5rem;
+  left: clamp(-0.25rem, -1vw, -0.5rem);
 }
 
 .modal-description {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: clamp(0.85rem, 2.2vw, 0.95rem);
+  line-height: 1.5;
   color: var(--text-primary);
-  margin-bottom: 1rem;
+  margin-bottom: clamp(0.75rem, 2vw, 1rem);
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .tech-stack {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
+  gap: clamp(0.4rem, 1.5vw, 0.6rem);
 }
 
 .tech-item {
   background: var(--bg-secondary);
   color: var(--text-primary);
-  padding: 0.4rem 0.8rem;
+  padding: clamp(0.3rem, 1vw, 0.4rem) clamp(0.6rem, 1.5vw, 0.8rem);
   border: var(--border-thin) solid var(--text-primary);
   font-family: 'Space Mono', monospace;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 2vw, 0.85rem);
   transition: var(--transition);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .tech-item:hover {
@@ -1036,23 +1206,24 @@ h4 {
 
 .modal-links {
   display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: clamp(0.75rem, 2vw, 1rem);
+  margin-top: clamp(1rem, 2.5vw, 1.5rem);
   flex-wrap: wrap;
 }
 
 .modal-link {
   background: var(--bg-accent2);
   color: var(--text-primary);
-  padding: 0.8rem 1.5rem;
+  padding: clamp(0.6rem, 1.5vw, 0.8rem) clamp(1rem, 2.5vw, 1.5rem);
   text-decoration: none;
   border: var(--border-thin) solid var(--text-primary);
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 2.2vw, 0.9rem);
   transition: var(--transition);
   flex: 1;
   text-align: center;
-  min-width: 140px;
+  min-width: clamp(120px, 30vw, 140px);
+  word-break: break-word;
 }
 
 .modal-link:hover {
@@ -1063,100 +1234,155 @@ h4 {
 }
 
 /* =========================================
-        FOOTER
+        FOOTER - RESPONSIVE
 ========================================= */
 .footer {
-  margin-top: 2rem;
-  padding: 1rem;
+  margin-top: clamp(1.5rem, 4vw, 2rem);
+  padding: var(--spacing-sm);
   background: var(--bg-primary);
   color: var(--bg-accent2);
   text-align: center;
   border-top: var(--border-thick) solid var(--text-primary);
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.8rem;
+  font-size: clamp(0.7rem, 2vw, 0.8rem);
   position: relative;
+  word-break: break-word;
 }
 
 .footer::before {
   content: "///";
   position: absolute;
-  top: -12px;
+  top: clamp(-10px, -2vw, -12px);
   left: 50%;
   transform: translateX(-50%);
   background: var(--bg-primary);
-  padding: 0 10px;
+  padding: 0 clamp(5px, 1.5vw, 10px);
   color: var(--bg-accent2);
-  font-size: 1rem;
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
 }
 
 /* =========================================
-        RESPONSIVE BREAKPOINTS
+        RESPONSIVE BREAKPOINTS - SIMPLIFIED
 ========================================= */
 @media (max-width: 768px) {
-  :root {
-    --border-thick: 6px;
-    --border-thin: 3px;
-    --shadow-offset: 5px;
-    --card-width: 280px;
+  .project-header,
+  .certificates-header {
+    flex-direction: column;
+    align-items: stretch;
   }
-
-  .page {
-    margin: 1rem auto;
-    padding: 1.5rem;
-  }
-
+  
   .project-controls,
   .certificates-controls {
-    width: 100%;
     justify-content: space-between;
+    width: 100%;
   }
-
+  
   .modal-links {
     flex-direction: column;
   }
-
+  
   .modal-link {
     min-width: 100%;
   }
-
+  
   .tools-grid {
-    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
-    gap: 0.8rem;
-    padding: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(45px, 12vw, 50px), 1fr));
+    gap: clamp(0.5rem, 1.5vw, 0.8rem);
+    padding: clamp(0.75rem, 2vw, 1rem);
   }
 }
 
-@media (max-width: 480px) {
-  :root {
-    --border-thick: 4px;
-    --border-thin: 2px;
-    --shadow-offset: 3px;
-    --card-width: 250px;
-  }
-
+@media (max-width: 640px) {
   .page {
-    margin: 0.5rem auto;
-    padding: 1rem;
-    box-shadow: 
-      var(--shadow-offset) var(--shadow-offset) 0 var(--bg-accent),
-      calc(var(--shadow-offset) * 2) calc(var(--shadow-offset) * 2) 0 var(--bg-accent2);
+    margin: clamp(0.25rem, 1vw, 0.5rem) auto;
+    padding: clamp(0.75rem, 2vw, 1rem);
   }
-
+  
   .card,
   .cert-card {
     min-height: 260px;
   }
-
-  .card-image {
+  
+  .card-image,
+  .cert-image {
     height: 140px;
   }
-
+  
   .modal {
     max-height: 95vh;
   }
-
+  
   .modal-image {
     height: 160px;
+  }
+  
+  .header h2 {
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .badges {
+    gap: 0.5rem;
+  }
+  
+  .badge {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.7rem;
+  }
+  
+  .card,
+  .cert-card {
+    min-height: 240px;
+  }
+  
+  .card-image,
+  .cert-image {
+    height: 130px;
+  }
+  
+  .card-title {
+    font-size: 0.9rem;
+    padding: 0.375rem 0.5rem;
+  }
+  
+  .card-description {
+    font-size: 0.8rem;
+    -webkit-line-clamp: 2;
+  }
+  
+  .lead {
+    padding: 0.875rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .card,
+  .cert-card {
+    min-height: 220px;
+    min-width: 220px;
+  }
+  
+  .card-image,
+  .cert-image {
+    height: 120px;
+  }
+  
+  .card-description {
+    -webkit-line-clamp: 2;
+    font-size: 0.75rem;
+  }
+  
+  .tech-tag {
+    font-size: 0.6rem;
+    padding: 0.15rem 0.375rem;
+  }
+  
+  .tools-grid {
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    gap: 0.5rem;
   }
 }
 
@@ -1227,7 +1453,7 @@ h4 {
 }
 
 /* =========================================
-        UTILITY CLASSES
+        UTILITY CLASSES - RESPONSIVE
 ========================================= */
 .sr-only {
   position: absolute;
@@ -1245,20 +1471,82 @@ h4 {
   text-align: center;
 }
 
-.mt-1 { margin-top: 0.5rem; }
-.mt-2 { margin-top: 1rem; }
-.mt-3 { margin-top: 1.5rem; }
-.mt-4 { margin-top: 2rem; }
+/* Responsive margin utilities */
+.mt-1 { margin-top: var(--spacing-xs); }
+.mt-2 { margin-top: var(--spacing-sm); }
+.mt-3 { margin-top: var(--spacing-md); }
+.mt-4 { margin-top: var(--spacing-lg); }
 
-.mb-1 { margin-bottom: 0.5rem; }
-.mb-2 { margin-bottom: 1rem; }
-.mb-3 { margin-bottom: 1.5rem; }
-.mb-4 { margin-bottom: 2rem; }
+.mb-1 { margin-bottom: var(--spacing-xs); }
+.mb-2 { margin-bottom: var(--spacing-sm); }
+.mb-3 { margin-bottom: var(--spacing-md); }
+.mb-4 { margin-bottom: var(--spacing-lg); }
 
-.p-1 { padding: 0.5rem; }
-.p-2 { padding: 1rem; }
-.p-3 { padding: 1.5rem; }
-.p-4 { padding: 2rem; }
+/* Responsive padding utilities */
+.p-1 { padding: var(--spacing-xs); }
+.p-2 { padding: var(--spacing-sm); }
+.p-3 { padding: var(--spacing-md); }
+.p-4 { padding: var(--spacing-lg); }
+
+/* Text truncation */
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.text-truncate-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Smooth scrolling for iOS */
+html {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Better touch targets on mobile */
+@media (max-width: 768px) {
+  button,
+  [role="button"],
+  .tag,
+  .badge,
+  .project-arrow,
+  .cert-arrow {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .tag,
+  .badge {
+    min-height: 36px;
+  }
+}
+
+/* Improve readability on small screens */
+@media (max-width: 480px) {
+  body {
+    font-size: 15px;
+  }
+  
+  .lead {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  
+  .card-description {
+    font-size: 0.85rem;
+  }
+}
 </style>
 </head>
 
@@ -1273,7 +1561,7 @@ h4 {
       <h2>BRUTALIST DEVELOPER & CREATIVE CODER</h2>
       
       <div class="badges">
-        <span class="badge"><img src="https://decisive-platypus-f3d.notion.site/icons/butterfly_gray.svg?mode=" alt="Student icon">STUDENT</span>
+        <span class="badge"><img src="https://decisive-platypus-f3d.notion.site/icons/butterfly_gray.svg?mode=dark" alt="Student icon">STUDENT</span>
         <span class="badge">AI ENTHUSIAST</span>
         <span class="badge">VIBE CODER</span>
         <span class="badge">BRUTALIST</span>
@@ -1320,8 +1608,8 @@ h4 {
         <h3 id="projects-title">PROJECTS</h3>
         <div class="project-controls">
           <div class="project-arrows">
-            <button class="project-arrow" onclick="slideLeft()" aria-label="Scroll projects left">◄</button>
-            <button class="project-arrow" onclick="slideRight()" aria-label="Scroll projects right">►</button>
+            <button class="project-arrow" onclick="slideProject(-1)" aria-label="Scroll projects left">◄</button>
+            <button class="project-arrow" onclick="slideProject(1)" aria-label="Scroll projects right">►</button>
           </div>
         </div>
       </div>
@@ -1331,6 +1619,16 @@ h4 {
           <div class="carousel" id="projects-track" role="list" aria-label="Projects list">
             <!-- Projects will be loaded dynamically -->
           </div>
+        </div>
+        
+        <!-- Progress bar for projects -->
+        <div class="carousel-progress" id="projects-progress">
+          <div class="progress-fill" id="projects-progress-fill"></div>
+        </div>
+        
+        <!-- Indicator dots for projects -->
+        <div class="carousel-indicator" id="projects-indicator">
+          <!-- Dots will be added dynamically -->
         </div>
       </div>
     </div>
@@ -1357,8 +1655,8 @@ h4 {
             </select>
           </div>
           <div class="certificates-arrows">
-            <button class="cert-arrow" onclick="slideCertLeft()" aria-label="Scroll certificates left">◄</button>
-            <button class="cert-arrow" onclick="slideCertRight()" aria-label="Scroll certificates right">►</button>
+            <button class="cert-arrow" onclick="slideCertificate(-1)" aria-label="Scroll certificates left">◄</button>
+            <button class="cert-arrow" onclick="slideCertificate(1)" aria-label="Scroll certificates right">►</button>
           </div>
         </div>
       </div>
@@ -1368,6 +1666,16 @@ h4 {
           <div class="carousel" id="certificates-track" role="list" aria-label="Certificates list">
             <!-- Certificates will be loaded dynamically -->
           </div>
+        </div>
+        
+        <!-- Progress bar for certificates -->
+        <div class="carousel-progress" id="certificates-progress">
+          <div class="progress-fill" id="certificates-progress-fill"></div>
+        </div>
+        
+        <!-- Indicator dots for certificates -->
+        <div class="carousel-indicator" id="certificates-indicator">
+          <!-- Dots will be added dynamically -->
         </div>
       </div>
     </div>
@@ -1408,7 +1716,7 @@ h4 {
 
   <!-- FOOTER -->
   <footer class="footer">
-    <span style="color: var(--bg-accent);">© 2025</span> <a style="color: var(--bg-accent3);" href="https://github.com/takathena">TAKATHENA</a>　—　<span style="color: yellow;">MAKE WITH L*VE</span>
+    © 2025 TAKATHENA — BRUTALIST EDITION
   </footer>
 </div>
 
@@ -1513,7 +1821,7 @@ h4 {
 
 <script>
 /* =========================================
-        BRUTALIST JAVASCRIPT - IMPROVED
+        BRUTALIST JAVASCRIPT - IMPROVED WITH SNAP EFFECT
 ========================================= */
 
 // Database icons
@@ -1540,15 +1848,16 @@ const toolsDB = [
   {cat:"programming", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"}
 ];
 
-// Projects data - Full 8 projects
+// Projects data - Optimized for mobile
 const projects = [
   {
     id: 0,
     title: "BRUTALIST STARTUP PAGE",
     subtitle: "EXPERIMENTAL WEB • 1 MONTH",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop",
-    description: "A radical browser startup page that rejects conventional design norms. Features brutalist aesthetics, glitch effects, and minimalist functionality. Built with raw HTML/CSS and JavaScript.",
-    technologies: ["HTML5", "CSS3", "JAVASCRIPT", "BRUTALIST DESIGN", "GLITCH ART"],
+    description: "A radical browser startup page that rejects conventional design norms. Features brutalist aesthetics, glitch effects, and minimalist functionality.",
+    shortDescription: "Radical browser startup page with brutalist design and glitch effects.",
+    technologies: ["HTML5", "CSS3", "JS", "BRUTALIST", "GLITCH ART"],
     features: "• RAW, UNFILTERED UI\n• GLITCH ANIMATIONS\n• MINIMALIST NAVIGATION\n• CUSTOM TYPOGRAPHY\n• EXPERIMENTAL LAYOUTS\n• DARK MODE ONLY",
     liveLink: "https://brutal.takathena.com",
     githubLink: "https://github.com/takathena/brutalist-startpage"
@@ -1559,8 +1868,9 @@ const projects = [
     subtitle: "AI/ML ART • 2 MONTHS",
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop",
     description: "An AI image generator that intentionally creates glitched and distorted art. Embraces imperfection and digital artifacts as aesthetic features.",
+    shortDescription: "AI image generator creating glitched and distorted art intentionally.",
     technologies: ["PYTHON", "TENSORFLOW", "GLSL", "WEBGL", "AI ART"],
-    features: "• GLITCH-STYLE GENERATION\n• REAL-TIME DISTORTION\n• NOISE INJECTION\n• COLOR CHANNEL SHIFTING\n• PIXELATION CONTROLS\n• BATCH PROCESSING",
+    features: "• GLITCH-STYLE GENERATION\n• REAL-TIME DISTORTION\n• NOISE INJECTION\n• COLOR CHANNEL SHIFTING\n• PIXELATION CONTROLS",
     liveLink: "https://glitch-ai.takathena.com",
     githubLink: "https://github.com/takathena/glitch-ai-generator"
   },
@@ -1570,8 +1880,9 @@ const projects = [
     subtitle: "DEVELOPMENT TOOL • 1.5 MONTHS",
     image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=800&h=400&fit=crop",
     description: "A terminal-based code editor with brutalist UI. No syntax highlighting, no autocomplete—just raw text editing in monospace fonts.",
+    shortDescription: "Terminal-based code editor with brutalist UI and minimal features.",
     technologies: ["NODE.JS", "TERMINAL UI", "STREAMS", "FILE SYSTEM", "CLI"],
-    features: "• TERMINAL INTERFACE\n• MONOSPACE ONLY\n• FILE SYSTEM INTEGRATION\n• MINIMAL FEATURES\n• KEYBOARD-ONLY NAVIGATION\n• PLUGIN SYSTEM",
+    features: "• TERMINAL INTERFACE\n• MONOSPACE ONLY\n• FILE SYSTEM INTEGRATION\n• MINIMAL FEATURES\n• KEYBOARD-ONLY NAVIGATION",
     liveLink: "https://terminal.takathena.com",
     githubLink: "https://github.com/takathena/terminal-editor"
   },
@@ -1581,8 +1892,9 @@ const projects = [
     subtitle: "DATA VISUALIZATION • 2 MONTHS",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop&auto=format&fit=crop&q=80",
     description: "A data visualization dashboard that rejects conventional charting libraries. Uses raw SVG and canvas for maximum performance.",
+    shortDescription: "Data visualization dashboard using raw SVG and canvas for performance.",
     technologies: ["D3.JS", "SVG", "CANVAS", "WEB WORKERS", "DATA VIZ"],
-    features: "• RAW SVG RENDERING\n• REAL-TIME UPDATES\n• MINIMALIST CHARTS\n• CUSTOM GRID SYSTEM\n• PERFORMANCE OPTIMIZED\n• OFFLINE SUPPORT",
+    features: "• RAW SVG RENDERING\n• REAL-TIME UPDATES\n• MINIMALIST CHARTS\n• CUSTOM GRID SYSTEM\n• PERFORMANCE OPTIMIZED",
     liveLink: "https://data-brutal.takathena.com",
     githubLink: "https://github.com/takathena/data-brutalism"
   },
@@ -1592,8 +1904,9 @@ const projects = [
     subtitle: "REAL-TIME APP • 2.5 MONTHS",
     image: "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=800&h=400&fit=crop",
     description: "A real-time chat application with brutalist design principles. No emojis, no rich text—just pure text communication.",
+    shortDescription: "Real-time chat app with brutalist design and pure text communication.",
     technologies: ["WEBSOCKETS", "NODE.JS", "EXPRESS", "MONGO", "REDIS"],
-    features: "• REAL-TIME MESSAGING\n• NO EMOJIS\n• MONOSPACE TEXT ONLY\n• MINIMAL PROTOCOL\n• OFFLINE QUEUE\n• END-TO-END ENCRYPTION",
+    features: "• REAL-TIME MESSAGING\n• NO EMOJIS\n• MONOSPACE TEXT ONLY\n• MINIMAL PROTOCOL\n• OFFLINE QUEUE",
     liveLink: "https://chat-brutal.takathena.com",
     githubLink: "https://github.com/takathena/brutal-chat"
   },
@@ -1603,8 +1916,9 @@ const projects = [
     subtitle: "PERSONAL SITE • 1 MONTH",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
     description: "My personal portfolio website built with glitch aesthetics and brutalist design principles.",
+    shortDescription: "Personal portfolio with glitch aesthetics and brutalist design.",
     technologies: ["HTML", "CSS", "JS", "GLITCH ART", "BRUTALISM"],
-    features: "• GLITCH ANIMATIONS\n• BRUTALIST LAYOUT\n• PERFORMANCE FOCUSED\n• NO FRAMEWORKS\n• CUSTOM TYPOGRAPHY\n• DARK MODE ONLY",
+    features: "• GLITCH ANIMATIONS\n• BRUTALIST LAYOUT\n• PERFORMANCE FOCUSED\n• NO FRAMEWORKS\n• CUSTOM TYPOGRAPHY",
     liveLink: "https://takathena.com",
     githubLink: "https://github.com/takathena/glitch-portfolio"
   },
@@ -1614,8 +1928,9 @@ const projects = [
     subtitle: "UTILITY APP • 3 WEEKS",
     image: "https://images.unsplash.com/photo-1587145820266-a5951ee6f620?w=800&h=400&fit=crop",
     description: "A calculator app that rejects conventional UI patterns. Uses raw buttons and direct feedback.",
+    shortDescription: "Calculator app with raw buttons and direct feedback.",
     technologies: ["VANILLA JS", "CSS GRID", "CALC ENGINE", "PWA"],
-    features: "• RAW BUTTONS\n• INSTANT FEEDBACK\n• NO ANIMATIONS\n• KEYBOARD SUPPORT\n• PWA INSTALLABLE\n• OFFLINE READY",
+    features: "• RAW BUTTONS\n• INSTANT FEEDBACK\n• NO ANIMATIONS\n• KEYBOARD SUPPORT\n• PWA INSTALLABLE",
     liveLink: "https://calc-brutal.takathena.com",
     githubLink: "https://github.com/takathena/raw-calculator"
   },
@@ -1625,14 +1940,15 @@ const projects = [
     subtitle: "DESKTOP APP • 2 MONTHS",
     image: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=800&h=400&fit=crop",
     description: "A desktop application for applying brutalist effects to files and images.",
+    shortDescription: "Desktop app for applying brutalist effects to files and images.",
     technologies: ["ELECTRON", "NODE.JS", "IMAGE PROCESSING", "FILE SYSTEM"],
-    features: "• FILE PROCESSING\n• BRUTALIST FILTERS\n• BATCH OPERATIONS\n• CLI INTERFACE\n• CUSTOM PLUGINS\n• PERFORMANCE METRICS",
+    features: "• FILE PROCESSING\n• BRUTALIST FILTERS\n• BATCH OPERATIONS\n• CLI INTERFACE\n• CUSTOM PLUGINS",
     liveLink: "https://file-brutal.takathena.com",
     githubLink: "https://github.com/takathena/file-brutalizer"
   }
 ];
 
-// Certificates data - Full 8 certificates
+// Certificates data - Optimized for mobile
 const certificatesDB = [
   {
     id: 0,
@@ -1644,6 +1960,7 @@ const certificatesDB = [
     image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=400&fit=crop",
     badge: "EXPERIMENTAL",
     description: "Mastering the art of brutalist web design: raw aesthetics, bold typography, and intentional design choices that challenge convention.",
+    shortDescription: "Mastering brutalist web design with raw aesthetics and bold typography.",
     skills: ["BRUTALIST DESIGN", "TYPOGRAPHY", "COLOR THEORY", "LAYOUT", "UX"],
     validation: "CERT ID: DAA-BRUTAL-2024-001",
     viewLink: "https://example.com/cert/brutalist-design",
@@ -1659,6 +1976,7 @@ const certificatesDB = [
     image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&h=400&fit=crop",
     badge: "ADVANCED",
     description: "Pushing the boundaries of conventional programming with unorthodox approaches and experimental techniques.",
+    shortDescription: "Pushing programming boundaries with unorthodox approaches.",
     skills: ["EXPERIMENTAL CODE", "ALGORITHMS", "CREATIVE CODING", "PROTOTYPING"],
     validation: "CERT ID: CR-EXPCODE-2024-002",
     viewLink: "https://example.com/cert/experimental-coding",
@@ -1674,6 +1992,7 @@ const certificatesDB = [
     image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=400&fit=crop",
     badge: "PROFESSIONAL",
     description: "Comprehensive AI and machine learning certification covering neural networks, deep learning, and practical applications.",
+    shortDescription: "Comprehensive AI and machine learning certification from Google.",
     skills: ["PYTHON", "TENSORFLOW", "NEURAL NETWORKS", "DEEP LEARNING", "NLP"],
     validation: "CERT ID: GOOGLE-AI-2023-789",
     viewLink: "https://example.com/cert/google-ai",
@@ -1689,6 +2008,7 @@ const certificatesDB = [
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop",
     badge: "SPECIALIZATION",
     description: "Full stack web development certification covering modern frameworks, databases, and deployment strategies.",
+    shortDescription: "Full stack web development certification from Meta.",
     skills: ["REACT", "NODE.JS", "EXPRESS", "MONGODB", "DOCKER"],
     validation: "CERT ID: META-WEB-2023-456",
     viewLink: "https://example.com/cert/meta-web",
@@ -1704,6 +2024,7 @@ const certificatesDB = [
     image: "https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?w=800&h=400&fit=crop",
     badge: "ASSOCIATE",
     description: "AWS cloud practitioner certification covering cloud fundamentals, services, and architecture.",
+    shortDescription: "AWS cloud practitioner certification.",
     skills: ["AWS", "CLOUD ARCHITECTURE", "DEVOPS", "SECURITY", "SCALING"],
     validation: "CERT ID: AWS-CLOUD-2023-123",
     viewLink: "https://example.com/cert/aws-cloud",
@@ -1719,6 +2040,7 @@ const certificatesDB = [
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop",
     badge: "PROFESSIONAL",
     description: "Data science specialization covering statistics, machine learning, and data visualization.",
+    shortDescription: "Data science specialization from IBM.",
     skills: ["PYTHON", "PANDAS", "NUMPY", "STATISTICS", "DATA VIZ"],
     validation: "CERT ID: IBM-DATA-2023-987",
     viewLink: "https://example.com/cert/ibm-data",
@@ -1734,6 +2056,7 @@ const certificatesDB = [
     image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=400&fit=crop",
     badge: "FUNDAMENTALS",
     description: "Cybersecurity fundamentals covering network security, cryptography, and threat analysis.",
+    shortDescription: "Cybersecurity fundamentals from Cisco.",
     skills: ["NETWORK SECURITY", "CRYPTOGRAPHY", "THREAT ANALYSIS", "ETHICAL HACKING"],
     validation: "CERT ID: CISCO-CYBER-2023-654",
     viewLink: "https://example.com/cert/cisco-cyber",
@@ -1749,12 +2072,21 @@ const certificatesDB = [
     image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800&h=400&fit=crop",
     badge: "ASSOCIATE",
     description: "Database management certification covering SQL, normalization, and performance optimization.",
+    shortDescription: "Database management certification from Oracle.",
     skills: ["SQL", "DATABASE DESIGN", "NORMALIZATION", "PERFORMANCE", "BACKUP"],
     validation: "CERT ID: ORACLE-DB-2023-321",
     viewLink: "https://example.com/cert/oracle-db",
     credentialLink: "https://verify.oracle.com/db-321"
   }
 ];
+
+// State variables for carousels
+let currentProjectIndex = 0;
+let currentCertIndex = 0;
+let totalProjects = projects.length;
+let totalCerts = certificatesDB.length;
+let projectsPerView = 3;
+let certsPerView = 3;
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', function() {
@@ -1784,65 +2116,476 @@ document.addEventListener('DOMContentLoaded', function() {
   // Open accordion by default
   setTimeout(toggleTools, 100);
   
-  // Lazy load images
-  lazyLoadImages();
+  // Adjust layout on resize
+  window.addEventListener('resize', handleResize);
+  
+  // Initial adjustment
+  handleResize();
+  
+  // Initialize carousel indicators
+  updateProjectsPerView();
+  updateCertsPerView();
+  createProjectIndicators();
+  createCertIndicators();
+  updateCarouselProgress();
 });
 
-// Lazy load images
-function lazyLoadImages() {
-  const images = document.querySelectorAll('img[loading="lazy"]');
-  const imageObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const img = entry.target;
-        img.src = img.dataset.src || img.src;
-        imageObserver.unobserve(img);
-      }
-    });
+// Handle window resize
+function handleResize() {
+  const width = window.innerWidth;
+  
+  // Adjust card sizes based on screen width
+  const cards = document.querySelectorAll('.card, .cert-card');
+  cards.forEach(card => {
+    if (width < 480) {
+      card.style.minWidth = '240px';
+      card.style.minHeight = '240px';
+      projectsPerView = 1;
+      certsPerView = 1;
+    } else if (width < 768) {
+      card.style.minWidth = '260px';
+      card.style.minHeight = '260px';
+      projectsPerView = 2;
+      certsPerView = 2;
+    } else {
+      card.style.minWidth = '';
+      card.style.minHeight = '';
+      projectsPerView = 3;
+      certsPerView = 3;
+    }
   });
-
-  images.forEach(img => imageObserver.observe(img));
+  
+  updateCarouselProgress();
+  
+  // Recreate indicators based on new view count
+  createProjectIndicators();
+  createCertIndicators();
 }
 
-// Render projects
+// Update projects per view based on screen size
+function updateProjectsPerView() {
+  const width = window.innerWidth;
+  if (width < 480) projectsPerView = 1;
+  else if (width < 768) projectsPerView = 2;
+  else projectsPerView = 3;
+}
+
+function updateCertsPerView() {
+  const width = window.innerWidth;
+  if (width < 480) certsPerView = 1;
+  else if (width < 768) certsPerView = 2;
+  else certsPerView = 3;
+}
+
+// Create project indicators
+function createProjectIndicators() {
+  const indicator = document.getElementById('projects-indicator');
+  indicator.innerHTML = '';
+  
+  const totalIndicators = Math.ceil(totalProjects / projectsPerView);
+  
+  for (let i = 0; i < totalIndicators; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'indicator-dot';
+    if (i === currentProjectIndex) dot.classList.add('active');
+    dot.setAttribute('data-index', i);
+    dot.setAttribute('aria-label', `Go to projects group ${i + 1}`);
+    dot.addEventListener('click', () => goToProjectGroup(i));
+    indicator.appendChild(dot);
+  }
+}
+
+// Create certificate indicators
+function createCertIndicators() {
+  const indicator = document.getElementById('certificates-indicator');
+  indicator.innerHTML = '';
+  
+  const totalIndicators = Math.ceil(totalCerts / certsPerView);
+  
+  for (let i = 0; i < totalIndicators; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'indicator-dot';
+    if (i === currentCertIndex) dot.classList.add('active');
+    dot.setAttribute('data-index', i);
+    dot.setAttribute('aria-label', `Go to certificates group ${i + 1}`);
+    dot.addEventListener('click', () => goToCertGroup(i));
+    indicator.appendChild(dot);
+  }
+}
+
+// Slide project with snap effect
+function slideProject(direction) {
+  const carousel = document.getElementById('projects-carousel');
+  const cards = document.querySelectorAll('.card');
+  if (cards.length === 0) return;
+  
+  const cardWidth = cards[0].offsetWidth;
+  const gap = 24; // 1.5rem in pixels
+  
+  // Update current index
+  const totalGroups = Math.ceil(totalProjects / projectsPerView);
+  currentProjectIndex += direction;
+  
+  // Clamp index
+  if (currentProjectIndex < 0) {
+    currentProjectIndex = totalGroups - 1;
+  } else if (currentProjectIndex >= totalGroups) {
+    currentProjectIndex = 0;
+  }
+  
+  // Calculate scroll position
+  const scrollPosition = currentProjectIndex * (cardWidth + gap) * projectsPerView;
+  
+  // Smooth scroll to position
+  carousel.scrollTo({
+    left: scrollPosition,
+    behavior: 'smooth'
+  });
+  
+  // Update indicators
+  updateProjectIndicators();
+  
+  // Update progress bar
+  updateCarouselProgress();
+  
+  // Add snap focus effect to visible cards
+  setTimeout(() => addSnapFocusToVisibleProjects(), 300);
+  
+  // Play click sound effect
+  playClickSound();
+}
+
+// Slide certificate with snap effect
+function slideCertificate(direction) {
+  const carousel = document.getElementById('certificates-carousel');
+  const cards = document.querySelectorAll('.cert-card');
+  if (cards.length === 0) return;
+  
+  const cardWidth = cards[0].offsetWidth;
+  const gap = 24; // 1.5rem in pixels
+  
+  // Update current index
+  const totalGroups = Math.ceil(totalCerts / certsPerView);
+  currentCertIndex += direction;
+  
+  // Clamp index
+  if (currentCertIndex < 0) {
+    currentCertIndex = totalGroups - 1;
+  } else if (currentCertIndex >= totalGroups) {
+    currentCertIndex = 0;
+  }
+  
+  // Calculate scroll position
+  const scrollPosition = currentCertIndex * (cardWidth + gap) * certsPerView;
+  
+  // Smooth scroll to position
+  carousel.scrollTo({
+    left: scrollPosition,
+    behavior: 'smooth'
+  });
+  
+  // Update indicators
+  updateCertIndicators();
+  
+  // Update progress bar
+  updateCarouselProgress();
+  
+  // Add snap focus effect to visible cards
+  setTimeout(() => addSnapFocusToVisibleCerts(), 300);
+  
+  // Play click sound effect
+  playClickSound();
+}
+
+// Go to specific project group
+function goToProjectGroup(groupIndex) {
+  const carousel = document.getElementById('projects-carousel');
+  const cards = document.querySelectorAll('.card');
+  if (cards.length === 0) return;
+  
+  const cardWidth = cards[0].offsetWidth;
+  const gap = 24;
+  
+  currentProjectIndex = groupIndex;
+  const scrollPosition = groupIndex * (cardWidth + gap) * projectsPerView;
+  
+  carousel.scrollTo({
+    left: scrollPosition,
+    behavior: 'smooth'
+  });
+  
+  updateProjectIndicators();
+  updateCarouselProgress();
+  setTimeout(() => addSnapFocusToVisibleProjects(), 300);
+  playClickSound();
+}
+
+// Go to specific certificate group
+function goToCertGroup(groupIndex) {
+  const carousel = document.getElementById('certificates-carousel');
+  const cards = document.querySelectorAll('.cert-card');
+  if (cards.length === 0) return;
+  
+  const cardWidth = cards[0].offsetWidth;
+  const gap = 24;
+  
+  currentCertIndex = groupIndex;
+  const scrollPosition = groupIndex * (cardWidth + gap) * certsPerView;
+  
+  carousel.scrollTo({
+    left: scrollPosition,
+    behavior: 'smooth'
+  });
+  
+  updateCertIndicators();
+  updateCarouselProgress();
+  setTimeout(() => addSnapFocusToVisibleCerts(), 300);
+  playClickSound();
+}
+
+// Update project indicators
+function updateProjectIndicators() {
+  const indicators = document.querySelectorAll('#projects-indicator .indicator-dot');
+  indicators.forEach((dot, index) => {
+    dot.classList.toggle('active', index === currentProjectIndex);
+  });
+}
+
+// Update certificate indicators
+function updateCertIndicators() {
+  const indicators = document.querySelectorAll('#certificates-indicator .indicator-dot');
+  indicators.forEach((dot, index) => {
+    dot.classList.toggle('active', index === currentCertIndex);
+  });
+}
+
+// Add snap focus effect to visible projects
+function addSnapFocusToVisibleProjects() {
+  const cards = document.querySelectorAll('.card');
+  
+  // Remove previous focus
+  cards.forEach(card => {
+    card.classList.remove('snap-focus');
+    card.classList.remove('current-item');
+  });
+  
+  // Calculate visible range
+  const startIndex = currentProjectIndex * projectsPerView;
+  const endIndex = Math.min(startIndex + projectsPerView, totalProjects);
+  
+  // Add focus effect to visible cards
+  for (let i = startIndex; i < endIndex; i++) {
+    if (cards[i]) {
+      cards[i].classList.add('snap-focus');
+      
+      // Add current item indicator to first card in view
+      if (i === startIndex) {
+        cards[i].classList.add('current-item');
+      }
+    }
+  }
+}
+
+// Add snap focus effect to visible certificates
+function addSnapFocusToVisibleCerts() {
+  const cards = document.querySelectorAll('.cert-card');
+  
+  // Remove previous focus
+  cards.forEach(card => {
+    card.classList.remove('snap-focus');
+    card.classList.remove('current-item');
+  });
+  
+  // Calculate visible range
+  const startIndex = currentCertIndex * certsPerView;
+  const endIndex = Math.min(startIndex + certsPerView, totalCerts);
+  
+  // Add focus effect to visible cards
+  for (let i = startIndex; i < endIndex; i++) {
+    if (cards[i]) {
+      cards[i].classList.add('snap-focus');
+      
+      // Add current item indicator to first card in view
+      if (i === startIndex) {
+        cards[i].classList.add('current-item');
+      }
+    }
+  }
+}
+
+// Update carousel progress bars
+function updateCarouselProgress() {
+  // Update projects progress
+  const totalProjectGroups = Math.ceil(totalProjects / projectsPerView);
+  const projectsProgress = ((currentProjectIndex + 1) / totalProjectGroups) * 100;
+  const projectsProgressFill = document.getElementById('projects-progress-fill');
+  if (projectsProgressFill) {
+    projectsProgressFill.style.width = `${projectsProgress}%`;
+  }
+  
+  // Update certificates progress
+  const totalCertGroups = Math.ceil(totalCerts / certsPerView);
+  const certsProgress = ((currentCertIndex + 1) / totalCertGroups) * 100;
+  const certsProgressFill = document.getElementById('certificates-progress-fill');
+  if (certsProgressFill) {
+    certsProgressFill.style.width = `${certsProgress}%`;
+  }
+}
+
+// Play click sound effect
+function playClickSound() {
+  // Create audio context for sound effect
+  try {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.value = 600;
+    oscillator.type = 'sine';
+    
+    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.1);
+  } catch (e) {
+    // Audio context not supported, silent fail
+  }
+}
+
+// Render projects with responsive descriptions
 function renderProjects() {
   const track = document.getElementById('projects-track');
   track.innerHTML = '';
   
-  projects.forEach(project => {
-    const card = createProjectCard(project);
+  projects.forEach((project, index) => {
+    const card = createProjectCard(project, index);
     track.appendChild(card);
   });
+  
+  // Add initial snap focus
+  setTimeout(() => addSnapFocusToVisibleProjects(), 100);
 }
 
-// Create project card
-function createProjectCard(project) {
+// Create project card with responsive design
+function createProjectCard(project, index) {
   const card = document.createElement('article');
   card.className = 'card';
   card.onclick = () => openModal(project.id);
   card.tabIndex = 0;
   card.setAttribute('role', 'button');
   card.setAttribute('aria-label', `View ${project.title} project details`);
+  card.setAttribute('data-index', index);
+  
+  // Use short description on mobile
+  const description = window.innerWidth < 768 ? project.shortDescription : project.description;
+  const displayDescription = description.substring(0, window.innerWidth < 480 ? 80 : 120);
   
   card.innerHTML = `
     <div class="card-image">
       <img src="${project.image}" alt="${project.title}" loading="lazy">
     </div>
     <div class="card-content">
-      <h4 class="card-title">${project.title}</h4>
-      <p class="card-description">${project.description.substring(0, 120)}...</p>
+      <h4 class="card-title text-truncate">${project.title}</h4>
+      <p class="card-description">${displayDescription}...</p>
       <div class="card-tech">
-        ${project.technologies.slice(0, 3).map(tech => 
+        ${project.technologies.slice(0, window.innerWidth < 480 ? 2 : 3).map(tech => 
           `<span class="tech-tag">${tech}</span>`
         ).join('')}
-        ${project.technologies.length > 3 ? 
-          `<span class="tech-tag">+${project.technologies.length - 3}</span>` : ''
+        ${project.technologies.length > (window.innerWidth < 480 ? 2 : 3) ? 
+          `<span class="tech-tag">+${project.technologies.length - (window.innerWidth < 480 ? 2 : 3)}</span>` : ''
         }
       </div>
     </div>
   `;
   
   return card;
+}
+
+// Initialize certificates
+function initializeCertificates() {
+  const filterSelect = document.getElementById('cert-filter');
+  filterSelect.addEventListener('change', (e) => {
+    renderCertificates(e.target.value);
+  });
+  
+  renderCertificates('all');
+}
+
+// Render certificates with responsive design
+function renderCertificates(category) {
+  const track = document.getElementById('certificates-track');
+  track.innerHTML = '';
+  
+  const filteredCerts = category === 'all' 
+    ? certificatesDB 
+    : certificatesDB.filter(cert => cert.category === category);
+  
+  if (filteredCerts.length === 0) {
+    track.innerHTML = `
+      <div style="padding: 3rem; text-align: center; color: var(--text-primary); font-family: 'IBM Plex Mono'; width: 100%;">
+        <h4 style="color: var(--text-accent); margin-bottom: 1rem;">NO CERTIFICATES FOUND</h4>
+        <p>Try selecting a different category</p>
+      </div>
+    `;
+    totalCerts = 0;
+    createCertIndicators();
+    updateCarouselProgress();
+    return;
+  }
+  
+  filteredCerts.forEach((cert, index) => {
+    const certCard = createCertificateCard(cert, index);
+    track.appendChild(certCard);
+  });
+  
+  // Update total certs
+  totalCerts = filteredCerts.length;
+  currentCertIndex = 0;
+  createCertIndicators();
+  updateCarouselProgress();
+  
+  // Add initial snap focus
+  setTimeout(() => addSnapFocusToVisibleCerts(), 100);
+}
+
+// Create certificate card with responsive design
+function createCertificateCard(cert, index) {
+  const certCard = document.createElement('article');
+  certCard.className = 'card cert-card';
+  certCard.onclick = () => openCertificateModal(cert.id);
+  certCard.tabIndex = 0;
+  certCard.setAttribute('role', 'button');
+  certCard.setAttribute('aria-label', `View ${cert.title} certificate details`);
+  certCard.setAttribute('data-index', index);
+  
+  // Use short description on mobile
+  const description = window.innerWidth < 768 ? cert.shortDescription : cert.description;
+  const displayDescription = description.substring(0, window.innerWidth < 480 ? 60 : 100);
+  
+  certCard.innerHTML = `
+    <div class="card-image cert-image">
+      <img src="${cert.image}" alt="${cert.title}" loading="lazy">
+      <div class="cert-badge">${cert.badge}</div>
+    </div>
+    <div class="card-content cert-content">
+      <div class="cert-issuer">
+        <img src="${cert.issuerIcon}" alt="${cert.issuer} logo" loading="lazy">
+        <span>${cert.issuer}</span>
+      </div>
+      <h4 class="card-title text-truncate">${cert.title}</h4>
+      <p class="card-description">${displayDescription}...</p>
+      <div class="card-tech">
+        <span class="tech-tag">${cert.date}</span>
+        <span class="tech-tag">${cert.category.toUpperCase()}</span>
+      </div>
+    </div>
+  `;
+  
+  return certCard;
 }
 
 // Accordion toggle
@@ -1912,27 +2655,6 @@ function clearFilter() {
   document.querySelectorAll("#tools-grid img").forEach(i => i.classList.remove("highlight"));
 }
 
-// Carousel navigation
-function slideLeft() {
-  const carousel = document.getElementById("projects-carousel");
-  carousel.scrollBy({ left: -350, behavior: "smooth" });
-}
-
-function slideRight() {
-  const carousel = document.getElementById("projects-carousel");
-  carousel.scrollBy({ left: 350, behavior: "smooth" });
-}
-
-function slideCertLeft() {
-  const carousel = document.getElementById("certificates-carousel");
-  carousel.scrollBy({ left: -350, behavior: "smooth" });
-}
-
-function slideCertRight() {
-  const carousel = document.getElementById("certificates-carousel");
-  carousel.scrollBy({ left: 350, behavior: "smooth" });
-}
-
 // Project modal
 function openModal(projectId) {
   const project = projects[projectId];
@@ -1973,7 +2695,7 @@ function openModal(projectId) {
   
   // Prevent body scroll
   document.body.style.overflow = 'hidden';
-  document.body.style.paddingRight = '15px';
+  document.body.style.paddingRight = window.innerWidth > 768 ? '15px' : '0';
 }
 
 // Close modal
@@ -1986,72 +2708,6 @@ function closeModal() {
     document.body.style.overflow = '';
     document.body.style.paddingRight = '';
   }, 300);
-}
-
-// Initialize certificates
-function initializeCertificates() {
-  const filterSelect = document.getElementById('cert-filter');
-  filterSelect.addEventListener('change', (e) => {
-    renderCertificates(e.target.value);
-  });
-  
-  renderCertificates('all');
-}
-
-// Render certificates
-function renderCertificates(category) {
-  const track = document.getElementById('certificates-track');
-  track.innerHTML = '';
-  
-  const filteredCerts = category === 'all' 
-    ? certificatesDB 
-    : certificatesDB.filter(cert => cert.category === category);
-  
-  if (filteredCerts.length === 0) {
-    track.innerHTML = `
-      <div style="padding: 3rem; text-align: center; color: var(--text-primary); font-family: 'IBM Plex Mono';">
-        <h4 style="color: var(--text-accent); margin-bottom: 1rem;">NO CERTIFICATES FOUND</h4>
-        <p>Try selecting a different category</p>
-      </div>
-    `;
-    return;
-  }
-  
-  filteredCerts.forEach(cert => {
-    const certCard = createCertificateCard(cert);
-    track.appendChild(certCard);
-  });
-}
-
-// Create certificate card
-function createCertificateCard(cert) {
-  const certCard = document.createElement('article');
-  certCard.className = 'card cert-card';
-  certCard.onclick = () => openCertificateModal(cert.id);
-  certCard.tabIndex = 0;
-  certCard.setAttribute('role', 'button');
-  certCard.setAttribute('aria-label', `View ${cert.title} certificate details`);
-  
-  certCard.innerHTML = `
-    <div class="card-image">
-      <img src="${cert.image}" alt="${cert.title}" loading="lazy">
-      <div class="cert-badge">${cert.badge}</div>
-    </div>
-    <div class="card-content">
-      <div class="cert-issuer">
-        <img src="${cert.issuerIcon}" alt="${cert.issuer} logo" loading="lazy">
-        <span>${cert.issuer}</span>
-      </div>
-      <h4 class="card-title">${cert.title}</h4>
-      <p class="card-description">${cert.description.substring(0, 100)}...</p>
-      <div class="card-tech">
-        <span class="tech-tag">${cert.date}</span>
-        <span class="tech-tag">${cert.category.toUpperCase()}</span>
-      </div>
-    </div>
-  `;
-  
-  return certCard;
 }
 
 // Open certificate modal
@@ -2094,7 +2750,7 @@ function openCertificateModal(certId) {
   
   // Prevent body scroll
   document.body.style.overflow = 'hidden';
-  document.body.style.paddingRight = '15px';
+  document.body.style.paddingRight = window.innerWidth > 768 ? '15px' : '0';
 }
 
 // Close certificate modal
@@ -2151,69 +2807,128 @@ function setupEventListeners() {
         closeCertificateModal();
       }
     }
+    
+    // Keyboard navigation for carousels
+    if (e.key === 'ArrowLeft') {
+      if (document.activeElement.closest('.projects-section')) {
+        e.preventDefault();
+        slideProject(-1);
+      } else if (document.activeElement.closest('.certificates-section')) {
+        e.preventDefault();
+        slideCertificate(-1);
+      }
+    } else if (e.key === 'ArrowRight') {
+      if (document.activeElement.closest('.projects-section')) {
+        e.preventDefault();
+        slideProject(1);
+      } else if (document.activeElement.closest('.certificates-section')) {
+        e.preventDefault();
+        slideCertificate(1);
+      }
+    }
   });
   
-  // Touch and keyboard navigation for carousels
-  setupCarouselNavigation('projects-carousel');
-  setupCarouselNavigation('certificates-carousel');
+  // Setup carousel scroll listeners
+  setupCarouselScrollListeners();
+  
+  // Touch gestures for mobile swipe
+  let touchStartX = 0;
+  let touchStartY = 0;
+  
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+  
+  document.addEventListener('touchend', (e) => {
+    const touchEndX = e.changedTouches[0].screenX;
+    const touchEndY = e.changedTouches[0].screenY;
+    
+    const diffX = touchStartX - touchEndX;
+    const diffY = touchStartY - touchEndY;
+    
+    // Only trigger if horizontal swipe is dominant
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+      // Check if swipe happened in projects section
+      const projectsRect = document.querySelector('.projects-section').getBoundingClientRect();
+      const certsRect = document.querySelector('.certificates-section').getBoundingClientRect();
+      
+      if (touchStartY >= projectsRect.top && touchStartY <= projectsRect.bottom) {
+        if (diffX > 0) {
+          // Swipe left
+          slideProject(1);
+        } else {
+          // Swipe right
+          slideProject(-1);
+        }
+      } else if (touchStartY >= certsRect.top && touchStartY <= certsRect.bottom) {
+        if (diffX > 0) {
+          // Swipe left
+          slideCertificate(1);
+        } else {
+          // Swipe right
+          slideCertificate(-1);
+        }
+      }
+    }
+  }, { passive: true });
 }
 
-// Setup carousel navigation with touch support
-function setupCarouselNavigation(carouselId) {
-  const carousel = document.getElementById(carouselId);
-  let isDragging = false;
-  let startX;
-  let scrollLeft;
+// Setup carousel scroll listeners
+function setupCarouselScrollListeners() {
+  const projectsCarousel = document.getElementById('projects-carousel');
+  const certsCarousel = document.getElementById('certificates-carousel');
   
-  carousel.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    startX = e.pageX - carousel.offsetLeft;
-    scrollLeft = carousel.scrollLeft;
-    carousel.style.cursor = 'grabbing';
-    carousel.style.scrollBehavior = 'auto';
-  });
+  // Throttle function for scroll events
+  function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+      const args = arguments;
+      const context = this;
+      if (!inThrottle) {
+        func.apply(context, args);
+        inThrottle = true;
+        setTimeout(() => inThrottle = false, limit);
+      }
+    }
+  }
   
-  carousel.addEventListener('mouseleave', () => {
-    isDragging = false;
-    carousel.style.cursor = 'grab';
-    carousel.style.scrollBehavior = 'smooth';
-  });
+  // Update project index on scroll
+  projectsCarousel.addEventListener('scroll', throttle(function() {
+    const cards = document.querySelectorAll('.card');
+    if (cards.length === 0) return;
+    
+    const cardWidth = cards[0].offsetWidth;
+    const gap = 24;
+    const scrollLeft = projectsCarousel.scrollLeft;
+    const newIndex = Math.round(scrollLeft / ((cardWidth + gap) * projectsPerView));
+    
+    if (newIndex !== currentProjectIndex && newIndex >= 0) {
+      currentProjectIndex = newIndex;
+      updateProjectIndicators();
+      updateCarouselProgress();
+      addSnapFocusToVisibleProjects();
+    }
+  }, 150));
   
-  carousel.addEventListener('mouseup', () => {
-    isDragging = false;
-    carousel.style.cursor = 'grab';
-    carousel.style.scrollBehavior = 'smooth';
-  });
-  
-  carousel.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    const x = e.pageX - carousel.offsetLeft;
-    const walk = (x - startX) * 2;
-    carousel.scrollLeft = scrollLeft - walk;
-  });
-  
-  // Touch support
-  carousel.addEventListener('touchstart', (e) => {
-    isDragging = true;
-    startX = e.touches[0].pageX - carousel.offsetLeft;
-    scrollLeft = carousel.scrollLeft;
-    carousel.style.scrollBehavior = 'auto';
-  });
-  
-  carousel.addEventListener('touchend', () => {
-    isDragging = false;
-    carousel.style.scrollBehavior = 'smooth';
-  });
-  
-  carousel.addEventListener('touchmove', (e) => {
-    if (!isDragging) return;
-    const x = e.touches[0].pageX - carousel.offsetLeft;
-    const walk = (x - startX) * 2;
-    carousel.scrollLeft = scrollLeft - walk;
-  });
+  // Update cert index on scroll
+  certsCarousel.addEventListener('scroll', throttle(function() {
+    const cards = document.querySelectorAll('.cert-card');
+    if (cards.length === 0) return;
+    
+    const cardWidth = cards[0].offsetWidth;
+    const gap = 24;
+    const scrollLeft = certsCarousel.scrollLeft;
+    const newIndex = Math.round(scrollLeft / ((cardWidth + gap) * certsPerView));
+    
+    if (newIndex !== currentCertIndex && newIndex >= 0) {
+      currentCertIndex = newIndex;
+      updateCertIndicators();
+      updateCarouselProgress();
+      addSnapFocusToVisibleCerts();
+    }
+  }, 150));
 }
 </script>
-
 </body>
 </html>
