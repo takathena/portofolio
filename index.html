@@ -351,8 +351,8 @@ h4 {
   color: var(--text-secondary);
   border: var(--border-thin) solid var(--text-primary);
   font-size: clamp(1rem, 3vw, 1.2rem);
-  width: clamp(32px, 8vw, 36px);
-  height: clamp(32px, 8vw, 36px);
+  width: 44px;
+  height: 44px;
   cursor: pointer;
   transition: var(--transition);
   flex-shrink: 0;
@@ -363,7 +363,7 @@ h4 {
 }
 
 .accordion-btn:hover {
-  transform: scale(1.2) rotate(90deg);
+  transform: rotate(90deg);
   background: var(--bg-accent3);
 }
 
@@ -499,7 +499,7 @@ h4 {
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding: var(--spacing-sm) clamp(0.25rem, 1vw, 0.5rem);
+  padding: 10px;
   margin: 0 clamp(-0.25rem, -1vw, -0.5rem);
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
@@ -1561,6 +1561,8 @@ html {
   .tag,
   .badge {
     min-height: 36px;
+    display: flex;
+    align-items: center;
   }
 }
 
