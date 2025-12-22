@@ -736,20 +736,12 @@ h4 {
 }
 
 .card:hover, .cert-card:hover {
-  /* transform: translate(-8px, -8px); */
   transform: scale(1.02);
-  /* box-shadow: 
-    12px 12px 0 var(--bg-accent2),
-    -12px -12px 0 var(--bg-accent5); */
   border-color: var(--bg-accent2);
 }
 
 .card:nth-child(even):hover, .cert-card:nth-child(even):hover {
-  /* transform: translate(-8px, -8px); */
   transform: scale(1.02);
-  /* box-shadow: 
-    12px 12px 0 var(--bg-accent2),
-    -12px -12px 0 var(--bg-accent5); */
   border-color: var(--bg-accent2);
 }
 
@@ -1417,31 +1409,134 @@ h4 {
 }
 
 /* =========================================
-        ANIMATIONS & EFFECTS
+        ENHANCED ANIMATIONS & EFFECTS
 ========================================= */
 @keyframes glitch {
   0% {
+    text-shadow: 2px 2px 0 var(--bg-accent2);
     transform: translate(0);
   }
+  10% {
+    text-shadow: -2px -2px 0 var(--bg-accent3);
+    transform: translate(-1px, 1px);
+  }
   20% {
-    transform: translate(-2px, 2px);
+    text-shadow: 2px -2px 0 var(--bg-accent4);
+    transform: translate(1px, -1px);
+  }
+  30% {
+    text-shadow: -2px 2px 0 var(--bg-accent);
+    transform: translate(-1px, -1px);
   }
   40% {
-    transform: translate(-2px, -2px);
-  }
-  60% {
-    transform: translate(2px, 2px);
-  }
-  80% {
-    transform: translate(2px, -2px);
+    text-shadow: 2px 2px 0 var(--bg-accent2);
+    transform: translate(1px, 1px);
   }
   100% {
+    text-shadow: 2px 2px 0 var(--bg-accent2);
     transform: translate(0);
   }
 }
 
 .glitch:hover {
-  animation: glitch 0.3s linear;
+  animation: glitch 0.4s linear;
+  display: inline-block;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  75% {
+    transform: translateX(2px) rotate(1deg);
+  }
+}
+
+@keyframes colorShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    border-color: var(--text-primary);
+    box-shadow: 
+      var(--shadow-offset) var(--shadow-offset) 0 var(--bg-accent2),
+      calc(var(--shadow-offset) * -1) calc(var(--shadow-offset) * -1) 0 var(--bg-accent3);
+  }
+  50% {
+    border-color: var(--bg-accent2);
+    box-shadow: 
+      0 0 10px var(--bg-accent2),
+      var(--shadow-offset) var(--shadow-offset) 0 var(--bg-accent3),
+      calc(var(--shadow-offset) * -1) calc(var(--shadow-offset) * -1) 0 var(--bg-accent);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Hover animations */
+.card:hover .card-title,
+.cert-card:hover .card-title {
+  animation: shake 0.3s ease;
+}
+
+.badge:hover {
+  animation: float 0.8s ease-in-out;
+}
+
+.section:hover {
+  animation: borderGlow 2s infinite;
 }
 
 /* Scanline effect */
@@ -1466,6 +1561,16 @@ h4 {
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: overlay;
+  animation: scanline 8s linear infinite;
+}
+
+@keyframes scanline {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100px;
+  }
 }
 
 /* Noise texture */
@@ -1480,6 +1585,185 @@ h4 {
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: overlay;
+  animation: noiseMove 0.2s infinite;
+}
+
+@keyframes noiseMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-1%, -1%);
+  }
+  20% {
+    transform: translate(1%, 1%);
+  }
+  30% {
+    transform: translate(-1%, 1%);
+  }
+  40% {
+    transform: translate(1%, -1%);
+  }
+  50% {
+    transform: translate(-1%, -1%);
+  }
+  60% {
+    transform: translate(1%, 1%);
+  }
+  70% {
+    transform: translate(-1%, 1%);
+  }
+  80% {
+    transform: translate(1%, -1%);
+  }
+  90% {
+    transform: translate(-1%, -1%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Page load animation */
+.page {
+  animation: pageLoad 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+@keyframes pageLoad {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Staggered animations for badges */
+.badge:nth-child(1) { animation: slideInFromLeft 0.5s ease 0.1s both; }
+.badge:nth-child(2) { animation: slideInFromRight 0.5s ease 0.2s both; }
+.badge:nth-child(3) { animation: slideInFromLeft 0.5s ease 0.3s both; }
+.badge:nth-child(4) { animation: slideInFromRight 0.5s ease 0.4s both; }
+.badge:nth-child(5) { animation: slideInFromLeft 0.5s ease 0.5s both; }
+
+/* Photo hover effect */
+.photo-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-image::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(0, 173, 181, 0.1) 50%, transparent 70%);
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.photo-image:hover::after {
+  opacity: 1;
+  animation: glint 1.5s ease;
+}
+
+@keyframes glint {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+/* Typewriter effect for lead text */
+.lead {
+  position: relative;
+  overflow: hidden;
+}
+
+.lead::after {
+  content: "|";
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  animation: blink 1s infinite;
+  color: var(--bg-accent2);
+  font-weight: bold;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Social icons wave animation */
+.social-link:nth-child(1) .social-icon { transition-delay: 0.1s; }
+.social-link:nth-child(2) .social-icon { transition-delay: 0.2s; }
+.social-link:nth-child(3) .social-icon { transition-delay: 0.3s; }
+.social-link:nth-child(4) .social-icon { transition-delay: 0.4s; }
+.social-link:nth-child(5) .social-icon { transition-delay: 0.5s; }
+.social-link:nth-child(6) .social-icon { transition-delay: 0.6s; }
+.social-link:nth-child(7) .social-icon { transition-delay: 0.7s; }
+.social-link:nth-child(8) .social-icon { transition-delay: 0.8s; }
+
+.social-grid:hover .social-icon {
+  animation: wave 0.5s ease;
+}
+
+@keyframes wave {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-5px) rotate(2deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+}
+
+/* Tool icons hover effect */
+.tools-grid img {
+  position: relative;
+}
+
+.tools-grid img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-accent2);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.tools-grid img:hover::before {
+  opacity: 0.1;
+  animation: pulseTool 1s ease;
+}
+
+@keyframes pulseTool {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.1;
+  }
 }
 
 /* =========================================
@@ -1578,6 +1862,36 @@ html {
   .card-description {
     font-size: 0.85rem;
   }
+}
+
+/* Animation classes */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+.pulse-animation {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.shake-on-hover:hover {
+  animation: shake 0.3s ease;
+}
+
+.color-shift {
+  background: linear-gradient(-45deg, var(--bg-accent), var(--bg-accent2), var(--bg-accent3), var(--bg-accent4));
+  background-size: 400% 400%;
+  animation: colorShift 15s ease infinite;
 }
 </style>
 </head>
@@ -1853,7 +2167,7 @@ html {
 
 <script>
 /* =========================================
-        BRUTALIST JAVASCRIPT - IMPROVED WITH SNAP EFFECT
+        BRUTALIST JAVASCRIPT - ENHANCED ANIMATIONS
 ========================================= */
 
 // Database icons
@@ -2160,6 +2474,12 @@ document.addEventListener('DOMContentLoaded', function() {
   createProjectIndicators();
   createCertIndicators();
   updateCarouselProgress();
+  
+  // Start scanline animation
+  startScanlineAnimation();
+  
+  // Add scroll animations
+  setupScrollAnimations();
 });
 
 // Handle window resize
@@ -2505,7 +2825,7 @@ function renderProjects() {
 // Create project card with responsive design
 function createProjectCard(project, index) {
   const card = document.createElement('article');
-  card.className = 'card';
+  card.className = 'card animate-on-scroll';
   card.onclick = () => openModal(project.id);
   card.tabIndex = 0;
   card.setAttribute('role', 'button');
@@ -2521,7 +2841,7 @@ function createProjectCard(project, index) {
       <img src="${project.image}" alt="${project.title}" loading="lazy">
     </div>
     <div class="card-content">
-      <h4 class="card-title text-truncate">${project.title}</h4>
+      <h4 class="card-title text-truncate shake-on-hover">${project.title}</h4>
       <p class="card-description">${displayDescription}...</p>
       <div class="card-tech">
         ${project.technologies.slice(0, window.innerWidth < 480 ? 2 : 3).map(tech => 
@@ -2587,7 +2907,7 @@ function renderCertificates(category) {
 // Create certificate card with responsive design
 function createCertificateCard(cert, index) {
   const certCard = document.createElement('article');
-  certCard.className = 'card cert-card';
+  certCard.className = 'card cert-card animate-on-scroll';
   certCard.onclick = () => openCertificateModal(cert.id);
   certCard.tabIndex = 0;
   certCard.setAttribute('role', 'button');
@@ -2608,7 +2928,7 @@ function createCertificateCard(cert, index) {
         <img src="${cert.issuerIcon}" alt="${cert.issuer} logo" loading="lazy">
         <span>${cert.issuer}</span>
       </div>
-      <h4 class="card-title text-truncate">${cert.title}</h4>
+      <h4 class="card-title text-truncate shake-on-hover">${cert.title}</h4>
       <p class="card-description">${displayDescription}...</p>
       <div class="card-tech">
         <span class="tech-tag">${cert.date}</span>
@@ -2904,6 +3224,18 @@ function setupEventListeners() {
       }
     }
   }, { passive: true });
+  
+  // Add hover effects to badges
+  const badges = document.querySelectorAll('.badge');
+  badges.forEach(badge => {
+    badge.addEventListener('mouseenter', () => {
+      badge.style.transform = `rotate(${Math.random() * 4 - 2}deg) scale(1.05)`;
+    });
+    
+    badge.addEventListener('mouseleave', () => {
+      badge.style.transform = '';
+    });
+  });
 }
 
 // Setup carousel scroll listeners
@@ -2961,6 +3293,83 @@ function setupCarouselScrollListeners() {
     }
   }, 150));
 }
+
+// Scanline animation
+function startScanlineAnimation() {
+  const scanlines = document.querySelector('.scanlines');
+  if (scanlines) {
+    let position = 0;
+    setInterval(() => {
+      position = (position + 1) % 100;
+      scanlines.style.backgroundPosition = `0 ${position}px`;
+    }, 100);
+  }
+}
+
+// Scroll animations
+function setupScrollAnimations() {
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  // Observe all animate-on-scroll elements
+  document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    observer.observe(el);
+  });
+  
+  // Observe sections
+  document.querySelectorAll('.section').forEach(section => {
+    observer.observe(section);
+  });
+}
+
+// Random glitch effect on header
+function triggerRandomGlitch() {
+  const header = document.querySelector('h1.glitch');
+  if (header) {
+    header.style.animation = 'none';
+    setTimeout(() => {
+      header.style.animation = 'glitch 0.4s linear';
+    }, 10);
+  }
+}
+
+// Randomly trigger glitch effect
+setInterval(() => {
+  if (Math.random() < 0.2) { // 20% chance every 10 seconds
+    triggerRandomGlitch();
+  }
+}, 10000);
+
+// Add floating animation to random badges
+setInterval(() => {
+  const badges = document.querySelectorAll('.badge');
+  const randomBadge = badges[Math.floor(Math.random() * badges.length)];
+  randomBadge.classList.add('float-animation');
+  setTimeout(() => {
+    randomBadge.classList.remove('float-animation');
+  }, 3000);
+}, 5000);
+
+// Add interactive noise effect
+document.addEventListener('mousemove', (e) => {
+  const noise = document.querySelector('.noise');
+  if (noise) {
+    const x = (e.clientX / window.innerWidth) * 100;
+    const y = (e.clientY / window.innerHeight) * 100;
+    noise.style.backgroundPosition = `${x}% ${y}%`;
+  }
+});
 </script>
 </body>
 </html>
