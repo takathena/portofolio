@@ -81,7 +81,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: var(--font-size-xxl);
-  margin-bottom: clamp(0.25rem, 1vw, 0.5rem);
+  margin: 12px 0 7px 0;
   color: var(--bg-accent);
   text-shadow: 
     var(--shadow-offset) var(--shadow-offset) 0 var(--bg-accent2),
@@ -92,7 +92,7 @@ h1 {
 
 h2 {
   font-size: var(--font-size-xl);
-  margin-bottom: var(--spacing-md);
+  margin: 10px 0;
   background: var(--bg-accent);
   color: var(--text-secondary);
   padding: clamp(0.5rem, 1.5vw, 0.625rem) clamp(0.75rem, 2vw, 0.9375rem);
@@ -216,14 +216,14 @@ h4 {
   content: "/// TOOLS ///";
   background: #08D9D6;
   color: var(--text-primary);
-  transform: rotate(-2deg) translateY(-10px);
+  transform: rotate(-1deg) translateY(-10px);
 }
 
 .section.projects::before {
   content: "/// PROJECTS ///";
   background: #08D9D6;
   color: var(--text-primary);
-  transform: rotate(1deg) translateY(-10px);
+  transform: rotate(-1deg) translateY(-10px);
 }
 
 .section.certificates::before {
@@ -245,7 +245,7 @@ h4 {
 .badges {
   display: flex;
   gap: clamp(0.5rem, 1.5vw, 0.8rem);
-  margin: clamp(1rem, 3vw, 1.5rem) 0;
+  margin: 20px 0;
   flex-wrap: wrap;
 }
 
@@ -1362,12 +1362,14 @@ h4 {
   .header h2 {
     font-size: clamp(1.2rem, 4vw, 1.5rem);
     padding: 0.5rem 0.75rem;
+    margin-top: 2px;
   }
 }
 
 @media (max-width: 480px) {
   .badges {
     gap: 0.5rem;
+    margin: 4px 0;
   }
   
   .badge {
