@@ -193,8 +193,8 @@ h4 {
     45deg,
     transparent,
     transparent 10px,
-    rgba(255, 0, 0, 0.02) 10px,
-    rgba(255, 0, 0, 0.02) 20px
+    rgba(0, 38, 255, 0.02) 10px,
+    rgba(0, 0, 255, 0.02) 20px
   );
   position: relative;
 }
@@ -205,22 +205,25 @@ h4 {
   top: clamp(-8px, -1.5vw, -10px);
   left: clamp(10px, 3vw, 20px);
   background: var(--bg-secondary);
-  padding: 0 clamp(5px, 1.5vw, 10px);
+  padding: 5px 13px;
   font-family: 'Archivo Black', sans-serif;
   font-size: clamp(0.75rem, 2vw, 0.9rem);
   border: var(--border-thin) solid var(--text-primary);
+  transform: translateY(-10px);
 }
 
 .section.tools::before {
   content: "/// TOOLS ///";
   background: #08D9D6;
   color: var(--text-primary);
+  transform: rotate(-2deg) translateY(-10px);
 }
 
 .section.projects::before {
   content: "/// PROJECTS ///";
   background: #08D9D6;
   color: var(--text-primary);
+  transform: rotate(1deg) translateY(-10px);
 }
 
 .section.certificates::before {
@@ -233,6 +236,7 @@ h4 {
   content: "/// CONNECT ///";
   background: #08D9D6;
   color: var(--text-primary);
+  transform: rotate(-1deg) translateY(-10px);
 }
 
 /* =========================================
@@ -1277,6 +1281,15 @@ h4 {
   font-size: clamp(0.7rem, 2vw, 0.8rem);
   position: relative;
   word-break: break-word;
+  a {
+    color: #77d8e0;
+    text-decoration: none;
+    transition: var(--transition);
+    &:hover {
+      color: #a3fffd;
+      text-decoration: underline;
+    }
+  }
 }
 
 .footer::before {
@@ -1748,7 +1761,7 @@ html {
 
   <!-- FOOTER -->
   <footer class="footer">
-    © 2025 TAKATHENA — BRUTALIST EDITION
+    © 2025 <a href="https://github.com/takathena">TAKATHENA</a> — MAKE WITH LOVE
   </footer>
 </div>
 
