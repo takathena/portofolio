@@ -81,7 +81,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: var(--font-size-xxl);
-  margin-bottom: clamp(0.25rem, 1vw, 0.5rem);
+  margin: 12px 0 7px 0;
   color: var(--bg-accent);
   text-shadow: 
     var(--shadow-offset) var(--shadow-offset) 0 var(--bg-accent2),
@@ -92,7 +92,7 @@ h1 {
 
 h2 {
   font-size: var(--font-size-xl);
-  margin-bottom: var(--spacing-md);
+  margin: 10px 0;
   background: var(--bg-accent);
   color: var(--text-secondary);
   padding: clamp(0.5rem, 1.5vw, 0.625rem) clamp(0.75rem, 2vw, 0.9375rem);
@@ -193,8 +193,8 @@ h4 {
     45deg,
     transparent,
     transparent 10px,
-    rgba(255, 0, 0, 0.02) 10px,
-    rgba(255, 0, 0, 0.02) 20px
+    rgba(0, 38, 255, 0.02) 10px,
+    rgba(0, 0, 255, 0.02) 20px
   );
   position: relative;
 }
@@ -205,22 +205,25 @@ h4 {
   top: clamp(-8px, -1.5vw, -10px);
   left: clamp(10px, 3vw, 20px);
   background: var(--bg-secondary);
-  padding: 0 clamp(5px, 1.5vw, 10px);
+  padding: 5px 13px;
   font-family: 'Archivo Black', sans-serif;
   font-size: clamp(0.75rem, 2vw, 0.9rem);
   border: var(--border-thin) solid var(--text-primary);
+  transform: translateY(-10px);
 }
 
 .section.tools::before {
   content: "/// TOOLS ///";
   background: #08D9D6;
   color: var(--text-primary);
+  transform: rotate(-1deg) translateY(-10px);
 }
 
 .section.projects::before {
   content: "/// PROJECTS ///";
   background: #08D9D6;
   color: var(--text-primary);
+  transform: rotate(-1deg) translateY(-10px);
 }
 
 .section.certificates::before {
@@ -233,6 +236,7 @@ h4 {
   content: "/// CONNECT ///";
   background: #08D9D6;
   color: var(--text-primary);
+  transform: rotate(-1deg) translateY(-10px);
 }
 
 /* =========================================
@@ -241,12 +245,12 @@ h4 {
 .badges {
   display: flex;
   gap: clamp(0.5rem, 1.5vw, 0.8rem);
-  margin: clamp(1rem, 3vw, 1.5rem) 0;
+  margin: 20px 0;
   flex-wrap: wrap;
 }
 
 .badge {
-  background: #E3FDFD;
+  background: #77d8e0;
   color: var(--text-primary);
   padding: clamp(0.375rem, 1vw, 0.5rem) clamp(0.75rem, 2vw, 1rem);
   border: var(--border-thin) solid var(--text-primary);
@@ -736,12 +740,20 @@ h4 {
 }
 
 .card:hover, .cert-card:hover {
+  /* transform: translate(-8px, -8px); */
   transform: scale(1.02);
+  /* box-shadow: 
+    12px 12px 0 var(--bg-accent2),
+    -12px -12px 0 var(--bg-accent5); */
   border-color: var(--bg-accent2);
 }
 
 .card:nth-child(even):hover, .cert-card:nth-child(even):hover {
+  /* transform: translate(-8px, -8px); */
   transform: scale(1.02);
+  /* box-shadow: 
+    12px 12px 0 var(--bg-accent2),
+    -12px -12px 0 var(--bg-accent5); */
   border-color: var(--bg-accent2);
 }
 
@@ -1269,6 +1281,15 @@ h4 {
   font-size: clamp(0.7rem, 2vw, 0.8rem);
   position: relative;
   word-break: break-word;
+  a {
+    color: #77d8e0;
+    text-decoration: none;
+    transition: var(--transition);
+    &:hover {
+      color: #a3fffd;
+      text-decoration: underline;
+    }
+  }
 }
 
 .footer::before {
@@ -1341,12 +1362,14 @@ h4 {
   .header h2 {
     font-size: clamp(1.2rem, 4vw, 1.5rem);
     padding: 0.5rem 0.75rem;
+    margin-top: 2px;
   }
 }
 
 @media (max-width: 480px) {
   .badges {
     gap: 0.5rem;
+    margin: 4px 0;
   }
   
   .badge {
@@ -1409,134 +1432,31 @@ h4 {
 }
 
 /* =========================================
-        ENHANCED ANIMATIONS & EFFECTS
+        ANIMATIONS & EFFECTS
 ========================================= */
 @keyframes glitch {
   0% {
-    text-shadow: 2px 2px 0 var(--bg-accent2);
     transform: translate(0);
   }
-  10% {
-    text-shadow: -2px -2px 0 var(--bg-accent3);
-    transform: translate(-1px, 1px);
-  }
   20% {
-    text-shadow: 2px -2px 0 var(--bg-accent4);
-    transform: translate(1px, -1px);
-  }
-  30% {
-    text-shadow: -2px 2px 0 var(--bg-accent);
-    transform: translate(-1px, -1px);
+    transform: translate(-2px, 2px);
   }
   40% {
-    text-shadow: 2px 2px 0 var(--bg-accent2);
-    transform: translate(1px, 1px);
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
   }
   100% {
-    text-shadow: 2px 2px 0 var(--bg-accent2);
     transform: translate(0);
   }
 }
 
 .glitch:hover {
-  animation: glitch 0.4s linear;
-  display: inline-block;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-8px) rotate(1deg);
-  }
-}
-
-@keyframes shake {
-  0%, 100% {
-    transform: translateX(0) rotate(0deg);
-  }
-  25% {
-    transform: translateX(-2px) rotate(-1deg);
-  }
-  75% {
-    transform: translateX(2px) rotate(1deg);
-  }
-}
-
-@keyframes colorShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes borderGlow {
-  0%, 100% {
-    border-color: var(--text-primary);
-    box-shadow: 
-      var(--shadow-offset) var(--shadow-offset) 0 var(--bg-accent2),
-      calc(var(--shadow-offset) * -1) calc(var(--shadow-offset) * -1) 0 var(--bg-accent3);
-  }
-  50% {
-    border-color: var(--bg-accent2);
-    box-shadow: 
-      0 0 10px var(--bg-accent2),
-      var(--shadow-offset) var(--shadow-offset) 0 var(--bg-accent3),
-      calc(var(--shadow-offset) * -1) calc(var(--shadow-offset) * -1) 0 var(--bg-accent);
-  }
-}
-
-@keyframes slideInFromLeft {
-  from {
-    transform: translateX(-30px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideInFromRight {
-  from {
-    transform: translateX(30px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* Hover animations */
-.card:hover .card-title,
-.cert-card:hover .card-title {
-  animation: shake 0.3s ease;
-}
-
-.badge:hover {
-  animation: float 0.8s ease-in-out;
-}
-
-.section:hover {
-  animation: borderGlow 2s infinite;
+  animation: glitch 0.3s linear;
 }
 
 /* Scanline effect */
@@ -1561,16 +1481,6 @@ h4 {
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: overlay;
-  animation: scanline 8s linear infinite;
-}
-
-@keyframes scanline {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 0 100px;
-  }
 }
 
 /* Noise texture */
@@ -1585,185 +1495,6 @@ h4 {
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: overlay;
-  animation: noiseMove 0.2s infinite;
-}
-
-@keyframes noiseMove {
-  0% {
-    transform: translate(0, 0);
-  }
-  10% {
-    transform: translate(-1%, -1%);
-  }
-  20% {
-    transform: translate(1%, 1%);
-  }
-  30% {
-    transform: translate(-1%, 1%);
-  }
-  40% {
-    transform: translate(1%, -1%);
-  }
-  50% {
-    transform: translate(-1%, -1%);
-  }
-  60% {
-    transform: translate(1%, 1%);
-  }
-  70% {
-    transform: translate(-1%, 1%);
-  }
-  80% {
-    transform: translate(1%, -1%);
-  }
-  90% {
-    transform: translate(-1%, -1%);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
-/* Page load animation */
-.page {
-  animation: pageLoad 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
-}
-
-@keyframes pageLoad {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* Staggered animations for badges */
-.badge:nth-child(1) { animation: slideInFromLeft 0.5s ease 0.1s both; }
-.badge:nth-child(2) { animation: slideInFromRight 0.5s ease 0.2s both; }
-.badge:nth-child(3) { animation: slideInFromLeft 0.5s ease 0.3s both; }
-.badge:nth-child(4) { animation: slideInFromRight 0.5s ease 0.4s both; }
-.badge:nth-child(5) { animation: slideInFromLeft 0.5s ease 0.5s both; }
-
-/* Photo hover effect */
-.photo-image {
-  position: relative;
-  overflow: hidden;
-}
-
-.photo-image::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, transparent 30%, rgba(0, 173, 181, 0.1) 50%, transparent 70%);
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.photo-image:hover::after {
-  opacity: 1;
-  animation: glint 1.5s ease;
-}
-
-@keyframes glint {
-  0% {
-    transform: translateX(-100%) translateY(-100%) rotate(45deg);
-  }
-  100% {
-    transform: translateX(100%) translateY(100%) rotate(45deg);
-  }
-}
-
-/* Typewriter effect for lead text */
-.lead {
-  position: relative;
-  overflow: hidden;
-}
-
-.lead::after {
-  content: "|";
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  animation: blink 1s infinite;
-  color: var(--bg-accent2);
-  font-weight: bold;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* Social icons wave animation */
-.social-link:nth-child(1) .social-icon { transition-delay: 0.1s; }
-.social-link:nth-child(2) .social-icon { transition-delay: 0.2s; }
-.social-link:nth-child(3) .social-icon { transition-delay: 0.3s; }
-.social-link:nth-child(4) .social-icon { transition-delay: 0.4s; }
-.social-link:nth-child(5) .social-icon { transition-delay: 0.5s; }
-.social-link:nth-child(6) .social-icon { transition-delay: 0.6s; }
-.social-link:nth-child(7) .social-icon { transition-delay: 0.7s; }
-.social-link:nth-child(8) .social-icon { transition-delay: 0.8s; }
-
-.social-grid:hover .social-icon {
-  animation: wave 0.5s ease;
-}
-
-@keyframes wave {
-  0% {
-    transform: translateY(0) rotate(0);
-  }
-  50% {
-    transform: translateY(-5px) rotate(2deg);
-  }
-  100% {
-    transform: translateY(0) rotate(0);
-  }
-}
-
-/* Tool icons hover effect */
-.tools-grid img {
-  position: relative;
-}
-
-.tools-grid img::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--bg-accent2);
-  opacity: 0;
-  z-index: -1;
-  transition: opacity 0.3s ease;
-}
-
-.tools-grid img:hover::before {
-  opacity: 0.1;
-  animation: pulseTool 1s ease;
-}
-
-@keyframes pulseTool {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.2;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0.1;
-  }
 }
 
 /* =========================================
@@ -1863,36 +1594,6 @@ html {
     font-size: 0.85rem;
   }
 }
-
-/* Animation classes */
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.animate-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.float-animation {
-  animation: float 3s ease-in-out infinite;
-}
-
-.pulse-animation {
-  animation: pulse 2s ease-in-out infinite;
-}
-
-.shake-on-hover:hover {
-  animation: shake 0.3s ease;
-}
-
-.color-shift {
-  background: linear-gradient(-45deg, var(--bg-accent), var(--bg-accent2), var(--bg-accent3), var(--bg-accent4));
-  background-size: 400% 400%;
-  animation: colorShift 15s ease infinite;
-}
 </style>
 </head>
 
@@ -1907,7 +1608,7 @@ html {
       <h2>BRUTALIST DEVELOPER & CREATIVE CODER</h2>
       
       <div class="badges">
-        <span class="badge"><img src="https://decisive-platypus-f3d.notion.site/icons/butterfly_gray.svg?mode=" alt="Student icon">STUDENT</span>
+        <span class="badge"><img src="https://img.icons8.com/?size=100&id=11225&format=png&color=000000" alt="Student icon">STUDENT</span>
         <span class="badge">AI ENTHUSIAST</span>
         <span class="badge">VIBE CODER</span>
         <span class="badge">BRUTALIST</span>
@@ -2032,29 +1733,29 @@ html {
     <div class="connect-section">
       <h3>GET IN TOUCH</h3>
       <div class="social-grid">
-        <a href="https://www.linkedin.com/in/fitrah-octavio-538080396/" aria-label="Visit LinkedIn profile" class="social-link">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/960px-LinkedIn_logo_initials.png" alt="LinkedIn logo" class="social-icon">
+        <a target="_blank" href="https://www.linkedin.com/in/fitrah-octavio-538080396/" aria-label="Visit LinkedIn profile" class="social-link">
+          <img src="https://img.icons8.com/?size=100&id=61956&format=png&color=000000" alt="LinkedIn logo" class="social-icon">
         </a>
-        <a href="https://github.com/takathena" aria-label="Visit GitHub profile" class="social-link">
-          <img src="https://cdn.cosmos.so/2569e4fd-edc5-4dc2-b2f0-62029928d298?format=jpeg" alt="GitHub logo" class="social-icon">
+        <a target="_blank" href="https://github.com/takathena" aria-label="Visit GitHub profile" class="social-link">
+          <img src="https://img.icons8.com/?size=100&id=wC6U9tCpf3iN&format=png&color=000000" alt="GitHub logo" class="social-icon">
         </a>
-        <a href="https://www.instagram.com/pitravs/" aria-label="Visit Instagram profile" class="social-link">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/960px-Instagram_logo_2022.svg.png" alt="Instagram logo" class="social-icon">
+        <a target="_blank" href="https://www.instagram.com/pitravs/" aria-label="Visit Instagram profile" class="social-link">
+          <img src="https://img.icons8.com/?size=100&id=yp9pbAoPu0Sn&format=png&color=000000" alt="Instagram logo" class="social-icon">
         </a>
-        <a href="https://www.cosmos.so/takathena" aria-label="Visit Cosmos profile" class="social-link">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLqNIMiklXnPjCckpTiqnNLIlKC4biPA9snQ&s" alt="Cosmos logo" class="social-icon">
+        <a target="_blank" href="https://www.cosmos.so/takathena" aria-label="Visit Cosmos profile" class="social-link">
+          <img src="https://img.icons8.com/?size=100&id=X1F0FerHt74r&format=png&color=000000" alt="Cosmos logo" class="social-icon">
         </a>
-        <a href="https://open.spotify.com/user/31aro76cun6v222osijbjxw3kpoy?si=2f78522bc08c49d9" aria-label="Visit Spotify profile" class="social-link">
-          <img src="https://cdn.jim-nielsen.com/watchos/512/spotify-music-and-podcasts-2020-03-19.png?rf=1024" alt="Spotify logo" class="social-icon">
+        <a target="_blank" href="https://open.spotify.com/user/31aro76cun6v222osijbjxw3kpoy?si=2f78522bc08c49d9" aria-label="Visit Spotify profile" class="social-link">
+          <img src="https://img.icons8.com/?size=100&id=bLhnvHtf8jQB&format=png&color=000000" alt="Spotify logo" class="social-icon">
         </a>
-        <a href="https://x.com/takathena" aria-label="Visit X (Twitter) profile" class="social-link">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/X_icon_2.svg/1024px-X_icon_2.svg.png" alt="X (Twitter) logo" class="social-icon">
+        <a target="_blank" href="https://x.com/takathena" aria-label="Visit X (Twitter) profile" class="social-link">
+          <img src="https://img.icons8.com/?size=100&id=rtpOcTdebJ36&format=png&color=000000" alt="X (Twitter) logo" class="social-icon">
         </a>
-        <a href="https://discord.com/users/1409489428707279033" aria-label="Visit Discord profile" class="social-link">
-          <img src="https://pngimg.com/uploads/discord/discord_PNG8.png" alt="Discord logo" class="social-icon">
+        <a target="_blank" href="https://discord.com/users/1409489428707279033" aria-label="Visit Discord profile" class="social-link">
+          <img src="https://img.icons8.com/?size=100&id=VQVRp4uu0ssX&format=png&color=000000" alt="Discord logo" class="social-icon">
         </a>
-        <a href="mailto:example@takathena.com" aria-label="Send email" class="social-link">
-          <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email icon" class="social-icon">
+        <a target="_blank" href="mailto:example@takathena.com" aria-label="Send email" class="social-link">
+          <img src="https://img.icons8.com/?size=100&id=pRezTnlZ3Oab&format=png&color=000000" alt="Email icon" class="social-icon">
         </a>
       </div>
     </div>
@@ -2062,7 +1763,7 @@ html {
 
   <!-- FOOTER -->
   <footer class="footer">
-    © 2025 TAKATHENA — BRUTALIST EDITION
+    © 2025 <a href="https://github.com/takathena" target="_blank">TAKATHENA</a> — MAKE WITH LOVE
   </footer>
 </div>
 
@@ -2167,7 +1868,7 @@ html {
 
 <script>
 /* =========================================
-        BRUTALIST JAVASCRIPT - ENHANCED ANIMATIONS
+        BRUTALIST JAVASCRIPT - IMPROVED WITH SNAP EFFECT
 ========================================= */
 
 // Database icons
@@ -2474,12 +2175,6 @@ document.addEventListener('DOMContentLoaded', function() {
   createProjectIndicators();
   createCertIndicators();
   updateCarouselProgress();
-  
-  // Start scanline animation
-  startScanlineAnimation();
-  
-  // Add scroll animations
-  setupScrollAnimations();
 });
 
 // Handle window resize
@@ -2825,7 +2520,7 @@ function renderProjects() {
 // Create project card with responsive design
 function createProjectCard(project, index) {
   const card = document.createElement('article');
-  card.className = 'card animate-on-scroll';
+  card.className = 'card';
   card.onclick = () => openModal(project.id);
   card.tabIndex = 0;
   card.setAttribute('role', 'button');
@@ -2841,7 +2536,7 @@ function createProjectCard(project, index) {
       <img src="${project.image}" alt="${project.title}" loading="lazy">
     </div>
     <div class="card-content">
-      <h4 class="card-title text-truncate shake-on-hover">${project.title}</h4>
+      <h4 class="card-title text-truncate">${project.title}</h4>
       <p class="card-description">${displayDescription}...</p>
       <div class="card-tech">
         ${project.technologies.slice(0, window.innerWidth < 480 ? 2 : 3).map(tech => 
@@ -2907,7 +2602,7 @@ function renderCertificates(category) {
 // Create certificate card with responsive design
 function createCertificateCard(cert, index) {
   const certCard = document.createElement('article');
-  certCard.className = 'card cert-card animate-on-scroll';
+  certCard.className = 'card cert-card';
   certCard.onclick = () => openCertificateModal(cert.id);
   certCard.tabIndex = 0;
   certCard.setAttribute('role', 'button');
@@ -2928,7 +2623,7 @@ function createCertificateCard(cert, index) {
         <img src="${cert.issuerIcon}" alt="${cert.issuer} logo" loading="lazy">
         <span>${cert.issuer}</span>
       </div>
-      <h4 class="card-title text-truncate shake-on-hover">${cert.title}</h4>
+      <h4 class="card-title text-truncate">${cert.title}</h4>
       <p class="card-description">${displayDescription}...</p>
       <div class="card-tech">
         <span class="tech-tag">${cert.date}</span>
@@ -3224,18 +2919,6 @@ function setupEventListeners() {
       }
     }
   }, { passive: true });
-  
-  // Add hover effects to badges
-  const badges = document.querySelectorAll('.badge');
-  badges.forEach(badge => {
-    badge.addEventListener('mouseenter', () => {
-      badge.style.transform = `rotate(${Math.random() * 4 - 2}deg) scale(1.05)`;
-    });
-    
-    badge.addEventListener('mouseleave', () => {
-      badge.style.transform = '';
-    });
-  });
 }
 
 // Setup carousel scroll listeners
@@ -3293,83 +2976,6 @@ function setupCarouselScrollListeners() {
     }
   }, 150));
 }
-
-// Scanline animation
-function startScanlineAnimation() {
-  const scanlines = document.querySelector('.scanlines');
-  if (scanlines) {
-    let position = 0;
-    setInterval(() => {
-      position = (position + 1) % 100;
-      scanlines.style.backgroundPosition = `0 ${position}px`;
-    }, 100);
-  }
-}
-
-// Scroll animations
-function setupScrollAnimations() {
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, observerOptions);
-
-  // Observe all animate-on-scroll elements
-  document.querySelectorAll('.animate-on-scroll').forEach(el => {
-    observer.observe(el);
-  });
-  
-  // Observe sections
-  document.querySelectorAll('.section').forEach(section => {
-    observer.observe(section);
-  });
-}
-
-// Random glitch effect on header
-function triggerRandomGlitch() {
-  const header = document.querySelector('h1.glitch');
-  if (header) {
-    header.style.animation = 'none';
-    setTimeout(() => {
-      header.style.animation = 'glitch 0.4s linear';
-    }, 10);
-  }
-}
-
-// Randomly trigger glitch effect
-setInterval(() => {
-  if (Math.random() < 0.2) { // 20% chance every 10 seconds
-    triggerRandomGlitch();
-  }
-}, 10000);
-
-// Add floating animation to random badges
-setInterval(() => {
-  const badges = document.querySelectorAll('.badge');
-  const randomBadge = badges[Math.floor(Math.random() * badges.length)];
-  randomBadge.classList.add('float-animation');
-  setTimeout(() => {
-    randomBadge.classList.remove('float-animation');
-  }, 3000);
-}, 5000);
-
-// Add interactive noise effect
-document.addEventListener('mousemove', (e) => {
-  const noise = document.querySelector('.noise');
-  if (noise) {
-    const x = (e.clientX / window.innerWidth) * 100;
-    const y = (e.clientY / window.innerHeight) * 100;
-    noise.style.backgroundPosition = `${x}% ${y}%`;
-  }
-});
 </script>
 </body>
 </html>
