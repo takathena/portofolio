@@ -7,9 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="https://cdn.cosmos.so/ce562cca-2d95-47b3-969e-f842ffb4c225?format=jpeg">
 <style>
-/* =========================================
-        BRUTALIST CSS VARIABLES - RESPONSIVE
-========================================= */
 :root {
   --bg-primary: #000000;
   --bg-secondary: #FFFFFF;
@@ -20,23 +17,17 @@
   --text-primary: #000000;
   --text-secondary: #FFFFFF;
   --text-accent: #00ADB5;
-  
-  /* Responsive variables */
   --border-thick: clamp(4px, 1vw, 8px);
   --border-thin: clamp(2px, 0.5vw, 4px);
   --shadow-offset: clamp(3px, 0.8vw, 8px);
   --maxw: min(1200px, 95vw);
   --card-width: min(350px, 90vw);
   --transition: all 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  
-  /* Spacing variables */
   --spacing-xs: clamp(0.25rem, 0.5vw, 0.5rem);
   --spacing-sm: clamp(0.5rem, 1vw, 1rem);
   --spacing-md: clamp(1rem, 2vw, 1.5rem);
   --spacing-lg: clamp(1.5rem, 3vw, 2rem);
   --spacing-xl: clamp(2rem, 4vw, 3rem);
-  
-  /* Typography variables */
   --font-size-xs: clamp(0.7rem, 2vw, 0.85rem);
   --font-size-sm: clamp(0.85rem, 2.5vw, 1rem);
   --font-size-md: clamp(1rem, 3vw, 1.2rem);
@@ -45,9 +36,6 @@
   --font-size-xxl: clamp(2.5rem, 8vw, 4.5rem);
 }
 
-/* =========================================
-        RESET & BASE STYLES - RESPONSIVE
-========================================= */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -65,11 +53,9 @@ html, body {
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: grayscale;
   font-size: clamp(14px, 2.5vw, 16px);
+  -webkit-overflow-scrolling: touch;
 }
 
-/* =========================================
-        TYPOGRAPHY BRUTALIST - RESPONSIVE
-========================================= */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Archivo Black', sans-serif;
   font-weight: 900;
@@ -130,9 +116,6 @@ h4 {
   display: inline-block;
 }
 
-/* =========================================
-        LAYOUT BRUTALIST RESPONSIF - IMPROVED
-========================================= */
 .page {
   max-width: min(var(--maxw), 98%);
   margin: clamp(0.5rem, 2vw, 1.5rem) auto;
@@ -182,9 +165,6 @@ h4 {
   }
 }
 
-/* =========================================
-        SECTION CONTAINER - RESPONSIVE
-========================================= */
 .section {
   margin: clamp(1rem, 3vw, 2rem) 0;
   padding: clamp(1rem, 2.5vw, 1.5rem);
@@ -209,39 +189,13 @@ h4 {
   font-family: 'Archivo Black', sans-serif;
   font-size: clamp(0.75rem, 2vw, 0.9rem);
   border: var(--border-thin) solid var(--text-primary);
-  transform: translateY(-10px);
 }
 
-.section.tools::before {
-  content: "/// TOOLS ///";
-  background: #08D9D6;
-  color: var(--text-primary);
-  transform: rotate(-1deg) translateY(-10px);
-}
+.section.tools::before { content: "/// TOOLS ///"; background: #08D9D6; color: var(--text-primary); }
+.section.projects::before { content: "/// PROJECTS ///"; background: #08D9D6; color: var(--text-primary);}
+.section.certificates::before { content: "/// CERTIFICATES ///"; background: #08D9D6; color: var(--text-primary); }
+.section.connect::before { content: "/// CONNECT ///"; background: #08D9D6; color: var(--text-primary);}
 
-.section.projects::before {
-  content: "/// PROJECTS ///";
-  background: #08D9D6;
-  color: var(--text-primary);
-  transform: rotate(-1deg) translateY(-10px);
-}
-
-.section.certificates::before {
-  content: "/// CERTIFICATES ///";
-  background: #08D9D6;
-  color: var(--text-primary);
-}
-
-.section.connect::before {
-  content: "/// CONNECT ///";
-  background: #08D9D6;
-  color: var(--text-primary);
-  transform: rotate(-1deg) translateY(-10px);
-}
-
-/* =========================================
-        BADGES BRUTALIST - RESPONSIVE
-========================================= */
 .badges {
   display: flex;
   gap: clamp(0.5rem, 1.5vw, 0.8rem);
@@ -270,29 +224,10 @@ h4 {
   text-overflow: ellipsis;
 }
 
-.badge:nth-child(2n) {
-  transform: rotate(-1deg);
-  background: var(--bg-accent);
-  color: var(--text-secondary);
-}
-
-.badge:nth-child(3n) {
-  transform: rotate(2deg);
-  background: var(--bg-accent2);
-  color: var(--text-secondary);
-}
-
-.badge:nth-child(4n) {
-  transform: rotate(2deg);
-  background: #3282B8;
-  color: var(--text-secondary);
-}
-
-.badge:nth-child(5n) {
-  transform: rotate(2deg);
-  background: #9DB2BF;
-  color: var(--bg-primary);
-}
+.badge:nth-child(2n) { transform: rotate(-1deg); background: var(--bg-accent); color: var(--text-secondary); }
+.badge:nth-child(3n) { transform: rotate(2deg); background: var(--bg-accent2); color: var(--text-secondary); }
+.badge:nth-child(4n) { transform: rotate(2deg); background: #3282B8; color: var(--text-secondary); }
+.badge:nth-child(5n) { transform: rotate(2deg); background: #9DB2BF; color: var(--bg-primary); }
 
 .badge img {
   width: clamp(16px, 3vw, 18px);
@@ -301,9 +236,6 @@ h4 {
   filter: grayscale(100%) contrast(200%);
 }
 
-/* =========================================
-        LEAD TEXT - RESPONSIVE
-========================================= */
 .lead {
   font-family: 'Space Mono', monospace;
   font-size: var(--font-size-sm);
@@ -330,13 +262,7 @@ h4 {
   font-size: clamp(0.7rem, 2vw, 0.9rem);
 }
 
-/* =========================================
-        ACCORDION BRUTALIST - RESPONSIVE
-========================================= */
-.accordion {
-  width: 100%;
-  margin: var(--spacing-sm) 0;
-}
+.accordion { width: 100%; margin: var(--spacing-sm) 0; }
 
 .accordion-header {
   display: flex;
@@ -366,20 +292,9 @@ h4 {
   min-width: 32px;
 }
 
-.accordion-btn:hover {
-  transform: rotate(90deg);
-  background: var(--bg-accent3);
-}
+.accordion-btn:hover { transform: rotate(90deg); background: var(--bg-accent3); }
+.accordion-btn.open { background: var(--bg-accent2); color: var(--text-primary); transform: rotate(180deg); }
 
-.accordion-btn.open {
-  background: var(--bg-accent2);
-  color: var(--text-primary);
-  transform: rotate(180deg);
-}
-
-/* =========================================
-        TAG BAR BRUTALIST - RESPONSIVE
-========================================= */
 .tag-bar {
   display: flex;
   gap: clamp(0.4rem, 1.5vw, 0.6rem);
@@ -391,19 +306,9 @@ h4 {
   scrollbar-color: var(--bg-accent) var(--bg-primary);
 }
 
-.tag-bar::-webkit-scrollbar {
-  height: clamp(4px, 1vw, 6px);
-}
-
-.tag-bar::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-
-.tag-bar::-webkit-scrollbar-thumb {
-  background: var(--bg-accent);
-  border: 1px solid var(--text-primary);
-  border-radius: 2px;
-}
+.tag-bar::-webkit-scrollbar { height: clamp(4px, 1vw, 6px); }
+.tag-bar::-webkit-scrollbar-track { background: var(--bg-primary); }
+.tag-bar::-webkit-scrollbar-thumb { background: var(--bg-accent); border: 1px solid var(--text-primary); border-radius: 2px; }
 
 .tag {
   background: var(--bg-secondary);
@@ -428,15 +333,8 @@ h4 {
   box-shadow: 3px 3px 0 var(--bg-accent2);
 }
 
-.tag.active {
-  background: var(--text-primary);
-  color: var(--bg-secondary);
-  border-color: var(--text-primary);
-}
+.tag.active { background: var(--text-primary); color: var(--bg-secondary); border-color: var(--text-primary); }
 
-/* =========================================
-        TOOLS GRID BRUTALIST - RESPONSIVE
-========================================= */
 .tools-body {
   overflow: hidden;
   max-height: 0;
@@ -444,10 +342,7 @@ h4 {
   transition: max-height 0.5s ease, opacity 0.3s ease;
 }
 
-.tools-body.open {
-  opacity: 1;
-  max-height: 1000px;
-}
+.tools-body.open { opacity: 1; max-height: 1000px; }
 
 .tools-grid {
   display: grid;
@@ -479,14 +374,8 @@ h4 {
   box-shadow: 4px 4px 0 var(--bg-accent3);
 }
 
-.tools-grid img:nth-child(even):hover {
-  transform: scale(1.15) rotate(5deg);
-}
-
-.tools-grid.dimmed img {
-  opacity: 0.25;
-}
-
+.tools-grid img:nth-child(even):hover { transform: scale(1.15) rotate(5deg); }
+.tools-grid.dimmed img { opacity: 0.25; }
 .tools-grid img.highlight {
   opacity: 1 !important;
   transform: scale(1.1);
@@ -494,9 +383,6 @@ h4 {
   box-shadow: 5px 5px 0 var(--bg-accent);
 }
 
-/* =========================================
-        CAROUSEL SNAP EFFECT
-========================================= */
 .carousel-wrapper {
   overflow-x: auto;
   scroll-behavior: smooth;
@@ -509,9 +395,7 @@ h4 {
   border: 4px solid rgba(0, 0, 0, 0);
 }
 
-.carousel-wrapper::-webkit-scrollbar {
-  display: none;
-}
+.carousel-wrapper::-webkit-scrollbar { display: none; }
 
 .carousel {
   display: flex;
@@ -526,17 +410,10 @@ h4 {
   transition: transform 0.3s ease;
 }
 
-/* Animation for snap effect */
 @keyframes snapFocus {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.02);
-  }
-  100% {
-    transform: scale(1);
-  }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
 }
 
 .card.snap-focus, .cert-card.snap-focus {
@@ -548,14 +425,7 @@ h4 {
     12px 12px 0 var(--bg-accent3);
 }
 
-/* Active dot indicator */
-.carousel-indicator {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
-  padding: 0.5rem;
-}
+.carousel-indicator { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.5rem; padding: 0.5rem; }
 
 .indicator-dot {
   width: 10px;
@@ -568,26 +438,11 @@ h4 {
   flex-shrink: 0;
 }
 
-.indicator-dot.active {
-  background: var(--bg-accent2);
-  transform: scale(1.2);
-}
+.indicator-dot.active { background: var(--bg-accent2); transform: scale(1.2); }
+.indicator-dot:hover { background: var(--bg-accent); transform: scale(1.3); }
 
-.indicator-dot:hover {
-  background: var(--bg-accent);
-  transform: scale(1.3);
-}
-
-/* Arrow animation */
-.project-arrow:active, .cert-arrow:active {
-  transform: scale(0.95);
-  background: var(--bg-accent3);
-}
-
-/* Highlight current item */
-.current-item {
-  position: relative;
-}
+.project-arrow:active, .cert-arrow:active { transform: scale(0.95); background: var(--bg-accent3); }
+.current-item { position: relative; }
 
 .current-item::after {
   content: "CURRENT";
@@ -605,17 +460,10 @@ h4 {
 }
 
 @keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.05);
-  }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
 }
 
-/* Progress bar */
 .carousel-progress {
   width: 100%;
   height: 4px;
@@ -649,12 +497,7 @@ h4 {
   );
 }
 
-/* =========================================
-        PROJECTS CAROUSEL BRUTALIST - RESPONSIVE
-========================================= */
-.projects-section {
-  margin: var(--spacing-md) 0;
-}
+.projects-section { margin: var(--spacing-md) 0; }
 
 .project-header {
   display: flex;
@@ -703,9 +546,6 @@ h4 {
   margin: 0 auto;
 }
 
-/* =========================================
-        CARDS BRUTALIST - RESPONSIVE
-========================================= */
 .card, .cert-card {
   flex: 0 0 calc(var(--card-width) - 2rem);
   background: var(--bg-secondary);
@@ -739,23 +579,8 @@ h4 {
   }
 }
 
-.card:hover, .cert-card:hover {
-  /* transform: translate(-8px, -8px); */
-  transform: scale(1.02);
-  /* box-shadow: 
-    12px 12px 0 var(--bg-accent2),
-    -12px -12px 0 var(--bg-accent5); */
-  border-color: var(--bg-accent2);
-}
-
-.card:nth-child(even):hover, .cert-card:nth-child(even):hover {
-  /* transform: translate(-8px, -8px); */
-  transform: scale(1.02);
-  /* box-shadow: 
-    12px 12px 0 var(--bg-accent2),
-    -12px -12px 0 var(--bg-accent5); */
-  border-color: var(--bg-accent2);
-}
+.card:hover, .cert-card:hover { transform: scale(1.02); border-color: var(--bg-accent2); }
+.card:nth-child(even):hover, .cert-card:nth-child(even):hover { transform: scale(1.02); border-color: var(--bg-accent2); }
 
 .card-image, .cert-image {
   height: clamp(140px, 40vw, 160px);
@@ -840,12 +665,7 @@ h4 {
   flex-shrink: 0;
 }
 
-/* =========================================
-        SOCIAL CONNECT BRUTALIST - RESPONSIVE
-========================================= */
-.connect-section {
-  margin: var(--spacing-md) 0;
-}
+.connect-section { margin: var(--spacing-md) 0; }
 
 .social-grid {
   display: grid;
@@ -882,13 +702,8 @@ h4 {
   box-shadow: 4px 4px 0 var(--bg-accent3);
 }
 
-.social-link:nth-child(even):hover .social-icon {
-  transform: scale(1.1) rotate(5deg);
-}
+.social-link:nth-child(even):hover .social-icon { transform: scale(1.1) rotate(5deg); }
 
-/* =========================================
-        PHOTO SECTION - RESPONSIVE
-========================================= */
 .photo-container {
   margin-bottom: var(--spacing-md);
   width: 100%;
@@ -910,12 +725,7 @@ h4 {
   transform: rotate(1deg) scale(1.01);
 }
 
-/* =========================================
-        CERTIFICATES SECTION - RESPONSIVE
-========================================= */
-.certificates-section {
-  margin: var(--spacing-md) 0;
-}
+.certificates-section { margin: var(--spacing-md) 0; }
 
 .certificates-header {
   display: flex;
@@ -934,11 +744,7 @@ h4 {
   width: 100%;
 }
 
-@media (min-width: 768px) {
-  .certificates-controls {
-    width: auto;
-  }
-}
+@media (min-width: 768px) { .certificates-controls { width: auto; } }
 
 .certificates-filter {
   position: relative;
@@ -946,11 +752,7 @@ h4 {
   width: 100%;
 }
 
-@media (min-width: 768px) {
-  .certificates-filter {
-    width: auto;
-  }
-}
+@media (min-width: 768px) { .certificates-filter { width: auto; } }
 
 .filter-select {
   width: 100%;
@@ -972,16 +774,8 @@ h4 {
   min-height: 40px;
 }
 
-.filter-select:hover {
-  background: var(--bg-accent);
-  color: var(--text-secondary);
-}
-
-.certificates-arrows {
-  display: flex;
-  gap: clamp(0.375rem, 1vw, 0.5rem);
-  flex-shrink: 0;
-}
+.filter-select:hover { background: var(--bg-accent); color: var(--text-secondary); }
+.certificates-arrows { display: flex; gap: clamp(0.375rem, 1vw, 0.5rem); flex-shrink: 0; }
 
 .cert-arrow {
   background: var(--bg-secondary);
@@ -999,12 +793,8 @@ h4 {
   min-width: 32px;
 }
 
-.cert-arrow:hover {
-  background: var(--bg-accent2);
-  transform: scale(1.1);
-}
+.cert-arrow:hover { background: var(--bg-accent2); transform: scale(1.1); }
 
-/* Certificate Card Specific */
 .cert-badge {
   position: absolute;
   top: clamp(8px, 2vw, 12px);
@@ -1042,9 +832,6 @@ h4 {
   word-break: break-word;
 }
 
-/* =========================================
-        MODALS BRUTALIST - RESPONSIVE
-========================================= */
 .modal-overlay {
   display: none;
   position: fixed;
@@ -1061,19 +848,9 @@ h4 {
   overflow-y: auto;
 }
 
-.modal-overlay.active {
-  display: flex;
-  animation: modalAppear 0.3s forwards;
-}
+.modal-overlay.active { display: flex; animation: modalAppear 0.3s forwards; }
 
-@keyframes modalAppear {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
+@keyframes modalAppear { from { opacity: 0; } to { opacity: 1; } }
 
 .modal {
   background: var(--bg-secondary);
@@ -1087,16 +864,7 @@ h4 {
   margin: auto;
 }
 
-@keyframes modalSlide {
-  from {
-    transform: translateY(100px) scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-}
+@keyframes modalSlide { from { transform: translateY(100px) scale(0.9); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
 
 .modal-close {
   position: absolute;
@@ -1156,9 +924,7 @@ h4 {
   word-break: break-word;
 }
 
-.modal-content {
-  padding: clamp(1rem, 2.5vw, 1.5rem);
-}
+.modal-content { padding: clamp(1rem, 2.5vw, 1.5rem); }
 
 .modal-image {
   width: 100%;
@@ -1178,9 +944,7 @@ h4 {
   filter: contrast(200%) grayscale(100%);
 }
 
-.modal:hover .modal-image img {
-  filter: contrast(100%) grayscale(0%);
-}
+.modal:hover .modal-image img { filter: contrast(100%) grayscale(0%); }
 
 .modal-section {
   margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
@@ -1213,11 +977,7 @@ h4 {
   hyphens: auto;
 }
 
-.tech-stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: clamp(0.4rem, 1.5vw, 0.6rem);
-}
+.tech-stack { display: flex; flex-wrap: wrap; gap: clamp(0.4rem, 1.5vw, 0.6rem); }
 
 .tech-item {
   background: var(--bg-secondary);
@@ -1267,9 +1027,6 @@ h4 {
   box-shadow: 5px 5px 0 var(--bg-accent3);
 }
 
-/* =========================================
-        FOOTER - RESPONSIVE
-========================================= */
 .footer {
   margin-top: clamp(1.5rem, 4vw, 2rem);
   padding: var(--spacing-sm);
@@ -1285,10 +1042,7 @@ h4 {
     color: #77d8e0;
     text-decoration: none;
     transition: var(--transition);
-    &:hover {
-      color: #a3fffd;
-      text-decoration: underline;
-    }
+    &:hover { color: #a3fffd; text-decoration: underline; }
   }
 }
 
@@ -1304,30 +1058,11 @@ h4 {
   font-size: clamp(0.8rem, 2.5vw, 1rem);
 }
 
-/* =========================================
-        RESPONSIVE BREAKPOINTS - SIMPLIFIED
-========================================= */
 @media (max-width: 768px) {
-  .project-header,
-  .certificates-header {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .project-controls,
-  .certificates-controls {
-    justify-content: space-between;
-    width: 100%;
-  }
-  
-  .modal-links {
-    flex-direction: column;
-  }
-  
-  .modal-link {
-    min-width: 100%;
-  }
-  
+  .project-header, .certificates-header { flex-direction: column; align-items: stretch; }
+  .project-controls, .certificates-controls { justify-content: space-between; width: 100%; }
+  .modal-links { flex-direction: column; }
+  .modal-link { min-width: 100%; }
   .tools-grid {
     grid-template-columns: repeat(auto-fill, minmax(clamp(45px, 12vw, 50px), 1fr));
     gap: clamp(0.5rem, 1.5vw, 0.8rem);
@@ -1336,170 +1071,68 @@ h4 {
 }
 
 @media (max-width: 640px) {
-  .page {
-    margin: clamp(0.25rem, 1vw, 0.5rem) auto;
-    padding: clamp(0.75rem, 2vw, 1rem);
-  }
-  
-  .card,
-  .cert-card {
-    min-height: 260px;
-  }
-  
-  .card-image,
-  .cert-image {
-    height: 140px;
-  }
-  
-  .modal {
-    max-height: 95vh;
-  }
-  
-  .modal-image {
-    height: 160px;
-  }
-  
-  .header h2 {
-    font-size: clamp(1.2rem, 4vw, 1.5rem);
-    padding: 0.5rem 0.75rem;
-    margin-top: 2px;
-  }
+  .page { margin: clamp(0.25rem, 1vw, 0.5rem) auto; padding: clamp(0.75rem, 2vw, 1rem); }
+  .card, .cert-card { min-height: 260px; }
+  .card-image, .cert-image { height: 140px; }
+  .modal { max-height: 95vh; }
+  .modal-image { height: 160px; }
+  .header h2 { font-size: clamp(1.2rem, 4vw, 1.5rem); padding: 0.5rem 0.75rem; margin-top: 2px; }
 }
 
 @media (max-width: 480px) {
-  .badges {
-    gap: 0.5rem;
-    margin: 4px 0;
-  }
-  
-  .badge {
-    padding: 0.375rem 0.75rem;
-    font-size: 0.7rem;
-  }
-  
-  .card,
-  .cert-card {
-    min-height: 240px;
-  }
-  
-  .card-image,
-  .cert-image {
-    height: 130px;
-  }
-  
-  .card-title {
-    font-size: 0.9rem;
-    padding: 0.375rem 0.5rem;
-  }
-  
-  .card-description {
-    font-size: 0.8rem;
-    -webkit-line-clamp: 2;
-  }
-  
-  .lead {
-    padding: 0.875rem;
-    font-size: 0.85rem;
-  }
+  .badges { gap: 0.5rem; margin: 4px 0; }
+  .badge { padding: 0.375rem 0.75rem; font-size: 0.7rem; }
+  .card, .cert-card { min-height: 240px; }
+  .card-image, .cert-image { height: 130px; }
+  .card-title { font-size: 0.9rem; padding: 0.375rem 0.5rem; }
+  .card-description { font-size: 0.8rem; -webkit-line-clamp: 2; }
+  .lead { padding: 0.875rem; font-size: 0.85rem; }
+  body { font-size: 15px; }
+  .lead { font-size: 0.9rem; line-height: 1.4; }
+  .card-description { font-size: 0.85rem; }
 }
 
 @media (max-width: 360px) {
-  .card,
-  .cert-card {
-    min-height: 220px;
-    min-width: 220px;
-  }
-  
-  .card-image,
-  .cert-image {
-    height: 120px;
-  }
-  
-  .card-description {
-    -webkit-line-clamp: 2;
-    font-size: 0.75rem;
-  }
-  
-  .tech-tag {
-    font-size: 0.6rem;
-    padding: 0.15rem 0.375rem;
-  }
-  
-  .tools-grid {
-    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-    gap: 0.5rem;
-  }
+  .card, .cert-card { min-height: 220px; min-width: 220px; }
+  .card-image, .cert-image { height: 120px; }
+  .card-description { -webkit-line-clamp: 2; font-size: 0.75rem; }
+  .tech-tag { font-size: 0.6rem; padding: 0.15rem 0.375rem; }
+  .tools-grid { grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 0.5rem; }
 }
 
-/* =========================================
-        ANIMATIONS & EFFECTS
-========================================= */
 @keyframes glitch {
-  0% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    transform: translate(-2px, -2px);
-  }
-  60% {
-    transform: translate(2px, 2px);
-  }
-  80% {
-    transform: translate(2px, -2px);
-  }
-  100% {
-    transform: translate(0);
-  }
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
 }
 
-.glitch:hover {
-  animation: glitch 0.3s linear;
-}
+.glitch:hover { animation: glitch 0.3s linear; }
 
-/* Scanline effect */
-.scanlines {
-  position: relative;
-  overflow: hidden;
-}
-
+.scanlines { position: relative; overflow: hidden; }
 .scanlines::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 50%,
-    rgba(0, 255, 0, 0.02) 50%
-  );
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(0, 255, 0, 0.02) 50%);
   background-size: 100% 3px;
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: overlay;
 }
 
-/* Noise texture */
 .noise::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: overlay;
 }
 
-/* =========================================
-        UTILITY CLASSES - RESPONSIVE
-========================================= */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -1512,87 +1145,11 @@ h4 {
   border: 0;
 }
 
-.text-center {
-  text-align: center;
-}
+.text-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-/* Responsive margin utilities */
-.mt-1 { margin-top: var(--spacing-xs); }
-.mt-2 { margin-top: var(--spacing-sm); }
-.mt-3 { margin-top: var(--spacing-md); }
-.mt-4 { margin-top: var(--spacing-lg); }
-
-.mb-1 { margin-bottom: var(--spacing-xs); }
-.mb-2 { margin-bottom: var(--spacing-sm); }
-.mb-3 { margin-bottom: var(--spacing-md); }
-.mb-4 { margin-bottom: var(--spacing-lg); }
-
-/* Responsive padding utilities */
-.p-1 { padding: var(--spacing-xs); }
-.p-2 { padding: var(--spacing-sm); }
-.p-3 { padding: var(--spacing-md); }
-.p-4 { padding: var(--spacing-lg); }
-
-/* Text truncation */
-.text-truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.text-truncate-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.text-truncate-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* Smooth scrolling for iOS */
-html {
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Better touch targets on mobile */
 @media (max-width: 768px) {
-  button,
-  [role="button"],
-  .tag,
-  .badge,
-  .project-arrow,
-  .cert-arrow {
-    min-height: 44px;
-    min-width: 44px;
-  }
-  
-  .tag,
-  .badge {
-    min-height: 36px;
-    display: flex;
-    align-items: center;
-  }
-}
-
-/* Improve readability on small screens */
-@media (max-width: 480px) {
-  body {
-    font-size: 15px;
-  }
-  
-  .lead {
-    font-size: 0.9rem;
-    line-height: 1.4;
-  }
-  
-  .card-description {
-    font-size: 0.85rem;
-  }
+  button, [role="button"], .tag, .badge, .project-arrow, .cert-arrow { min-height: 44px; min-width: 44px; }
+  .tag, .badge { min-height: 36px; display: flex; align-items: center; }
 }
 </style>
 </head>
@@ -1601,7 +1158,6 @@ html {
 
 <div class="page" role="main" id="main-content">
   
-  <!-- HEADER SECTION -->
   <header class="header">
     <div class="left">
       <h1 class="glitch">TAKATHENA</h1>
@@ -1627,7 +1183,6 @@ html {
     </aside>
   </header>
 
-  <!-- TOOLS SECTION -->
   <section class="section tools">
     <div class="accordion">
       <div class="accordion-header" onclick="toggleTools()" role="button" aria-expanded="true" aria-controls="tools-body">
@@ -1648,7 +1203,6 @@ html {
     </div>
   </section>
 
-  <!-- PROJECTS SECTION -->
   <section class="section projects">
     <div class="projects-section">
       <div class="project-header">
@@ -1664,24 +1218,19 @@ html {
       <div class="carousel-container">
         <div class="carousel-wrapper" id="projects-carousel">
           <div class="carousel" id="projects-track" role="list" aria-label="Projects list">
-            <!-- Projects will be loaded dynamically -->
           </div>
         </div>
         
-        <!-- Progress bar for projects -->
         <div class="carousel-progress" id="projects-progress">
           <div class="progress-fill" id="projects-progress-fill"></div>
         </div>
         
-        <!-- Indicator dots for projects -->
         <div class="carousel-indicator" id="projects-indicator">
-          <!-- Dots will be added dynamically -->
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CERTIFICATES SECTION -->
   <section class="section certificates">
     <div class="certificates-section">
       <div class="certificates-header">
@@ -1711,24 +1260,19 @@ html {
       <div class="carousel-container">
         <div class="carousel-wrapper" id="certificates-carousel">
           <div class="carousel" id="certificates-track" role="list" aria-label="Certificates list">
-            <!-- Certificates will be loaded dynamically -->
           </div>
         </div>
         
-        <!-- Progress bar for certificates -->
         <div class="carousel-progress" id="certificates-progress">
           <div class="progress-fill" id="certificates-progress-fill"></div>
         </div>
         
-        <!-- Indicator dots for certificates -->
         <div class="carousel-indicator" id="certificates-indicator">
-          <!-- Dots will be added dynamically -->
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONNECT SECTION -->
   <section class="section connect">
     <div class="connect-section">
       <h3>GET IN TOUCH</h3>
@@ -1761,27 +1305,22 @@ html {
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer">
     © 2025 <a href="https://github.com/takathena" target="_blank">TAKATHENA</a> — MAKE WITH LOVE
   </footer>
 </div>
 
-<!-- Project Modal -->
 <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
   <div class="modal" id="modal">
     <button class="modal-close" id="modal-close" aria-label="Close modal">×</button>
-    
     <div class="modal-header">
       <h2 class="modal-title" id="modal-title">PROJECT TITLE</h2>
       <p class="modal-subtitle" id="modal-subtitle">PROJECT TYPE • TIMELINE</p>
     </div>
-    
     <div class="modal-content">
       <div class="modal-image">
         <img id="modal-image" src="" alt="Project screenshot" loading="lazy">
       </div>
-      
       <div class="modal-scroll">
         <div class="modal-section">
           <h4>PROJECT OVERVIEW</h4>
@@ -1789,21 +1328,17 @@ html {
             Project description will appear here...
           </p>
         </div>
-        
         <div class="modal-section">
           <h4>TECHNOLOGY STACK</h4>
           <div class="tech-stack" id="tech-stack" role="list" aria-label="Technology stack used in this project">
-            <!-- Technology items will be added here dynamically -->
           </div>
         </div>
-        
         <div class="modal-section">
           <h4>KEY FEATURES</h4>
           <p class="modal-description" id="modal-features">
             Key features will be listed here...
           </p>
         </div>
-        
         <div class="modal-links">
           <a href="#" class="modal-link" id="modal-live-link" target="_blank" rel="noopener noreferrer">
             LIVE DEMO
@@ -1817,21 +1352,17 @@ html {
   </div>
 </div>
 
-<!-- Certificate Modal -->
 <div class="modal-overlay" id="cert-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title" aria-hidden="true">
   <div class="modal" id="cert-modal">
     <button class="modal-close" id="cert-modal-close" aria-label="Close certificate modal">×</button>
-    
     <div class="modal-header">
       <h2 class="modal-title" id="cert-modal-title">CERTIFICATE TITLE</h2>
       <p class="modal-subtitle" id="cert-modal-subtitle">ISSUER • DATE</p>
     </div>
-    
     <div class="modal-content">
       <div class="modal-image">
         <img id="cert-modal-image" src="" alt="Certificate image" loading="lazy">
       </div>
-      
       <div class="modal-scroll">
         <div class="modal-section">
           <h4>CERTIFICATE DETAILS</h4>
@@ -1839,14 +1370,11 @@ html {
             Certificate description will appear here...
           </p>
         </div>
-        
         <div class="modal-section">
           <h4>SKILLS ACQUIRED</h4>
           <div class="tech-stack" id="cert-skills-stack" role="list" aria-label="Skills acquired from this certificate">
-            <!-- Skill items will be added here dynamically -->
           </div>
         </div>
-        
         <div class="modal-section">
           <h4>VALIDATION & CREDENTIALS</h4>
           <p class="modal-description" id="cert-validation">
@@ -1867,11 +1395,6 @@ html {
 </div>
 
 <script>
-/* =========================================
-        BRUTALIST JAVASCRIPT - IMPROVED WITH SNAP EFFECT
-========================================= */
-
-// Database icons
 const toolsDB = [
   {cat:"etc", src:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Arch_Linux_%22Crystal%22_icon.svg/960px-Arch_Linux_%22Crystal%22_icon.svg.png"},
   {cat:"etc", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"},
@@ -1895,7 +1418,6 @@ const toolsDB = [
   {cat:"programming", src:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"}
 ];
 
-// Projects data - Optimized for mobile
 const projects = [
   {
     id: 0,
@@ -1995,7 +1517,6 @@ const projects = [
   }
 ];
 
-// Certificates data - Optimized for mobile
 const certificatesDB = [
   {
     id: 0,
@@ -2127,7 +1648,6 @@ const certificatesDB = [
   }
 ];
 
-// State variables for carousels
 let currentProjectIndex = 0;
 let currentCertIndex = 0;
 let totalProjects = projects.length;
@@ -2135,9 +1655,7 @@ let totalCerts = certificatesDB.length;
 let projectsPerView = 3;
 let certsPerView = 3;
 
-// Initialize on load
 document.addEventListener('DOMContentLoaded', function() {
-  // Render tools grid
   const grid = document.getElementById("tools-grid");
   toolsDB.forEach(t => {
     const img = document.createElement("img");
@@ -2151,37 +1669,16 @@ document.addEventListener('DOMContentLoaded', function() {
     grid.appendChild(img);
   });
 
-  // Render projects
   renderProjects();
-  
-  // Initialize certificates
   initializeCertificates();
-  
-  // Set up event listeners
   setupEventListeners();
-  
-  // Open accordion by default
   setTimeout(toggleTools, 100);
-  
-  // Adjust layout on resize
   window.addEventListener('resize', handleResize);
-  
-  // Initial adjustment
   handleResize();
-  
-  // Initialize carousel indicators
-  updateProjectsPerView();
-  updateCertsPerView();
-  createProjectIndicators();
-  createCertIndicators();
-  updateCarouselProgress();
 });
 
-// Handle window resize
 function handleResize() {
   const width = window.innerWidth;
-  
-  // Adjust card sizes based on screen width
   const cards = document.querySelectorAll('.card, .cert-card');
   cards.forEach(card => {
     if (width < 480) {
@@ -2201,34 +1698,14 @@ function handleResize() {
       certsPerView = 3;
     }
   });
-  
   updateCarouselProgress();
-  
-  // Recreate indicators based on new view count
   createProjectIndicators();
   createCertIndicators();
 }
 
-// Update projects per view based on screen size
-function updateProjectsPerView() {
-  const width = window.innerWidth;
-  if (width < 480) projectsPerView = 1;
-  else if (width < 768) projectsPerView = 2;
-  else projectsPerView = 3;
-}
-
-function updateCertsPerView() {
-  const width = window.innerWidth;
-  if (width < 480) certsPerView = 1;
-  else if (width < 768) certsPerView = 2;
-  else certsPerView = 3;
-}
-
-// Create project indicators
 function createProjectIndicators() {
   const indicator = document.getElementById('projects-indicator');
   indicator.innerHTML = '';
-  
   const totalIndicators = Math.ceil(totalProjects / projectsPerView);
   
   for (let i = 0; i < totalIndicators; i++) {
@@ -2242,11 +1719,9 @@ function createProjectIndicators() {
   }
 }
 
-// Create certificate indicators
 function createCertIndicators() {
   const indicator = document.getElementById('certificates-indicator');
   indicator.innerHTML = '';
-  
   const totalIndicators = Math.ceil(totalCerts / certsPerView);
   
   for (let i = 0; i < totalIndicators; i++) {
@@ -2260,91 +1735,56 @@ function createCertIndicators() {
   }
 }
 
-// Slide project with snap effect
 function slideProject(direction) {
   const carousel = document.getElementById('projects-carousel');
   const cards = document.querySelectorAll('.card');
   if (cards.length === 0) return;
   
   const cardWidth = cards[0].offsetWidth;
-  const gap = 24; // 1.5rem in pixels
-  
-  // Update current index
+  const gap = 24; 
   const totalGroups = Math.ceil(totalProjects / projectsPerView);
   currentProjectIndex += direction;
   
-  // Clamp index
   if (currentProjectIndex < 0) {
     currentProjectIndex = totalGroups - 1;
   } else if (currentProjectIndex >= totalGroups) {
     currentProjectIndex = 0;
   }
   
-  // Calculate scroll position
   const scrollPosition = currentProjectIndex * (cardWidth + gap) * projectsPerView;
+  carousel.scrollTo({ left: scrollPosition, behavior: 'smooth' });
   
-  // Smooth scroll to position
-  carousel.scrollTo({
-    left: scrollPosition,
-    behavior: 'smooth'
-  });
-  
-  // Update indicators
   updateProjectIndicators();
-  
-  // Update progress bar
   updateCarouselProgress();
-  
-  // Add snap focus effect to visible cards
   setTimeout(() => addSnapFocusToVisibleProjects(), 300);
-  
-  // Play click sound effect
   playClickSound();
 }
 
-// Slide certificate with snap effect
 function slideCertificate(direction) {
   const carousel = document.getElementById('certificates-carousel');
   const cards = document.querySelectorAll('.cert-card');
   if (cards.length === 0) return;
   
   const cardWidth = cards[0].offsetWidth;
-  const gap = 24; // 1.5rem in pixels
-  
-  // Update current index
+  const gap = 24;
   const totalGroups = Math.ceil(totalCerts / certsPerView);
   currentCertIndex += direction;
   
-  // Clamp index
   if (currentCertIndex < 0) {
     currentCertIndex = totalGroups - 1;
   } else if (currentCertIndex >= totalGroups) {
     currentCertIndex = 0;
   }
   
-  // Calculate scroll position
   const scrollPosition = currentCertIndex * (cardWidth + gap) * certsPerView;
+  carousel.scrollTo({ left: scrollPosition, behavior: 'smooth' });
   
-  // Smooth scroll to position
-  carousel.scrollTo({
-    left: scrollPosition,
-    behavior: 'smooth'
-  });
-  
-  // Update indicators
   updateCertIndicators();
-  
-  // Update progress bar
   updateCarouselProgress();
-  
-  // Add snap focus effect to visible cards
   setTimeout(() => addSnapFocusToVisibleCerts(), 300);
-  
-  // Play click sound effect
   playClickSound();
 }
 
-// Go to specific project group
 function goToProjectGroup(groupIndex) {
   const carousel = document.getElementById('projects-carousel');
   const cards = document.querySelectorAll('.card');
@@ -2356,10 +1796,7 @@ function goToProjectGroup(groupIndex) {
   currentProjectIndex = groupIndex;
   const scrollPosition = groupIndex * (cardWidth + gap) * projectsPerView;
   
-  carousel.scrollTo({
-    left: scrollPosition,
-    behavior: 'smooth'
-  });
+  carousel.scrollTo({ left: scrollPosition, behavior: 'smooth' });
   
   updateProjectIndicators();
   updateCarouselProgress();
@@ -2367,7 +1804,6 @@ function goToProjectGroup(groupIndex) {
   playClickSound();
 }
 
-// Go to specific certificate group
 function goToCertGroup(groupIndex) {
   const carousel = document.getElementById('certificates-carousel');
   const cards = document.querySelectorAll('.cert-card');
@@ -2379,10 +1815,7 @@ function goToCertGroup(groupIndex) {
   currentCertIndex = groupIndex;
   const scrollPosition = groupIndex * (cardWidth + gap) * certsPerView;
   
-  carousel.scrollTo({
-    left: scrollPosition,
-    behavior: 'smooth'
-  });
+  carousel.scrollTo({ left: scrollPosition, behavior: 'smooth' });
   
   updateCertIndicators();
   updateCarouselProgress();
@@ -2390,7 +1823,6 @@ function goToCertGroup(groupIndex) {
   playClickSound();
 }
 
-// Update project indicators
 function updateProjectIndicators() {
   const indicators = document.querySelectorAll('#projects-indicator .indicator-dot');
   indicators.forEach((dot, index) => {
@@ -2398,7 +1830,6 @@ function updateProjectIndicators() {
   });
 }
 
-// Update certificate indicators
 function updateCertIndicators() {
   const indicators = document.querySelectorAll('#certificates-indicator .indicator-dot');
   indicators.forEach((dot, index) => {
@@ -2406,82 +1837,55 @@ function updateCertIndicators() {
   });
 }
 
-// Add snap focus effect to visible projects
 function addSnapFocusToVisibleProjects() {
   const cards = document.querySelectorAll('.card');
-  
-  // Remove previous focus
   cards.forEach(card => {
     card.classList.remove('snap-focus');
     card.classList.remove('current-item');
   });
   
-  // Calculate visible range
   const startIndex = currentProjectIndex * projectsPerView;
   const endIndex = Math.min(startIndex + projectsPerView, totalProjects);
   
-  // Add focus effect to visible cards
   for (let i = startIndex; i < endIndex; i++) {
     if (cards[i]) {
       cards[i].classList.add('snap-focus');
-      
-      // Add current item indicator to first card in view
-      if (i === startIndex) {
-        cards[i].classList.add('current-item');
-      }
+      if (i === startIndex) cards[i].classList.add('current-item');
     }
   }
 }
 
-// Add snap focus effect to visible certificates
 function addSnapFocusToVisibleCerts() {
   const cards = document.querySelectorAll('.cert-card');
-  
-  // Remove previous focus
   cards.forEach(card => {
     card.classList.remove('snap-focus');
     card.classList.remove('current-item');
   });
   
-  // Calculate visible range
   const startIndex = currentCertIndex * certsPerView;
   const endIndex = Math.min(startIndex + certsPerView, totalCerts);
   
-  // Add focus effect to visible cards
   for (let i = startIndex; i < endIndex; i++) {
     if (cards[i]) {
       cards[i].classList.add('snap-focus');
-      
-      // Add current item indicator to first card in view
-      if (i === startIndex) {
-        cards[i].classList.add('current-item');
-      }
+      if (i === startIndex) cards[i].classList.add('current-item');
     }
   }
 }
 
-// Update carousel progress bars
 function updateCarouselProgress() {
-  // Update projects progress
   const totalProjectGroups = Math.ceil(totalProjects / projectsPerView);
   const projectsProgress = ((currentProjectIndex + 1) / totalProjectGroups) * 100;
   const projectsProgressFill = document.getElementById('projects-progress-fill');
-  if (projectsProgressFill) {
-    projectsProgressFill.style.width = `${projectsProgress}%`;
-  }
+  if (projectsProgressFill) projectsProgressFill.style.width = `${projectsProgress}%`;
   
-  // Update certificates progress
   const totalCertGroups = Math.ceil(totalCerts / certsPerView);
   const certsProgress = ((currentCertIndex + 1) / totalCertGroups) * 100;
   const certsProgressFill = document.getElementById('certificates-progress-fill');
-  if (certsProgressFill) {
-    certsProgressFill.style.width = `${certsProgress}%`;
-  }
+  if (certsProgressFill) certsProgressFill.style.width = `${certsProgress}%`;
 }
 
-// Play click sound effect
 function playClickSound() {
-  // Create audio context for sound effect
   try {
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
@@ -2498,26 +1902,19 @@ function playClickSound() {
     
     oscillator.start(audioContext.currentTime);
     oscillator.stop(audioContext.currentTime + 0.1);
-  } catch (e) {
-    // Audio context not supported, silent fail
-  }
+  } catch (e) {}
 }
 
-// Render projects with responsive descriptions
 function renderProjects() {
   const track = document.getElementById('projects-track');
   track.innerHTML = '';
-  
   projects.forEach((project, index) => {
     const card = createProjectCard(project, index);
     track.appendChild(card);
   });
-  
-  // Add initial snap focus
   setTimeout(() => addSnapFocusToVisibleProjects(), 100);
 }
 
-// Create project card with responsive design
 function createProjectCard(project, index) {
   const card = document.createElement('article');
   card.className = 'card';
@@ -2527,7 +1924,6 @@ function createProjectCard(project, index) {
   card.setAttribute('aria-label', `View ${project.title} project details`);
   card.setAttribute('data-index', index);
   
-  // Use short description on mobile
   const description = window.innerWidth < 768 ? project.shortDescription : project.description;
   const displayDescription = description.substring(0, window.innerWidth < 480 ? 80 : 120);
   
@@ -2548,21 +1944,17 @@ function createProjectCard(project, index) {
       </div>
     </div>
   `;
-  
   return card;
 }
 
-// Initialize certificates
 function initializeCertificates() {
   const filterSelect = document.getElementById('cert-filter');
   filterSelect.addEventListener('change', (e) => {
     renderCertificates(e.target.value);
   });
-  
   renderCertificates('all');
 }
 
-// Render certificates with responsive design
 function renderCertificates(category) {
   const track = document.getElementById('certificates-track');
   track.innerHTML = '';
@@ -2589,17 +1981,13 @@ function renderCertificates(category) {
     track.appendChild(certCard);
   });
   
-  // Update total certs
   totalCerts = filteredCerts.length;
   currentCertIndex = 0;
   createCertIndicators();
   updateCarouselProgress();
-  
-  // Add initial snap focus
   setTimeout(() => addSnapFocusToVisibleCerts(), 100);
 }
 
-// Create certificate card with responsive design
 function createCertificateCard(cert, index) {
   const certCard = document.createElement('article');
   certCard.className = 'card cert-card';
@@ -2609,7 +1997,6 @@ function createCertificateCard(cert, index) {
   certCard.setAttribute('aria-label', `View ${cert.title} certificate details`);
   certCard.setAttribute('data-index', index);
   
-  // Use short description on mobile
   const description = window.innerWidth < 768 ? cert.shortDescription : cert.description;
   const displayDescription = description.substring(0, window.innerWidth < 480 ? 60 : 100);
   
@@ -2631,11 +2018,9 @@ function createCertificateCard(cert, index) {
       </div>
     </div>
   `;
-  
   return certCard;
 }
 
-// Accordion toggle
 function toggleTools() {
   const body = document.getElementById("tools-body");
   const btn = document.getElementById("acc-btn");
@@ -2656,7 +2041,6 @@ function toggleTools() {
   }
 }
 
-// Filtering
 let lockedTag = null;
 const tags = document.querySelectorAll(".tag");
 
@@ -2664,11 +2048,9 @@ tags.forEach(tag => {
   tag.addEventListener("mouseenter", () => { 
     if(!lockedTag) applyFilter(tag.dataset.tag); 
   });
-  
   tag.addEventListener("mouseleave", () => { 
     if(!lockedTag) clearFilter(); 
   });
-  
   tag.addEventListener("click", () => {
     if(lockedTag === tag.dataset.tag) {
       lockedTag = null;
@@ -2702,11 +2084,9 @@ function clearFilter() {
   document.querySelectorAll("#tools-grid img").forEach(i => i.classList.remove("highlight"));
 }
 
-// Project modal
 function openModal(projectId) {
   const project = projects[projectId];
   const overlay = document.getElementById('modal-overlay');
-  const modal = document.getElementById('modal');
   
   document.getElementById('modal-title').textContent = project.title;
   document.getElementById('modal-subtitle').textContent = project.subtitle;
@@ -2722,7 +2102,6 @@ function openModal(projectId) {
   githubLink.href = project.githubLink;
   githubLink.setAttribute('aria-label', `View ${project.title} GitHub repository`);
   
-  // Update technology stack
   const techStack = document.getElementById('tech-stack');
   techStack.innerHTML = '';
   project.technologies.forEach(tech => {
@@ -2733,19 +2112,14 @@ function openModal(projectId) {
     techStack.appendChild(techItem);
   });
   
-  // Show modal
   overlay.style.display = 'flex';
   overlay.setAttribute('aria-hidden', 'false');
-  setTimeout(() => {
-    overlay.classList.add('active');
-  }, 10);
+  setTimeout(() => { overlay.classList.add('active'); }, 10);
   
-  // Prevent body scroll
   document.body.style.overflow = 'hidden';
   document.body.style.paddingRight = window.innerWidth > 768 ? '15px' : '0';
 }
 
-// Close modal
 function closeModal() {
   const overlay = document.getElementById('modal-overlay');
   overlay.classList.remove('active');
@@ -2757,11 +2131,9 @@ function closeModal() {
   }, 300);
 }
 
-// Open certificate modal
 function openCertificateModal(certId) {
   const cert = certificatesDB[certId];
   const overlay = document.getElementById('cert-modal-overlay');
-  const modal = document.getElementById('cert-modal');
   
   document.getElementById('cert-modal-title').textContent = cert.title;
   document.getElementById('cert-modal-subtitle').textContent = `${cert.issuer} • ${cert.date}`;
@@ -2777,7 +2149,6 @@ function openCertificateModal(certId) {
   credentialLink.href = cert.credentialLink;
   credentialLink.setAttribute('aria-label', `Verify ${cert.title} credential`);
   
-  // Update skills stack
   const skillsStack = document.getElementById('cert-skills-stack');
   skillsStack.innerHTML = '';
   cert.skills.forEach(skill => {
@@ -2788,19 +2159,14 @@ function openCertificateModal(certId) {
     skillsStack.appendChild(skillItem);
   });
   
-  // Show modal
   overlay.style.display = 'flex';
   overlay.setAttribute('aria-hidden', 'false');
-  setTimeout(() => {
-    overlay.classList.add('active');
-  }, 10);
+  setTimeout(() => { overlay.classList.add('active'); }, 10);
   
-  // Prevent body scroll
   document.body.style.overflow = 'hidden';
   document.body.style.paddingRight = window.innerWidth > 768 ? '15px' : '0';
 }
 
-// Close certificate modal
 function closeCertificateModal() {
   const overlay = document.getElementById('cert-modal-overlay');
   overlay.classList.remove('active');
@@ -2812,73 +2178,46 @@ function closeCertificateModal() {
   }, 300);
 }
 
-// Set up event listeners
 function setupEventListeners() {
-  // Project modal
   const modalOverlay = document.getElementById('modal-overlay');
   const modalClose = document.getElementById('modal-close');
   const modal = document.getElementById('modal');
   
-  modalOverlay.addEventListener('click', function(e) {
-    if (e.target === modalOverlay) closeModal();
-  });
-  
+  modalOverlay.addEventListener('click', function(e) { if (e.target === modalOverlay) closeModal(); });
   modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e) { e.stopPropagation(); });
   
-  modal.addEventListener('click', function(e) {
-    e.stopPropagation();
-  });
-  
-  // Certificate modal
   const certModalOverlay = document.getElementById('cert-modal-overlay');
   const certModalClose = document.getElementById('cert-modal-close');
   const certModal = document.getElementById('cert-modal');
   
-  certModalOverlay.addEventListener('click', function(e) {
-    if (e.target === certModalOverlay) closeCertificateModal();
-  });
-  
+  certModalOverlay.addEventListener('click', function(e) { if (e.target === certModalOverlay) closeCertificateModal(); });
   certModalClose.addEventListener('click', closeCertificateModal);
+  certModal.addEventListener('click', function(e) { e.stopPropagation(); });
   
-  certModal.addEventListener('click', function(e) {
-    e.stopPropagation();
-  });
-  
-  // Escape key to close modals
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      if (document.getElementById('modal-overlay').classList.contains('active')) {
-        closeModal();
-      }
-      if (document.getElementById('cert-modal-overlay').classList.contains('active')) {
-        closeCertificateModal();
-      }
+      if (document.getElementById('modal-overlay').classList.contains('active')) closeModal();
+      if (document.getElementById('cert-modal-overlay').classList.contains('active')) closeCertificateModal();
     }
     
-    // Keyboard navigation for carousels
     if (e.key === 'ArrowLeft') {
       if (document.activeElement.closest('.projects-section')) {
-        e.preventDefault();
-        slideProject(-1);
+        e.preventDefault(); slideProject(-1);
       } else if (document.activeElement.closest('.certificates-section')) {
-        e.preventDefault();
-        slideCertificate(-1);
+        e.preventDefault(); slideCertificate(-1);
       }
     } else if (e.key === 'ArrowRight') {
       if (document.activeElement.closest('.projects-section')) {
-        e.preventDefault();
-        slideProject(1);
+        e.preventDefault(); slideProject(1);
       } else if (document.activeElement.closest('.certificates-section')) {
-        e.preventDefault();
-        slideCertificate(1);
+        e.preventDefault(); slideCertificate(1);
       }
     }
   });
   
-  // Setup carousel scroll listeners
   setupCarouselScrollListeners();
   
-  // Touch gestures for mobile swipe
   let touchStartX = 0;
   let touchStartY = 0;
   
@@ -2890,43 +2229,28 @@ function setupEventListeners() {
   document.addEventListener('touchend', (e) => {
     const touchEndX = e.changedTouches[0].screenX;
     const touchEndY = e.changedTouches[0].screenY;
-    
     const diffX = touchStartX - touchEndX;
     const diffY = touchStartY - touchEndY;
     
-    // Only trigger if horizontal swipe is dominant
     if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
-      // Check if swipe happened in projects section
       const projectsRect = document.querySelector('.projects-section').getBoundingClientRect();
       const certsRect = document.querySelector('.certificates-section').getBoundingClientRect();
       
       if (touchStartY >= projectsRect.top && touchStartY <= projectsRect.bottom) {
-        if (diffX > 0) {
-          // Swipe left
-          slideProject(1);
-        } else {
-          // Swipe right
-          slideProject(-1);
-        }
+        if (diffX > 0) slideProject(1);
+        else slideProject(-1);
       } else if (touchStartY >= certsRect.top && touchStartY <= certsRect.bottom) {
-        if (diffX > 0) {
-          // Swipe left
-          slideCertificate(1);
-        } else {
-          // Swipe right
-          slideCertificate(-1);
-        }
+        if (diffX > 0) slideCertificate(1);
+        else slideCertificate(-1);
       }
     }
   }, { passive: true });
 }
 
-// Setup carousel scroll listeners
 function setupCarouselScrollListeners() {
   const projectsCarousel = document.getElementById('projects-carousel');
   const certsCarousel = document.getElementById('certificates-carousel');
   
-  // Throttle function for scroll events
   function throttle(func, limit) {
     let inThrottle;
     return function() {
@@ -2940,7 +2264,6 @@ function setupCarouselScrollListeners() {
     }
   }
   
-  // Update project index on scroll
   projectsCarousel.addEventListener('scroll', throttle(function() {
     const cards = document.querySelectorAll('.card');
     if (cards.length === 0) return;
@@ -2958,7 +2281,6 @@ function setupCarouselScrollListeners() {
     }
   }, 150));
   
-  // Update cert index on scroll
   certsCarousel.addEventListener('scroll', throttle(function() {
     const cards = document.querySelectorAll('.cert-card');
     if (cards.length === 0) return;
