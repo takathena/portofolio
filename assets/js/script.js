@@ -123,19 +123,19 @@ const projects = [
 const certificatesDB = [
   {
     id: 0,
-    title: "BRUTALIST WEB DESIGN",
-    issuer: "DIGITAL ARTS ACADEMY",
-    issuerIcon: "https://cdn-icons-png.flaticon.com/512/2991/2991148.png",
-    date: "MARCH 2024",
-    category: "web",
-    image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=400&fit=crop",
-    badge: "EXPERIMENTAL",
-    description: "Mastering the art of brutalist web design: raw aesthetics, bold typography, and intentional design choices that challenge convention.",
-    shortDescription: "Mastering brutalist web design with raw aesthetics and bold typography.",
-    skills: ["BRUTALIST DESIGN", "TYPOGRAPHY", "COLOR THEORY", "LAYOUT", "UX"],
-    validation: "CERT ID: DAA-BRUTAL-2024-001",
-    viewLink: "https://example.com/cert/brutalist-design",
-    credentialLink: "https://verify.digitalarts.com/brutalist-001"
+    title: "AI, MACHINE LEARNING & GENERATIVE AI FUNDAMENTALS",
+    issuer: "DICODING",
+    issuerIcon: "https://assets.cdn.dicoding.com/original/commons/new-ui-logo.png",
+    date: "OCTOBER 2025",
+    category: "ai",
+    image: "https://assets.cdn.dicoding.com/original/academy/dos-603b3a230367b60edb5d11ffb951b9e120231217191216.png",
+    badge: "FUNDAMENTAL",
+    description: "Identify the basic concepts of AI. Describes the basic concepts of data and its utilization in AI development. Describes the basic concepts of Machine Learning as part of AI along with examples of its application.",
+    shortDescription: "Identify the basic concepts of AI. Describes the basic concepts of data and its utilization in AI development.",
+    skills: ["AI", "MACHINE LEARNING", "GENERATIVE AI"],
+    validation: "CERT ID: RVZKG091QXD5",
+    viewLink: "https://www.dicoding.com/certificates/RVZKG091QXD5",
+    credentialLink: "https://www.dicoding.com/certificates/RVZKG091QXD5"
   },
   {
     id: 1,
